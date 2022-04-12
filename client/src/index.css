@@ -11,3 +11,14 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+#profile-container, #about {
+  width: 70%;
+  margin: auto
+}
+
+.application-card {
+  width: 40%;
+  margin: auto;
+  border: 1px solid black
+}

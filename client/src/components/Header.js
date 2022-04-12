@@ -2,7 +2,7 @@ import React from 'react'
 
 const Header = () => {
   return (
-    <div>Forever Home</div>
+    <div id="app-header">Forever Home</div>
   )
 }
 

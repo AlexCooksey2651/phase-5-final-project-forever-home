@@ -2,7 +2,7 @@ import React from 'react'
 
 const PreviousAdoptions = () => {
   return (
-    <div>PreviousAdoptions</div>
+    <h2>Previous Adoptions</h2>
   )
 }
 

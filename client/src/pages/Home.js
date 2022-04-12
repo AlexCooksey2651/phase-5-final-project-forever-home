@@ -2,7 +2,7 @@ import React from 'react'
 
 function Home() {
     return (
-        <div id="About">
+        <div id="about">
             <h2>About <em>Forever Home</em></h2>
             <p>
                 Around the United States, millions of loving animals spend their whole lives in bouncing between adoption shelters and foster homes. Many interested potential owners are out there, hoping to provide loving homes, but struggle with the process of searching for their perfect companion. Shelters often rely on patient, compassionate volunteers, but are often over-crowded, under-funded, and under-staffed. Simply caring for the animals is already plenty to handle, and they often need help with outreach.
