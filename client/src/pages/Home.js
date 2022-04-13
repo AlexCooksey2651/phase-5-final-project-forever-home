@@ -1,6 +1,4 @@
 import React from 'react'
-import SignupForm from '../components/SignupForm';
-import Login from './Login';
 
 function Home() {
     return (
@@ -19,8 +17,6 @@ function Home() {
             <p>
                 Here to look for a new best friend? If you're interested in adopting a pet (or pets!), please navigate to the SEARCH page. There, you'll be able to browse animals that match what you're looking for. You can filter by animal type and the distance of a shelter from your home. If you are interested in a pet, you can bookmark them to easily view again later, or contact their shelter. Ready to take the next step toward being a pet parent? Submit an adoption application directly through the animal's information page.
             </p>
-            <br/>
-            <Login />
         </div>
     )
 }

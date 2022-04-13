@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
 import Button from 'react-bootstrap/Button'
+import Container from 'react-bootstrap/Container'
 import LoginForm from "../components/LoginForm"
 import SignupForm from "../components/SignupForm"
-
+import Header from '../components/Header'
 
 
 function Login({ onLogin }) {
@@ -21,13 +22,13 @@ function Login({ onLogin }) {
     }
 
     return (
-        <div id="login">
-            {/* <Header /> */}
+        <Container id="login">
+            <Header />
             {loginPage ? <LoginForm /> : <SignupForm />}
-            <Button onClick={toggleLoginPage}>
+            <Button variant="outline-dark" onClick={toggleLoginPage}>
                 {loginPage ? "Create Account" : "Return to Login Page"}
             </Button>
-        </div>
+        </Container>
     )
 }
 

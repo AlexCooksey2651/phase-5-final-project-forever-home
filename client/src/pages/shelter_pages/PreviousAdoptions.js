@@ -1,9 +1,11 @@
 import React from 'react'
+import PreviousAdoptionCard from '../../components/shelter_components/PreviousAdoptionCard'
 
 const PreviousAdoptions = () => {
   return (
     <div id="previous-adoptions">
         <h2>Previous Adoptions</h2>
+        <PreviousAdoptionCard />
     </div>
   )
 }

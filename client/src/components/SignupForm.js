@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import Form from 'react-bootstrap/Form'
 import Container from 'react-bootstrap/Container'
 import ShelterSignupForm from './shelter_components/ShelterSignupForm'
+import CustomerSignupForm from './customer_components/CustomerSignupForm'
 import Button from 'react-bootstrap/Button'
 
 const SignupForm = () => {
@@ -27,7 +28,7 @@ const SignupForm = () => {
                         onChange={() => setIsCustomer(false)}
                     />
                 </Form.Group>
-                {isCustomer ? null : <ShelterSignupForm />}
+                {isCustomer ? <CustomerSignupForm /> : <ShelterSignupForm />}
                 <Button variant="outline-dark">
                     Submit
                 </Button>

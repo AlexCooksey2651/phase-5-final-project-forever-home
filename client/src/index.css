@@ -14,11 +14,11 @@ code {
 
 #app-header {
   /* background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTozoL6cjMD7wH2dwcwu6XSrN5v7v06Tt0qlUId0Y1r8V24I8-QeQjlt1hHnplKIO_f2Ow&usqp=CAU"); */
-  height: 250px;
+  height: 10px;
 }
 
 #header-image {
-  object-fit: contain;
+  object-fit: cover;
 }
 
 #manage-pets, #active-applications, #previous-adoptions {
@@ -45,4 +45,8 @@ code {
 #signup-form {
   /* border: 1px solid black; */
   padding: 10px
+}
+
+#login {
+  justify-items: center;
 }

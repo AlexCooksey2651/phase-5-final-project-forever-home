@@ -13,7 +13,7 @@ const exampleApplication = {
         bio: "sparky is a 2-year old pug. he weighs 19lbs. he loves cuddles and sleeps a lot, but is feisty if you take him on walks. he'll make you very happy!",
         age: 2,
         species: "dog",
-        status: "available"
+        status: "application pending"
     },
     customer: {
         first_name: "Alex",
