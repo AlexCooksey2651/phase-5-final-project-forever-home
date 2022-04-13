@@ -1,22 +1,46 @@
-import React from 'react'
+import React, { useState } from 'react'
+import Form from 'react-bootstrap/Form'
+import Container from 'react-bootstrap/Container'
+import Button from 'react-bootstrap/Button'
+import Stack from 'react-bootstrap/Stack'
 
 function LoginForm() {
-    return (
-        <Form>
-            <div className="mb-3">
-                <Form.Check
-                    type="radio"
-                    id="customer-radio"
-                    label="Sign Up As Customer"
-                />
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
 
-                <Form.Check
-                    type="radio"
-                    label="Sign Up As Shelter"
-                    id="shelter-radio"
-                />
-            </div>
-        </Form>
+    return (
+        <Container>
+            <Form id="login-form">
+                <Form.Group className="mb-3" controlId="formBasicEmail">
+                    <Form.Label><b>Email Address:</b></Form.Label>
+                    <Form.Control type="email" placeholder="Enter email" value={email} onChange={e => setEmail(e.target.value)} />
+                </Form.Group>
+
+                <Form.Group className="mb-3" controlId="formBasicPassword">
+                    <Form.Label><b>Password:</b></Form.Label>
+                    <Form.Control type="password" placeholder="Enter password" value={password} onChange={e => setPassword(e.target.value)} />
+                </Form.Group>
+
+                <Stack gap={2} className="col-md-5 mx-auto">
+                    <Button variant="outline-dark" type="submit">
+                        Login
+                    </Button>
+                    {/* <Button variant="outline-dark">
+                        Create Account
+                    </Button> */}
+                </Stack>
+                {/* <br />
+                {errors ? <Form.Group>
+                    {errors.map(error => {
+                        return (
+                            <Alert key={error}>
+                                {error}
+                            </Alert>
+                        )
+                    })}
+                </Form.Group> : null} */}
+            </Form>
+        </Container>
     )
 }
 

@@ -3,8 +3,9 @@ import ShelterApplicationCard from "../../components/shelter_components/ShelterA
 
 const ViewApplications = () => {
   return (
-    <div>
+    <div id="active-applications">
         <h2>Active Applications</h2>
+        <br/>
         <ShelterApplicationCard />
     </div>
   )

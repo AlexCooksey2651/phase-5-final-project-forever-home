@@ -9,6 +9,7 @@ const NewPetForm = () => {
     const [image, setImage] = useState("")
     const [species, setSpecies] = useState("")
     const [bio, setBio] = useState("")
+    const [age, setAge] = useState(0)
     
     return (
         <Form id="new-pet-form">
@@ -35,13 +36,18 @@ const NewPetForm = () => {
                 </Form.Select>
             </Form.Group>
 
+            <Form.Group className="mb-3" controlId="formBasicInput">
+                <Form.Label><b>Age</b></Form.Label>
+                <Form.Control type="number" min="0" placeholder="Enter Pet Age" value={age} onChange={e => setAge(e.target.value)} />
+            </Form.Group>
+
             <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
                 <Form.Label><b>Pet Bio:</b></Form.Label>
                 <Form.Control as="textarea" rows={4} value={bio} onChange={e => setBio(e.target.value)} />
             </Form.Group>
 
             <Container>
-                <Button variant="light" type="submit">
+                <Button variant="dark" type="submit">
                     Submit
                 </Button>
             </Container>

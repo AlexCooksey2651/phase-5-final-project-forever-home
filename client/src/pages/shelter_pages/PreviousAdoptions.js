@@ -2,7 +2,9 @@ import React from 'react'
 
 const PreviousAdoptions = () => {
   return (
-    <h2>Previous Adoptions</h2>
+    <div id="previous-adoptions">
+        <h2>Previous Adoptions</h2>
+    </div>
   )
 }
 

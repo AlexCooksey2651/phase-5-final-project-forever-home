@@ -12,13 +12,37 @@ code {
     monospace;
 }
 
+#app-header {
+  /* background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTozoL6cjMD7wH2dwcwu6XSrN5v7v06Tt0qlUId0Y1r8V24I8-QeQjlt1hHnplKIO_f2Ow&usqp=CAU"); */
+  height: 250px;
+}
+
+#header-image {
+  object-fit: contain;
+}
+
+#manage-pets, #active-applications, #previous-adoptions {
+  padding: 20px;
+}
+
 #profile-container, #about {
   width: 70%;
   margin: auto
 }
 
 .application-card {
-  width: 40%;
+  width: 90%;
   margin: auto;
   border: 1px solid black
+}
+
+.pet-card-image, .application-card-image {
+  margin-top: 40px;
+  margin-left: 15px;
+  border: 0.5px solid black
+}
+
+#signup-form {
+  /* border: 1px solid black; */
+  padding: 10px
 }

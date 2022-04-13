@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
+import Button from 'react-bootstrap/Button'
 import LoginForm from "../components/LoginForm"
-import CustomerSignupForm from "../components/customer_components/CustomerSignupForm"
-import ShelterSignupForm from "../components/shelter_components/"
+import SignupForm from "../components/SignupForm"
 
-function Login() {
+
+
+function Login({ onLogin }) {
     const [loginPage, setLoginPage] = useState(true)
 
     //   if (loginPage === "login") {
@@ -13,15 +15,18 @@ function Login() {
     //   } else if (loginPage === "new-shelter") {
     //       return <ShelterSignupForm />
     //   }
-    
-    // function toggleLoginPage() {
-    //     setShowSignup(!showSignup)
-    // }
+
+    function toggleLoginPage() {
+        setLoginPage(!loginPage)
+    }
 
     return (
         <div id="login">
-            <Header />
-            {loginPage ? <LoginForm /> : <SignUpForm />}
+            {/* <Header /> */}
+            {loginPage ? <LoginForm /> : <SignupForm />}
+            <Button onClick={toggleLoginPage}>
+                {loginPage ? "Create Account" : "Return to Login Page"}
+            </Button>
         </div>
     )
 }

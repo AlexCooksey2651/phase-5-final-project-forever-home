@@ -12,13 +12,13 @@ const ManagePets = () => {
     const handleShow = () => setShowModal(true)
     const handleClose = () => setShowModal(false)
     return (
-        <>
+        <div id="manage-pets">
             <h2>Manage Pets</h2>
+            <br/>
             <Container>
-                <Button variant="primary" onClick={handleShow}>
+                <Button variant="outline-dark" onClick={handleShow}>
                     Add New Pet
                 </Button>
-
                 <Modal show={showModal} onHide={handleClose} animation={false}>
                     <Modal.Header closeButton>
                         <Modal.Title>Add a New Pet to your Shelter</Modal.Title>
@@ -28,13 +28,14 @@ const ManagePets = () => {
                     </Modal.Body>
                 </Modal>
             </Container>
+            <br/>
             {/* <Container>
                 Dropdowns to filter by species, filter by adoption status
             </Container> */}
             <Container id="shelter-pet-card-container">
                 <ShelterPetCard />
             </Container>
-        </>
+        </div>
     )
 }
 
