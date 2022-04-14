@@ -19,7 +19,7 @@ const shelter = {
     }
 }
 
-const Profile = () => {
+const Profile = ({ user }) => {
     const [showModal, setShowModal] = useState(false)
     const [showDelete, setShowDelete] = useState(false)
 
