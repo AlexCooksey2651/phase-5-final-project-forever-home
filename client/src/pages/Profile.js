@@ -20,17 +20,25 @@ const shelter = {
 }
 
 const Profile = ({ user }) => {
+    const isCustomer = () => {
+        if (user.profile_type === "customer") {
+            return true
+        } else if (user.profile_type === "shelter") {
+            return false
+        }
+    }
+
     const [showModal, setShowModal] = useState(false)
     const [showDelete, setShowDelete] = useState(false)
 
-
+    console.log(user.profile.interested_in)
     const handleShowEdit = () => setShowModal(true)
     const handleCloseEdit = () => setShowModal(false)
     const handleShowDelete = () => setShowDelete(true)
     const handleCloseDelete = () => setShowDelete(false)
 
-    const formatPhoneNum = () => {
-        const arrayedNum = shelter.phoneNumber.split('')
+    const formatPhoneNum = (phoneNumber) => {
+        const arrayedNum = phoneNumber.split('')
         const firstThree = arrayedNum.slice(2, 5).join('')
         const secondThree = arrayedNum.slice(5, 8).join('')
         const lastFour = arrayedNum.slice(-4).join('')
@@ -41,18 +49,28 @@ const Profile = ({ user }) => {
     return (
         <div>
             <h2>ACCOUNT INFORMATION</h2>
-            <Container id="profile-container">
-                <ListGroup variant="flush">
-                    <ListGroup.Item>Name: {shelter.shelterName}</ListGroup.Item>
-                    <ListGroup.Item>Location: {shelter.city}, {shelter.state}</ListGroup.Item>
-                    <ListGroup.Item>Phone Number: {formatPhoneNum()}</ListGroup.Item>
-                    <ListGroup.Item>Email Address: {shelter.user.email}</ListGroup.Item>
-                    {/* <ListGroup.Item type="password">Password: {shelter.user.password}</ListGroup.Item> */}
-                    <ListGroup.Item>Bio: {shelter.bio}</ListGroup.Item>
-                </ListGroup>
-
-
-            </Container>
+            {isCustomer() ?
+                <Container id="profile-container">
+                    <ListGroup variant="flush">
+                        <ListGroup.Item>Name: {`${user.profile.first_name} ${user.profile.last_name}`}</ListGroup.Item>
+                        <ListGroup.Item>Location: {user.city}, {user.state}</ListGroup.Item>
+                        <ListGroup.Item>Phone: {formatPhoneNum(user.phone_number)}</ListGroup.Item>
+                        <ListGroup.Item>Email: {user.email}</ListGroup.Item>
+                        {/* <ListGroup.Item type="password">Password: {shelter.user.password}</ListGroup.Item> */}
+                        <ListGroup.Item>Looking For: {user.profile.interested_in.join(', ')}</ListGroup.Item>
+                    </ListGroup>
+                </Container> :
+                <Container id="profile-container">
+                    <ListGroup variant="flush">
+                        <ListGroup.Item>Name: {user.profile.name}</ListGroup.Item>
+                        <ListGroup.Item>Location: {user.city}, {user.state}</ListGroup.Item>
+                        <ListGroup.Item>Phone: {formatPhoneNum(user.phone_number)}</ListGroup.Item>
+                        <ListGroup.Item>Email Address: {user.email}</ListGroup.Item>
+                        {/* <ListGroup.Item type="password">Password: {shelter.user.password}</ListGroup.Item> */}
+                        <ListGroup.Item>Bio: {user.profile.bio}</ListGroup.Item>
+                    </ListGroup>
+                </Container>
+            }
 
 
             <Stack gap={2} className="col-md-5 mx-auto">
@@ -66,7 +84,7 @@ const Profile = ({ user }) => {
                             <Modal.Title>Edit Account Information:</Modal.Title>
                         </Modal.Header>
                         <Modal.Body>
-                            <EditProfileForm shelter={shelter} />
+                            <EditProfileForm user={user} />
                         </Modal.Body>
                     </Modal>
                 </Container>

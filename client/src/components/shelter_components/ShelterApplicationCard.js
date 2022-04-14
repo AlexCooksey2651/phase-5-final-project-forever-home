@@ -8,47 +8,64 @@ import Stack from 'react-bootstrap/Stack'
 
 const exampleApplication = {
     pet: {
+        id: 1,
         name: "Sparky",
-        picture: "https://post.healthline.com/wp-content/uploads/2020/08/3180-Pug_green_grass-732x549-thumbnail-732x549.jpg",
-        bio: "sparky is a 2-year old pug. he weighs 19lbs. he loves cuddles and sleeps a lot, but is feisty if you take him on walks. he'll make you very happy!",
+        image: "https://post.healthline.com/wp-content/uploads/2020/08/3180-Pug_green_grass-732x549-thumbnail-732x549.jpg",
+        bio: "Sparky is a 2-year old Pug. He weighs 19lbs. He loves cuddles and sleeps a lot, but is feisty if you take him on walks. He'll make you very happy!",
         age: 2,
-        species: "dog",
-        status: "application pending"
+        ageUnit: "years",
+        species: "Dog",
+        status: "Adoption Pending"
     },
     customer: {
         first_name: "Alex",
         last_name: "Cooksey",
-        interested_in: ["dog", "cat", "bird"],
+        interested_in: ["Dog", "Cat", "Bird"],
         user: {
             email: "aecooksey2651@gmail.com",
-            password: "pugsaregreat",
-            phone_number: "(720) 301-8361"
+            password: "hello",
+            city: "Jersey City", 
+            state: "NJ",
+            phone_number: "+17203018361",
+            profile_type: "customer",
         },
     },
     date: "March 22, 2022",
     customer_text: "I'll be a great pug dad!"
 }
 
+const formatPhoneNum = (phoneNumber) => {
+    const arrayedNum = phoneNumber.split('')
+    const firstThree = arrayedNum.slice(2, 5).join('')
+    const secondThree = arrayedNum.slice(5, 8).join('')
+    const lastFour = arrayedNum.slice(-4).join('')
+    const newNumStr = `(${firstThree}) ${secondThree}-${lastFour}`
+    return newNumStr
+}
+
 const ShelterApplicationCard = () => {
+    const pet = exampleApplication.pet
+    const customer = exampleApplication.customer
+
 
     return (
         <Container>
             <Card className="application-card">
                 <div class="row no-gutters">
                     <div class="col-md-4">
-                        <Card.Img className="application-card-image" src={exampleApplication.pet.picture} />
+                        <Card.Img className="application-card-image" src={pet.image} alt="pet picture"/>
                     </div>
                     <div class="col-md-8">
                         <Card.Body>
-                            <Card.Title>{exampleApplication.pet.name}</Card.Title>
+                            <Card.Title>{pet.name}</Card.Title>
                             <Card.Text>Application Date: {exampleApplication.date}</Card.Text>
                             <Card.Text>
                                 <Accordion>
                                     <Accordion.Item eventKey="0">
-                                        <Accordion.Header>Customer: {exampleApplication.customer.first_name} {exampleApplication.customer.last_name} </Accordion.Header>
+                                        <Accordion.Header>Customer: {`${customer.first_name} ${customer.last_name}`} </Accordion.Header>
                                         <Accordion.Body>
-                                            <p>Email: {exampleApplication.customer.user.email}</p>
-                                            <p>Phone Number: {exampleApplication.customer.user.phone_number}</p>
+                                            <p>Email: {customer.user.email}</p>
+                                            <p>Phone Number: {formatPhoneNum(customer.user.phone_number)}</p>
                                             <Button variant="outline-dark">Contact Customer</Button>
                                         </Accordion.Body>
                                     </Accordion.Item>

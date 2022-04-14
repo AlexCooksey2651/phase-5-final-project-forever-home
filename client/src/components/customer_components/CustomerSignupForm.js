@@ -58,8 +58,6 @@ const CustomerSignupForm = () => {
                 {allPets.map(animal => {
                     return <Form.Check defaultChecked key={animal} label={animal} value={animal} onChange={(event) => modifyWantedAnimals(event.target.value)}/>
                 })}
-                {/* <Form.Check defaultChecked label="Dogs" value="Dog" onChange={(event) => modifyWantedAnimals(event.target.value)}/>
-                <Form.Check defaultChecked label="Cats" value="Cat" onChange={(event) => modifyWantedAnimals(event.target.value)}/> */}
             </Form.Group>
 
             <Form.Group>

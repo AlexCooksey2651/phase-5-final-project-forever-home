@@ -25,20 +25,7 @@ function LoginForm() {
                     <Button variant="outline-dark" type="submit">
                         Login
                     </Button>
-                    {/* <Button variant="outline-dark">
-                        Create Account
-                    </Button> */}
                 </Stack>
-                {/* <br />
-                {errors ? <Form.Group>
-                    {errors.map(error => {
-                        return (
-                            <Alert key={error}>
-                                {error}
-                            </Alert>
-                        )
-                    })}
-                </Form.Group> : null} */}
             </Form>
         </Container>
     )

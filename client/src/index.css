@@ -17,9 +17,9 @@ code {
   height: 10px;
 }
 
-#header-image {
+/* #header-image {
   object-fit: cover;
-}
+} */
 
 #manage-pets, #active-applications, #previous-adoptions {
   padding: 20px;
@@ -39,7 +39,7 @@ code {
 .pet-card-image, .application-card-image {
   margin-top: 40px;
   margin-left: 15px;
-  border: 0.5px solid black
+  border: 0.5px solid black;
 }
 
 #signup-form {

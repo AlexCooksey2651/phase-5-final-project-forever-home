@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import Button from 'react-bootstrap/Button'
 import Container from 'react-bootstrap/Container'
+import Stack from 'react-bootstrap/Stack'
 import LoginForm from "../components/LoginForm"
 import SignupForm from "../components/SignupForm"
 import Header from '../components/Header'
@@ -25,9 +26,11 @@ function Login({ onLogin }) {
         <Container id="login">
             <Header />
             {loginPage ? <LoginForm /> : <SignupForm />}
-            <Button variant="outline-dark" onClick={toggleLoginPage}>
-                {loginPage ? "Create Account" : "Return to Login Page"}
-            </Button>
+            <Stack gap={2} className="col-md-5 mx-auto">
+                <Button variant="outline-dark" onClick={toggleLoginPage}>
+                    {loginPage ? "Create Account" : "Return to Login Page"}
+                </Button>
+            </Stack>
         </Container>
     )
 }

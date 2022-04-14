@@ -31,6 +31,10 @@ const AdoptionAppForm = ({ pet, user }) => {
                     <Form.Label><b>Tell us why you'd be a great fit for {pet.name}:</b></Form.Label>
                     <Form.Control as="textarea" rows={4} value={appText} onChange={e => setAppText(e.target.value)} />
                 </Form.Group>
+                <br/>
+                <Button variant="outline-dark" >
+                    Submit Application
+                </Button>
             </Form>
         </Container>
     )

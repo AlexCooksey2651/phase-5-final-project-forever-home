@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import Form from 'react-bootstrap/Form'
 import Container from 'react-bootstrap/Container'
+import Stack from 'react-bootstrap/Stack'
 import ShelterSignupForm from './shelter_components/ShelterSignupForm'
 import CustomerSignupForm from './customer_components/CustomerSignupForm'
 import Button from 'react-bootstrap/Button'
@@ -29,9 +30,11 @@ const SignupForm = () => {
                     />
                 </Form.Group>
                 {isCustomer ? <CustomerSignupForm /> : <ShelterSignupForm />}
-                <Button variant="outline-dark">
-                    Submit
-                </Button>
+                <Stack gap={2} className="col-md-5 mx-auto">
+                    <Button variant="outline-dark">
+                        Submit
+                    </Button>
+                </Stack>
             </Form>
         </Container>
 
