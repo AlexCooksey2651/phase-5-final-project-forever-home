@@ -6,6 +6,7 @@ class CreatePets < ActiveRecord::Migration[6.1]
       t.text :bio
       t.string :species
       t.integer :age
+      t.string :age_unit
       t.integer :shelter_id
       t.string :adoption_status
       t.date :adoption_date

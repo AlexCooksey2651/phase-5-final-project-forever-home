@@ -10,6 +10,7 @@ const NewPetForm = () => {
     const [species, setSpecies] = useState("")
     const [bio, setBio] = useState("")
     const [age, setAge] = useState(0)
+    const [ageUnit, setAgeUnit] = useState("")
     
     return (
         <Form id="new-pet-form">
@@ -39,6 +40,12 @@ const NewPetForm = () => {
             <Form.Group className="mb-3" controlId="formBasicInput">
                 <Form.Label><b>Age</b></Form.Label>
                 <Form.Control type="number" min="0" placeholder="Enter Pet Age" value={age} onChange={e => setAge(e.target.value)} />
+                <Form.Select aria-label="Default select example" value={ageUnit} onChange={e => setAgeUnit(e.target.value)}>
+                    <option value="" disabled selected>Select</option>
+                    <option value="weeks" >Weeks</option>
+                    <option value="months" >Months</option>
+                    <option value="years" >Years</option>
+                </Form.Select>
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">

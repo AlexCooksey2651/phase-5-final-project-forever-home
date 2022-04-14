@@ -5,13 +5,14 @@ import Button from 'react-bootstrap/Button'
 import Stack from 'react-bootstrap/Stack'
 import EditProfileForm from "../components/EditProfileForm"
 import ListGroup from "react-bootstrap/ListGroup"
-import { NavigationType } from 'react-router-dom'
+// import { NavigationType } from 'react-router-dom'
 
 const shelter = {
     shelterName: "Kitty Kind",
     bio: "we love all animals around here and just want to help them find homes! find us near Union Square in NYC",
     city: "New York City",
     state: "NY",
+    phoneNumber: "+13148829097",
     user: {
         email: "hello@gmail.com",
         password: "super"
@@ -28,6 +29,15 @@ const Profile = () => {
     const handleShowDelete = () => setShowDelete(true)
     const handleCloseDelete = () => setShowDelete(false)
 
+    const formatPhoneNum = () => {
+        const arrayedNum = shelter.phoneNumber.split('')
+        const firstThree = arrayedNum.slice(2, 5).join('')
+        const secondThree = arrayedNum.slice(5, 8).join('')
+        const lastFour = arrayedNum.slice(-4).join('')
+        const newNumStr = `(${firstThree}) ${secondThree}-${lastFour}`
+        return newNumStr
+    }
+
     return (
         <div>
             <h2>ACCOUNT INFORMATION</h2>
@@ -35,6 +45,7 @@ const Profile = () => {
                 <ListGroup variant="flush">
                     <ListGroup.Item>Name: {shelter.shelterName}</ListGroup.Item>
                     <ListGroup.Item>Location: {shelter.city}, {shelter.state}</ListGroup.Item>
+                    <ListGroup.Item>Phone Number: {formatPhoneNum()}</ListGroup.Item>
                     <ListGroup.Item>Email Address: {shelter.user.email}</ListGroup.Item>
                     {/* <ListGroup.Item type="password">Password: {shelter.user.password}</ListGroup.Item> */}
                     <ListGroup.Item>Bio: {shelter.bio}</ListGroup.Item>

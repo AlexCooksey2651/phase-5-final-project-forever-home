@@ -12,6 +12,7 @@ const examplePet = {
     image: "https://post.healthline.com/wp-content/uploads/2020/08/3180-Pug_green_grass-732x549-thumbnail-732x549.jpg",
     bio: "Sparky is a 2-year old Pug. He weighs 19lbs. He loves cuddles and sleeps a lot, but is feisty if you take him on walks. He'll make you very happy!",
     age: 2,
+    ageUnit: "years",
     species: "Dog",
     status: "Available"
 }
@@ -28,15 +29,15 @@ const ShelterPetCard = () => {
     return (
         <Container>
             <Card className="application-card" bg="light">
-                <div class="row no-gutters">
-                    <div class="col-md-4">
+                <div className="row no-gutters">
+                    <div className="col-md-4">
                         <Card.Img className="pet-card-image" src={examplePet.image} />
                     </div>
-                    <div class="col-md-8">
+                    <div className="col-md-8">
                         <Card.Body>
                             <Card.Title><h2>{examplePet.name}</h2></Card.Title>
                             <Card.Text>Species: {examplePet.species}</Card.Text>
-                            <Card.Text>Age: {examplePet.age} years old</Card.Text>
+                            <Card.Text>Age: {examplePet.age} {examplePet.ageUnit} old</Card.Text>
 
                             <Card.Text>
                                 <b>Pet Bio:</b>
