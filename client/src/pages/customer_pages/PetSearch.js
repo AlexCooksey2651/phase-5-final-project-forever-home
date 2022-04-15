@@ -2,7 +2,7 @@ import React from 'react'
 import Container from 'react-bootstrap/Container'
 import PetCard from '../../components/PetCard'
 
-const PetSearch = ({ user }) => {
+function PetSearch({ user }) {
     const pets = [
         {
             id: 1,

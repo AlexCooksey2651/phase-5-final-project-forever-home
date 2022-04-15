@@ -1,13 +1,10 @@
 import React, { useState } from 'react'
-import Container from 'react-bootstrap/Container'
-import Form from 'react-bootstrap/Form'
-import Button from 'react-bootstrap/Button'
+import { Container, Form, Button } from 'react-bootstrap'
 
-const AdoptionAppForm = ({ pet, user }) => {
+function AdoptionAppForm({ pet, user }) {
     const [appText, setAppText] = useState("")
     const fullName = `${user.profile.first_name} ${user.profile.last_name}`
     const today = new Date().toLocaleDateString()
-
 
     return (
         <Container>
@@ -41,5 +38,3 @@ const AdoptionAppForm = ({ pet, user }) => {
 }
 
 export default AdoptionAppForm
-
-// {`${user.profile.first_name} ${user.profile.last_name}`}

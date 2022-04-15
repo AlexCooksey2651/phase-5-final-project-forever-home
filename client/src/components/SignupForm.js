@@ -1,12 +1,9 @@
 import React, { useState } from 'react'
-import Form from 'react-bootstrap/Form'
-import Container from 'react-bootstrap/Container'
-import Stack from 'react-bootstrap/Stack'
+import { Form, Container, Stack, Button } from 'react-bootstrap'
 import ShelterSignupForm from './shelter_components/ShelterSignupForm'
 import CustomerSignupForm from './customer_components/CustomerSignupForm'
-import Button from 'react-bootstrap/Button'
 
-const SignupForm = () => {
+function SignupForm() {
     const [isCustomer, setIsCustomer] = useState(true)
 
     return (

@@ -1,23 +1,7 @@
 import React, { useState } from 'react'
-import Container from 'react-bootstrap/Container'
-import Card from 'react-bootstrap/Card'
-import Button from 'react-bootstrap/Button'
-import Stack from 'react-bootstrap/Stack'
-import Modal from 'react-bootstrap/Modal'
-import Accordion from 'react-bootstrap/Accordion'
+import { Container, Card, Button, Stack, Modal, Accordion } from 'react-bootstrap'
 import EditPetForm from './shelter_components/EditPetForm'
 import AdoptionAppForm from './customer_components/AdoptionAppForm'
-
-
-// const pet = {
-//     name: "Sparky",
-//     image: "https://post.healthline.com/wp-content/uploads/2020/08/3180-Pug_green_grass-732x549-thumbnail-732x549.jpg",
-//     bio: "Sparky is a 2-year old Pug. He weighs 19lbs. He loves cuddles and sleeps a lot, but is feisty if you take him on walks. He'll make you very happy!",
-//     age: 2,
-//     ageUnit: "years",
-//     species: "Dog",
-//     status: "Available"
-// }
 
 const formatPhoneNum = (phoneNumber) => {
     const arrayedNum = phoneNumber.split('')
@@ -28,7 +12,7 @@ const formatPhoneNum = (phoneNumber) => {
     return newNumStr
 }
 
-const PetCard = ({ pet, user }) => {
+function PetCard({ pet, user }) {
     const userType = user.profile_type
     const [bookmarked, setBookmarked] = useState(false)
     const [showModal, setShowModal] = useState(false)
@@ -169,6 +153,3 @@ const PetCard = ({ pet, user }) => {
 }
 
 export default PetCard
-
-// NOTES
-// VIEW ANIMAL DATA, ASSOCIATED APPLICATIONS (+ number), REMOVE LISTING, EDIT LISTING (edit status as separate button?)

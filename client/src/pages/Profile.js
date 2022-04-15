@@ -1,25 +1,12 @@
-import React, { useState } from 'react'
-import Container from 'react-bootstrap/Container'
-import Modal from 'react-bootstrap/Modal'
-import Button from 'react-bootstrap/Button'
-import Stack from 'react-bootstrap/Stack'
+import React, { useState, useContext } from 'react'
+import { Container, Modal, Button, Stack } from 'react-bootstrap'
 import EditProfileForm from "../components/EditProfileForm"
 import ListGroup from "react-bootstrap/ListGroup"
-// import { NavigationType } from 'react-router-dom'
+import { UserContext } from '../context/user'
 
-const shelter = {
-    shelterName: "Kitty Kind",
-    bio: "we love all animals around here and just want to help them find homes! find us near Union Square in NYC",
-    city: "New York City",
-    state: "NY",
-    phoneNumber: "+13148829097",
-    user: {
-        email: "hello@gmail.com",
-        password: "super"
-    }
-}
+function Profile() {
+    const user = useContext(UserContext)
 
-const Profile = ({ user }) => {
     const isCustomer = () => {
         if (user.profile_type === "customer") {
             return true

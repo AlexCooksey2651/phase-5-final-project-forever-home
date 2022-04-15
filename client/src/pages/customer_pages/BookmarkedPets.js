@@ -2,7 +2,7 @@ import React from 'react'
 import PetCard from '../../components/PetCard'
 import Container from 'react-bootstrap/Container'
 
-const BookmarkedPets = ({ user }) => {
+function BookmarkedPets({ user }) {
     const bookmarks = [{
         id: 1,
         pet: {

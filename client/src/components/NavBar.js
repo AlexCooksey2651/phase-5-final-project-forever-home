@@ -1,9 +1,9 @@
-import React from 'react'
-import Navbar from 'react-bootstrap/Navbar'
-import Container from 'react-bootstrap/Container'
-import Nav from 'react-bootstrap/Nav'
+import React, { useContext } from 'react'
+import { Navbar, Container, Nav } from 'react-bootstrap'
+import { UserContext } from '../context/user'
 
-function NavBar({ user, handleLogout }) {
+function NavBar({ handleLogout }) {
+    const user = useContext(UserContext)
     if (user.profile_type === "customer") {
         return (
             <Navbar bg="dark" variant="dark">

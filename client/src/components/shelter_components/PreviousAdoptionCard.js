@@ -1,8 +1,5 @@
 import React from 'react'
-import Container from 'react-bootstrap/Container'
-import Card from 'react-bootstrap/Card'
-import Button from 'react-bootstrap/Button'
-import Accordion from 'react-bootstrap/Accordion'
+import { Container, Card, Button, Accordion } from 'react-bootstrap'
 
 const examplePet = {
     name: "Fido",
@@ -26,9 +23,9 @@ const examplePet = {
     }
 }
 
-const PreviousAdoptionCard = () => {
-  return (
-    <Container>
+function PreviousAdoptionCard() {
+    return (
+        <Container>
             <Card className="application-card">
                 <div class="row no-gutters">
                     <div class="col-md-4">
@@ -55,7 +52,7 @@ const PreviousAdoptionCard = () => {
                 </div>
             </Card>
         </Container>
-  )
+    )
 }
 
 export default PreviousAdoptionCard

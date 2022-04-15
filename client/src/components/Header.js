@@ -1,7 +1,7 @@
 import React from 'react'
 import Container from 'react-bootstrap/Container'
 
-const Header = () => {
+function Header() {
   return (
     <Container className="app-header">
         <span>

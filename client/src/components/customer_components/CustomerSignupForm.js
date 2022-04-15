@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import PhoneInput from 'react-phone-number-input/input'
-import Form from 'react-bootstrap/Form'
-import Container from 'react-bootstrap/Container'
+import { Form, Container } from 'react-bootstrap'
 
 const allPets = ["Dog", "Cat", "Other Mammal", "Bird", "Reptile/Amphibian", "Fish"] 
 const stateAbbreviations = [ 'AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC', 'FL', 'GA', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR', 'PA', 'PR', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'WA', 'WV', 'WI', 'WY' ]
@@ -9,7 +8,7 @@ const stateOptions = stateAbbreviations.map(state => {
     return <option key={state} value={state}>{state}</option>
 })
 
-const CustomerSignupForm = () => {
+function CustomerSignupForm() {
     const [firstName, setFirstName] = useState("")
     const [lastName, setLastName] = useState("")
     const [city, setCity] = useState("")
@@ -74,8 +73,7 @@ const CustomerSignupForm = () => {
                 <Form.Label><b>Confirm Password:</b></Form.Label>
                 <Form.Control type="password" placeholder="Confirm password" value={passwordConfirmation} onChange={e => setPasswordConfirmation(e.target.value)} />
             </Form.Group>
-
-
+            
         </Container>
     )
 }

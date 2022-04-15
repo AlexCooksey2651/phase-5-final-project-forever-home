@@ -1,13 +1,14 @@
 import React, { useState } from 'react'
 import PhoneInput from 'react-phone-number-input/input'
-import Form from 'react-bootstrap/Form'
-import Container from 'react-bootstrap/Container'
-import Button from 'react-bootstrap/Button'
+import { Form, Container, Button } from 'react-bootstrap'
 
 const stateAbbreviations = ['AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC', 'FL', 'GA', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR', 'PA', 'PR', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'WA', 'WV', 'WI', 'WY']
+const stateOptions = stateAbbreviations.map(state => {
+    return <option key={state} value={state}>{state}</option>
+})
 const allPets = ["Dog", "Cat", "Other Mammal", "Bird", "Reptile/Amphibian", "Fish"]
 
-const EditProfileForm = ({ user }) => {
+function EditProfileForm({ user }) {
     const [shelterName, setShelterName] = useState(user.profile.name)
     const [firstName, setFirstName] = useState(user.profile.first_name)
     const [lastName, setLastName] = useState(user.profile.last_name)
@@ -18,10 +19,6 @@ const EditProfileForm = ({ user }) => {
     const [password, setPassword] = useState(user.password)
     const [bio, setBio] = useState(user.profile.bio)
     const [interestedIn, setInterestedIn] = useState(user.profile.interested_in)
-
-    const stateOptions = stateAbbreviations.map(state => {
-        return <option key={state} value={state}>{state}</option>
-    })
 
     const isCustomer = () => {
         if (user.profile_type === "customer") {
@@ -38,16 +35,7 @@ const EditProfileForm = ({ user }) => {
             setInterestedIn([...interestedIn, animalType])
         }
     }
-
-    // const isDefaultChecked = (animal) => {
-    //     if (interestedIn.includes(animal)) {
-    //         return true
-    //     } else {
-    //         return false
-    //     }
-    // }
     
-
     return (
         <Form id="edit-profile-information">
             {isCustomer() ?
@@ -85,8 +73,6 @@ const EditProfileForm = ({ user }) => {
                 <Form.Label><b>Reset Password:</b></Form.Label>
                 <Form.Control type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)} />
             </Form.Group>
-
-
 
             {isCustomer() ?
                 <Form.Group>

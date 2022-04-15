@@ -1,13 +1,10 @@
 import React, { useState } from 'react'
-import Container from 'react-bootstrap/Container'
-import Modal from 'react-bootstrap/Modal'
-import Button from 'react-bootstrap/Button'
+import { Container, Modal, Button } from 'react-bootstrap'
 import NewPetForm from '../../components/shelter_components/NewPetForm'
 import PetCard from '../../components/PetCard'
 
-const ManagePets = ({ user }) => {
+function ManagePets({ user }) {
     const [showModal, setShowModal] = useState(false)
-
 
     const handleShow = () => setShowModal(true)
     const handleClose = () => setShowModal(false)
@@ -56,8 +53,3 @@ const ManagePets = ({ user }) => {
 }
 
 export default ManagePets
-
-// RENDERS ANIMAL CARDS
-// BUTTON THAT BRINGS UP MODAL WITH ADD NEW PET FORM
-// FILTER BY SPECIES
-// FILTER BY ADOPTION STATUS (Available, Application Pending)

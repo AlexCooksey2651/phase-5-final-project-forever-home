@@ -1,7 +1,5 @@
 import React, { useState } from 'react'
-import Button from 'react-bootstrap/Button'
-import Container from 'react-bootstrap/Container'
-import Stack from 'react-bootstrap/Stack'
+import { Button, Container, Stack } from 'react-bootstrap'
 import LoginForm from "../components/LoginForm"
 import SignupForm from "../components/SignupForm"
 import Header from '../components/Header'
@@ -9,14 +7,6 @@ import Header from '../components/Header'
 
 function Login({ onLogin }) {
     const [loginPage, setLoginPage] = useState(true)
-
-    //   if (loginPage === "login") {
-    //       return <LoginForm />
-    //   } else if (loginPage === "new-customer") {
-    //       return <CustomerSignupForm />
-    //   } else if (loginPage === "new-shelter") {
-    //       return <ShelterSignupForm />
-    //   }
 
     function toggleLoginPage() {
         setLoginPage(!loginPage)

@@ -2,7 +2,7 @@ import React from 'react'
 import CustomerApplicationCard from '../../components/customer_components/CustomerApplicationCard'
 import Container from 'react-bootstrap/Container'
 
-const MyApplications = ({ user }) => {
+function MyApplications({ user }) {
 
     const applications = [{
         id: 1,

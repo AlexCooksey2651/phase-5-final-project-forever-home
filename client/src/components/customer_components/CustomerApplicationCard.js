@@ -1,9 +1,5 @@
 import React from 'react'
-import Container from 'react-bootstrap/Container'
-import Card from 'react-bootstrap/Card'
-import Accordion from 'react-bootstrap/Accordion'
-import Stack from 'react-bootstrap/Stack'
-import Button from 'react-bootstrap/Button'
+import { Container, Card, Accordion, Stack, Button } from 'react-bootstrap'
 
 const exampleApplication = {
     pet: {
@@ -55,7 +51,7 @@ const formatPhoneNum = (phoneNumber) => {
     return newNumStr
 }
 
-const CustomerApplicationCard = () => {
+function CustomerApplicationCard() {
     const pet = exampleApplication.pet
     const shelter = exampleApplication.pet.shelter
     const customer = exampleApplication.customer

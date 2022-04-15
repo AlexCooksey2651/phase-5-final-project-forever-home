@@ -1,9 +1,8 @@
 import React, { useState } from 'react'
-import Form from 'react-bootstrap/Form'
-import Container from 'react-bootstrap/Container'
-import Button from 'react-bootstrap/Button'
+import { Form, Container, Button } from 'react-bootstrap'
 
-const EditPetForm = ({pet}) => {
+
+function EditPetForm({pet}) {
     const [name, setName] = useState(pet.name)
     const [image, setImage] = useState(pet.image)
     const [species, setSpecies] = useState(pet.species)

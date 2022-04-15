@@ -12,11 +12,12 @@ import PreviousAdoptions from './pages/shelter_pages/PreviousAdoptions';
 import BookmarkedPets from "./pages/customer_pages/BookmarkedPets"
 import Profile from './pages/Profile';
 import Login from './pages/Login';
+import { UserProvider } from "./context/user";
 
 const exampleCustomerUser = {
   email: "aecooksey2651@gmail.com",
   password: "hello",
-  city: "Jersey City", 
+  city: "Jersey City",
   state: "NJ",
   phone_number: "+17203018361",
   profile_type: "customer",
@@ -41,7 +42,7 @@ const exampleShelterUser = {
 }
 function App() {
   const [user, setUser] = useState(exampleCustomerUser)
-  
+
   function handleLogout() {
     setUser(null)
   }
@@ -50,19 +51,21 @@ function App() {
 
   return (
     <div className="App">
-      <Header />
-      <NavBar user={user} handleLogout={handleLogout}/>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/manage-pets" element={<ManagePets user={user}/>} />
-        <Route path="/search-pets" element={<PetSearch user={user}/>} />
-        <Route path="/view-applications" element={<ViewApplications user={user}/>} />
-        <Route path="/my-applications" element={<MyApplications user={user}/>} />
-        <Route path="/bookmarked-pets" element={<BookmarkedPets user={user}/>} />
-        <Route path="/previous-adoptions" element={<PreviousAdoptions user={user}/>} />
-        <Route path="/profile" element={<Profile user={user}/>} />
-        <Route path="/login" element={<Login />} />
-      </Routes>
+      <UserProvider>
+        <Header />
+        <NavBar  handleLogout={handleLogout} />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/manage-pets" element={<ManagePets  />} />
+          <Route path="/search-pets" element={<PetSearch  />} />
+          <Route path="/view-applications" element={<ViewApplications  />} />
+          <Route path="/my-applications" element={<MyApplications  />} />
+          <Route path="/bookmarked-pets" element={<BookmarkedPets  />} />
+          <Route path="/previous-adoptions" element={<PreviousAdoptions  />} />
+          <Route path="/profile" element={<Profile  />} />
+          <Route path="/login" element={<Login />} />
+        </Routes>
+      </UserProvider>
     </div>
   );
 }
