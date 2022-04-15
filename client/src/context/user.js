@@ -1,4 +1,5 @@
-import React, { useState, createContext } from "react";
+import React, { useState } from "react";
+
 const exampleCustomerUser = {
     email: "aecooksey2651@gmail.com",
     password: "hello",
@@ -30,7 +31,7 @@ const UserContext = React.createContext();
 
 // create a provider component
 function UserProvider({ children }) {
-    const [user, setUser] = useState(null)
+    const [user, setUser] = useState(exampleShelterUser)
     // the value prop of the provider will be our context data
     // this value will be available to child components of this provider
     return <UserContext.Provider value={{ user, setUser }}>{children}</UserContext.Provider>;

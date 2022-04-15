@@ -54,7 +54,6 @@ const formatPhoneNum = (phoneNumber) => {
 function CustomerApplicationCard() {
     const pet = exampleApplication.pet
     const shelter = exampleApplication.pet.shelter
-    const customer = exampleApplication.customer
 
     return (
         <Container>

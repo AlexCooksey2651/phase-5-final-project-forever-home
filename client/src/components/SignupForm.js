@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Form, Container, Stack, Button } from 'react-bootstrap'
+import { Form, Container } from 'react-bootstrap'
 import ShelterSignupForm from './shelter_components/ShelterSignupForm'
 import CustomerSignupForm from './customer_components/CustomerSignupForm'
 

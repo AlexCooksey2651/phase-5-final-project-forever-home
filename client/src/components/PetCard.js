@@ -1,5 +1,4 @@
-import React, { useState, useContext } from 'react'
-import { UserContext } from '../context/user'
+import React, { useState } from 'react'
 import { Container, Card, Button, Stack, Modal, Accordion } from 'react-bootstrap'
 import EditPetForm from './shelter_components/EditPetForm'
 import AdoptionAppForm from './customer_components/AdoptionAppForm'
@@ -14,7 +13,6 @@ const formatPhoneNum = (phoneNumber) => {
 }
 
 function PetCard({ pet, user }) {
-    // const user = useContext(UserContext)
     const userType = user.profile_type
     const [bookmarked, setBookmarked] = useState(false)
     const [showModal, setShowModal] = useState(false)

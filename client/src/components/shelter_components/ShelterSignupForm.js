@@ -43,7 +43,7 @@ function ShelterSignupForm({ onLogin }) {
         })
             .then(r => {
                 if (r.ok) {
-                    r.json().then(user => onLogin(user))
+                    r.json().then(shelter => onLogin(shelter.user))
                     navigate('/home')
                 } else {
                     r.json().then(data => setErrors(data.errors))
@@ -53,7 +53,7 @@ function ShelterSignupForm({ onLogin }) {
 
     return (
         <Container>
-            <Form>
+            <Form onSubmit={handleSubmit}>
                 <Form.Group>
                     <Form.Label><b>Shelter Name:</b></Form.Label>
                     <Form.Control type="text" placeholder="Enter Shelter Name" value={shelterName} onChange={e => setShelterName(e.target.value)} />

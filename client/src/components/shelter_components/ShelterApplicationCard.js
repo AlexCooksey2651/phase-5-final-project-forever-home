@@ -1,34 +1,6 @@
 import React from 'react'
 import { Container, Card, Button, Accordion, Stack } from 'react-bootstrap'
 
-const exampleApplication = {
-    pet: {
-        id: 1,
-        name: "Sparky",
-        image: "https://post.healthline.com/wp-content/uploads/2020/08/3180-Pug_green_grass-732x549-thumbnail-732x549.jpg",
-        bio: "Sparky is a 2-year old Pug. He weighs 19lbs. He loves cuddles and sleeps a lot, but is feisty if you take him on walks. He'll make you very happy!",
-        age: 2,
-        ageUnit: "years",
-        species: "Dog",
-        status: "Adoption Pending"
-    },
-    customer: {
-        first_name: "Alex",
-        last_name: "Cooksey",
-        interested_in: ["Dog", "Cat", "Bird"],
-        user: {
-            email: "aecooksey2651@gmail.com",
-            password: "hello",
-            city: "Jersey City", 
-            state: "NJ",
-            phone_number: "+17203018361",
-            profile_type: "customer",
-        },
-    },
-    date: "March 22, 2022",
-    customer_text: "I'll be a great pug dad!"
-}
-
 const formatPhoneNum = (phoneNumber) => {
     const arrayedNum = phoneNumber.split('')
     const firstThree = arrayedNum.slice(2, 5).join('')
