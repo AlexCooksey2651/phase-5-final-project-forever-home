@@ -1,9 +1,11 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
+import { UserContext } from '../../context/user'
 import { Container, Modal, Button } from 'react-bootstrap'
 import NewPetForm from '../../components/shelter_components/NewPetForm'
 import PetCard from '../../components/PetCard'
 
-function ManagePets({ user }) {
+function ManagePets() {
+    const { user } = useContext(UserContext)
     const [showModal, setShowModal] = useState(false)
 
     const handleShow = () => setShowModal(true)
@@ -19,15 +21,15 @@ function ManagePets({ user }) {
         species: "Dog",
         status: "Available"
     }]
-    
+
     const petCards = pets.map(pet => {
-        return <PetCard key={pet.id} pet={pet} user={user} />
+        return <PetCard key={pet.id} pet={pet} user={user}/>
     })
 
     return (
         <div id="manage-pets">
             <h2>Manage Pets</h2>
-            <br/>
+            <br />
             <Container>
                 <Button variant="outline-dark" onClick={handleShow}>
                     Add New Pet
@@ -41,10 +43,7 @@ function ManagePets({ user }) {
                     </Modal.Body>
                 </Modal>
             </Container>
-            <br/>
-            {/* <Container>
-                Dropdowns to filter by species, filter by adoption status
-            </Container> */}
+            <br />
             <Container id="shelter-pet-card-container">
                 {petCards}
             </Container>

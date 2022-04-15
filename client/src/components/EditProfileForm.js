@@ -1,6 +1,7 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import PhoneInput from 'react-phone-number-input/input'
 import { Form, Container, Button } from 'react-bootstrap'
+import { UserContext } from '../context/user'
 
 const stateAbbreviations = ['AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC', 'FL', 'GA', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR', 'PA', 'PR', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'WA', 'WV', 'WI', 'WY']
 const stateOptions = stateAbbreviations.map(state => {
@@ -8,7 +9,9 @@ const stateOptions = stateAbbreviations.map(state => {
 })
 const allPets = ["Dog", "Cat", "Other Mammal", "Bird", "Reptile/Amphibian", "Fish"]
 
-function EditProfileForm({ user }) {
+function EditProfileForm() {
+    const { user } = useContext(UserContext)
+
     const [shelterName, setShelterName] = useState(user.profile.name)
     const [firstName, setFirstName] = useState(user.profile.first_name)
     const [lastName, setLastName] = useState(user.profile.last_name)

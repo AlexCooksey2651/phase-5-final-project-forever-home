@@ -38,9 +38,9 @@ const formatPhoneNum = (phoneNumber) => {
     return newNumStr
 }
 
-function ShelterApplicationCard() {
-    const pet = exampleApplication.pet
-    const customer = exampleApplication.customer
+function ShelterApplicationCard({ application }) {
+    const pet = application.pet
+    const customer = application.customer
 
 
     return (
@@ -53,7 +53,7 @@ function ShelterApplicationCard() {
                     <div class="col-md-8">
                         <Card.Body>
                             <Card.Title>{pet.name}</Card.Title>
-                            <Card.Text>Application Date: {exampleApplication.date}</Card.Text>
+                            <Card.Text>Application Date: {application.date}</Card.Text>
                             <Card.Text>
                                 <Accordion>
                                     <Accordion.Item eventKey="0">
@@ -69,7 +69,7 @@ function ShelterApplicationCard() {
                             <Card.Text>
                                 Application:
                                 <br />
-                                <em>{exampleApplication.customer_text}</em>
+                                <em>{application.customer_text}</em>
                             </Card.Text>
                             <Stack gap={2} className="col-md-5 mx-auto">
                                 <Button variant="outline-dark">Approve Application</Button>

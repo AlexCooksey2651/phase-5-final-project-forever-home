@@ -5,7 +5,7 @@ import ListGroup from "react-bootstrap/ListGroup"
 import { UserContext } from '../context/user'
 
 function Profile() {
-    const user = useContext(UserContext)
+    const { user } = useContext(UserContext)
 
     const isCustomer = () => {
         if (user.profile_type === "customer") {

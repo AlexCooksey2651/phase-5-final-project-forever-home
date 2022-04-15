@@ -1,8 +1,10 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { UserContext } from '../../context/user'
 import Container from 'react-bootstrap/Container'
 import PetCard from '../../components/PetCard'
 
-function PetSearch({ user }) {
+function PetSearch() {
+    const { user } = useContext(UserContext)
     const pets = [
         {
             id: 1,

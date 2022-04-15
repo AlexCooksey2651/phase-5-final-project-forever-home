@@ -4,8 +4,9 @@ import ShelterSignupForm from './shelter_components/ShelterSignupForm'
 import CustomerSignupForm from './customer_components/CustomerSignupForm'
 
 function SignupForm() {
-    const [isCustomer, setIsCustomer] = useState(true)
-
+    const [profileType, setProfileType] = useState("customer")
+    const [profileData, setProfileData] = useState({})
+    
     return (
         <Container id="signup-form">
             <Form>
@@ -14,16 +15,16 @@ function SignupForm() {
                         type="radio"
                         id="customer-radio"
                         label="Sign Up As Customer"
-                        checked={!!isCustomer}
-                        onChange={() => setIsCustomer(true)}
+                        checked={profileType === "customer"}
+                        onChange={() => setProfileType("customer")}
                     />
 
                     <Form.Check
                         type="radio"
                         label="Sign Up As Shelter"
                         id="shelter-radio"
-                        checked={isCustomer === false}
-                        onChange={() => setIsCustomer(false)}
+                        checked={profileType === "shelter"}
+                        onChange={() => setProfileType("shelter")}
                     />
                 </Form.Group>
                 {isCustomer ? <CustomerSignupForm /> : <ShelterSignupForm />}

@@ -1,8 +1,11 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { UserContext } from '../../context/user'
 import PetCard from '../../components/PetCard'
 import Container from 'react-bootstrap/Container'
 
-function BookmarkedPets({ user }) {
+function BookmarkedPets() {
+    const { user } = useContext(UserContext)
+
     const bookmarks = [{
         id: 1,
         pet: {

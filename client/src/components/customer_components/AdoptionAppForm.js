@@ -1,7 +1,9 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { Container, Form, Button } from 'react-bootstrap'
+import { UserContext } from '../../context/user'
 
-function AdoptionAppForm({ pet, user }) {
+function AdoptionAppForm({ pet }) {
+    const { user } = useContext(UserContext)
     const [appText, setAppText] = useState("")
     const fullName = `${user.profile.first_name} ${user.profile.last_name}`
     const today = new Date().toLocaleDateString()

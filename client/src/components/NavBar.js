@@ -3,7 +3,7 @@ import { Navbar, Container, Nav } from 'react-bootstrap'
 import { UserContext } from '../context/user'
 
 function NavBar({ handleLogout }) {
-    const user = useContext(UserContext)
+    const { user } = useContext(UserContext)
     if (user.profile_type === "customer") {
         return (
             <Navbar bg="dark" variant="dark">

@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { UserContext } from '../../context/user'
 import CustomerApplicationCard from '../../components/customer_components/CustomerApplicationCard'
 import Container from 'react-bootstrap/Container'
 
-function MyApplications({ user }) {
-
+function MyApplications() {
+    const { user } = useContext(UserContext)
     const applications = [{
         id: 1,
         pet: {
