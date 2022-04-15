@@ -5,8 +5,32 @@ rescue_from ActiveRecord::RecordInvalid, with: :invalid_record
         new_shelter = Shelter.create!(shelter_params)
         user = new_shelter.user.create!(user_params)
         user.profile_type = "shelter"
-        session[:user_id] = new_user.id
+        session[:user_id] = user.id
         render json: new_shelter, status: :created
+    end
+
+    def update
+        user = User.find_by(id: session[:user_id])
+        if user
+            user.update!(user_params)
+            shelter = user.profile
+            shelter.update!(shelter_params)
+            render json: shelter
+        else
+            render json: {error: "User not found"}, status: :not_found
+        end
+    end
+
+    def destroy
+        user = User.find_by(id: session[:user_id])
+        if user
+            shelter_id = user.profile.id
+            shelter = Shelter.find_by(id: shelter_id)
+            shelter.destroy
+            head :no_content
+        else
+            render json: {error: "User not found"}, status: :not_found
+        end
     end
 
     private 

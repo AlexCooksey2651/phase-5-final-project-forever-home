@@ -1,8 +1,14 @@
 class BookmarksController < ApplicationController
+rescue_from ActiveRecord::RecordInvalid, with: :invalid_record
+
     def create
         user = User.find_by(id: session[:user_id])
-        new_bookmark = user.profile.bookmarks.create!(pet_id: params[:pet_id])
-        render json: new_bookmark, status: :created
+        if user
+            new_bookmark = user.profile.bookmarks.create!(pet_id: params[:pet_id])
+            render json: new_bookmark, status: :created
+        else
+            render json: {error: "User not found"}, status: :not_found
+        end
     end
 
     def destroy
@@ -17,9 +23,21 @@ class BookmarksController < ApplicationController
 
     def index
         user = User.find_by(id: session[:user_id])
-        bookmarks = user.profile.bookmarks
-        render json: bookmarks, status: :ok
+        if user
+            bookmarks = user.profile.bookmarks
+            render json: bookmarks, status: :ok
+        else
+            render json: {error: "User not found"}, status: :not_found
+        end
     end
 
     private
+    
+    def invalid_record(invalid)
+        render json: {errors: invalid.record.errors.full_messages}, status: :unprocessable_entity
+    end
+
+    def bookmark_params
+        params.permit(:pet_id)
+    end
 end

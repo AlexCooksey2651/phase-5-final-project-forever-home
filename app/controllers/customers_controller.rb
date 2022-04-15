@@ -4,7 +4,11 @@ rescue_from ActiveRecord::RecordInvalid, with: :invalid_record
     def create
         new_customer = Customer.create!(customer_params)
         new_user = new_customer.user.create!(user_params)
-        user.profile_type = "customer"
+        # is this line necessary?
+        new_user.profile_type = "customer" 
+        # alternate...
+        # new_customer.user << User.create!(user_params)
+        # session[:user_id] = new_customer.user.id
         session[:user_id] = new_user.id
         render json: new_customer, status: :created
     end
@@ -22,6 +26,15 @@ rescue_from ActiveRecord::RecordInvalid, with: :invalid_record
     end
 
     def destroy
+        user = User.find_by(id: session[:user_id])
+        if user
+            customer_id = user.profile.id
+            customer = Customer.find_by(id: customer_id)
+            customer.destroy
+            head :no_content
+        else
+            render json: {error: "User not found"}, status: :not_found
+        end
     end
 
     private 
