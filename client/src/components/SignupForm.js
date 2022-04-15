@@ -6,7 +6,14 @@ import CustomerSignupForm from './customer_components/CustomerSignupForm'
 function SignupForm() {
     const [profileType, setProfileType] = useState("customer")
     const [profileData, setProfileData] = useState({})
-    
+
+    const isCustomer = () => {
+        if (profileType === "customer") {
+            return true
+        } else if (profileType === "shelter") {
+            return false
+        }
+    }
     return (
         <Container id="signup-form">
             <Form>
@@ -27,13 +34,8 @@ function SignupForm() {
                         onChange={() => setProfileType("shelter")}
                     />
                 </Form.Group>
-                {isCustomer ? <CustomerSignupForm /> : <ShelterSignupForm />}
-                <Stack gap={2} className="col-md-5 mx-auto">
-                    <Button variant="outline-dark">
-                        Submit
-                    </Button>
-                </Stack>
             </Form>
+            {isCustomer() ? <CustomerSignupForm setProfileData={setProfileData}/> : <ShelterSignupForm setProfileData={setProfileData}/>}
         </Container>
 
     )
