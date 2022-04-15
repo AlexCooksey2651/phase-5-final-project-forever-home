@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
+import { useNavigate } from "react-router-dom"
 import PhoneInput from 'react-phone-number-input/input'
-import { Form, Container, Stack, Button } from 'react-bootstrap'
+import { Form, Container, Stack, Button, Alert } from 'react-bootstrap'
 
 const stateAbbreviations = ['AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC', 'FL', 'GA', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR', 'PA', 'PR', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'WA', 'WV', 'WI', 'WY']
 // SRC = "https://gist.github.com/bubblerun/a624de5b4fa8ff0980010054a7220977#file-array-js"
@@ -9,7 +10,7 @@ const stateOptions = stateAbbreviations.map(state => {
 })
 
 
-function ShelterSignupForm() {
+function ShelterSignupForm({ onLogin }) {
     const [shelterName, setShelterName] = useState("")
     const [city, setCity] = useState("")
     const [state, setState] = useState("")
@@ -18,6 +19,37 @@ function ShelterSignupForm() {
     const [password, setPassword] = useState("")
     const [passwordConfirmation, setPasswordConfirmation] = useState("")
     const [bio, setBio] = useState("")
+    const [errors, setErrors] = useState([]);
+    const navigate = useNavigate()
+
+    function handleSubmit(e) {
+        e.preventDefault()
+        setErrors([])
+        fetch('/signup-shelter', {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                name: shelterName,
+                city,
+                state,
+                phone_number: phoneNumber,
+                email,
+                password,
+                password_confirmation: passwordConfirmation,
+                bio
+            })
+        })
+            .then(r => {
+                if (r.ok) {
+                    r.json().then(user => onLogin(user))
+                    navigate('/home')
+                } else {
+                    r.json().then(data => setErrors(data.errors))
+                }
+            })
+    }
 
     return (
         <Container>
@@ -66,6 +98,17 @@ function ShelterSignupForm() {
                         Submit
                     </Button>
                 </Stack>
+
+                <br />
+                {errors ? <Form.Group>
+                    {errors.map(error => {
+                        return (
+                            <Alert key={error}>
+                                {error}
+                            </Alert>
+                        )
+                    })}
+                </Form.Group> : null}
             </Form>
         </Container>
     )

@@ -3,8 +3,10 @@ Rails.application.routes.draw do
   resources :pets
   resources :applications
   resources :bookmarks
-  resources :shelters
-  resources :customers
+  resources :shelters, exclude: [:create]
+  resources :customers, exclude: [:create]
+  post "/signup-customer", to: 'customers#create'
+  post '/signup-shelter', to: 'shelters#create'
   post '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'
   get '/me', to: 'users#show'

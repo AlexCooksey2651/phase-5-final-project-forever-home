@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
+import { useNavigate } from "react-router-dom"
 import PhoneInput from 'react-phone-number-input/input'
-import { Form, Container, Stack, Button } from 'react-bootstrap'
+import { Form, Container, Stack, Button, Alert } from 'react-bootstrap'
 
 const allPets = ["Dog", "Cat", "Other Mammal", "Bird", "Reptile/Amphibian", "Fish"]
 const stateAbbreviations = ['AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC', 'FL', 'GA', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR', 'PA', 'PR', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'WA', 'WV', 'WI', 'WY']
@@ -8,7 +9,7 @@ const stateOptions = stateAbbreviations.map(state => {
     return <option key={state} value={state}>{state}</option>
 })
 
-function CustomerSignupForm() {
+function CustomerSignupForm({ onLogin }) {
     const [firstName, setFirstName] = useState("")
     const [lastName, setLastName] = useState("")
     const [city, setCity] = useState("")
@@ -18,6 +19,8 @@ function CustomerSignupForm() {
     const [password, setPassword] = useState("")
     const [passwordConfirmation, setPasswordConfirmation] = useState("")
     const [interestedIn, setInterestedIn] = useState(allPets)
+    const [errors, setErrors] = useState([]);
+    const navigate = useNavigate()
 
     function modifyWantedAnimals(animalType) {
         if (interestedIn.includes(animalType)) {
@@ -27,9 +30,38 @@ function CustomerSignupForm() {
         }
     }
 
+    function handleSubmit(e) {
+        e.preventDefault()
+        setErrors([])
+        fetch('/signup-customer', {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                first_name: firstName,
+                last_name: lastName,
+                city,
+                state,
+                phone_number: phoneNumber,
+                email,
+                password,
+                password_confirmation: passwordConfirmation,
+                interested_in: interestedIn,
+            })
+        })
+            .then(r => {
+                if (r.ok) {
+                    r.json().then(customer => onLogin(customer.user))
+                    navigate('/home')
+                } else {
+                    r.json().then(data => setErrors(data.errors))
+                }
+            })
+    }
     return (
         <Container>
-            <Form>
+            <Form onSubmit={handleSubmit}>
                 <Form.Group>
                     <Form.Label><b>First Name:</b></Form.Label>
                     <Form.Control type="text" placeholder="Enter First Name" value={firstName} onChange={e => setFirstName(e.target.value)} />
@@ -80,6 +112,17 @@ function CustomerSignupForm() {
                         Submit
                     </Button>
                 </Stack>
+
+                <br />
+                {errors ? <Form.Group>
+                    {errors.map(error => {
+                        return (
+                            <Alert key={error}>
+                                {error}
+                            </Alert>
+                        )
+                    })}
+                </Form.Group> : null}
             </Form>
         </Container>
     )

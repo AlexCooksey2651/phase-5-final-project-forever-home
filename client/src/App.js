@@ -42,7 +42,7 @@ import Login from './pages/Login';
 //   }
 // }
 function App() {
-  const { user, setUser } = useContext(UserContext)
+  const { user, setUser } = useContext(UserContext);
 
   useEffect(() => {
     fetch('/me').then((r) => {

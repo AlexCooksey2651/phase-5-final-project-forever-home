@@ -3,9 +3,8 @@ import { Form, Container, Stack, Button } from 'react-bootstrap'
 import ShelterSignupForm from './shelter_components/ShelterSignupForm'
 import CustomerSignupForm from './customer_components/CustomerSignupForm'
 
-function SignupForm() {
+function SignupForm({ onLogin }) {
     const [profileType, setProfileType] = useState("customer")
-    const [profileData, setProfileData] = useState({})
 
     const isCustomer = () => {
         if (profileType === "customer") {
@@ -35,7 +34,7 @@ function SignupForm() {
                     />
                 </Form.Group>
             </Form>
-            {isCustomer() ? <CustomerSignupForm setProfileData={setProfileData}/> : <ShelterSignupForm setProfileData={setProfileData}/>}
+            {isCustomer() ? <CustomerSignupForm onLogin={onLogin} /> : <ShelterSignupForm onLogin={onLogin}/>}
         </Container>
 
     )
