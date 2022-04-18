@@ -54,7 +54,7 @@ function App() {
         <Route path="/my-applications" element={<MyApplications />} />
         <Route path="/bookmarked-pets" element={<BookmarkedPets />} />
         <Route path="/previous-adoptions" element={<PreviousAdoptions />} />
-        <Route path="/profile" element={<Profile />} />
+        <Route path="/profile" element={<Profile handleLogout={handleLogout}/>} />
         <Route path="/login" element={<Login />} />
       </Routes>
 

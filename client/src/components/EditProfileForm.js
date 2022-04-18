@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react'
 import PhoneInput from 'react-phone-number-input/input'
-import { Form, Container, Button } from 'react-bootstrap'
+import { Form, Container, Button, Alert } from 'react-bootstrap'
 import { UserContext } from '../context/user'
 
 const stateAbbreviations = ['AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC', 'FL', 'GA', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR', 'PA', 'PR', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'WA', 'WV', 'WI', 'WY']
@@ -11,17 +11,19 @@ const allPets = ["Dog", "Cat", "Other Mammal", "Bird", "Reptile/Amphibian", "Fis
 
 function EditProfileForm() {
     const { user } = useContext(UserContext)
+    const [userInfo, setUserInfo] = useState(user)
+    const [errors, setErrors] = useState([])
 
-    const [shelterName, setShelterName] = useState(user.profile.name)
-    const [firstName, setFirstName] = useState(user.profile.first_name)
-    const [lastName, setLastName] = useState(user.profile.last_name)
-    const [city, setCity] = useState(user.city)
-    const [state, setState] = useState(user.state)
-    const [phoneNumber, setPhoneNumber] = useState(user.phone_number)
-    const [email, setEmail] = useState(user.email)
-    const [password, setPassword] = useState(user.password)
-    const [bio, setBio] = useState(user.profile.bio)
-    const [interestedIn, setInterestedIn] = useState(user.profile.interested_in)
+    const [shelterName, setShelterName] = useState(userInfo.profile.name)
+    const [firstName, setFirstName] = useState(userInfo.profile.first_name)
+    const [lastName, setLastName] = useState(userInfo.profile.last_name)
+    const [city, setCity] = useState(userInfo.city)
+    const [state, setState] = useState(userInfo.state)
+    const [phoneNumber, setPhoneNumber] = useState(userInfo.phone_number)
+    const [email, setEmail] = useState(userInfo.email)
+    const [password, setPassword] = useState(userInfo.password)
+    const [bio, setBio] = useState(userInfo.profile.bio)
+    const [interestedIn, setInterestedIn] = useState(userInfo.profile.interested_in)
 
     const isCustomer = () => {
         if (user.profile_type === "customer") {
@@ -38,9 +40,60 @@ function EditProfileForm() {
             setInterestedIn([...interestedIn, animalType])
         }
     }
-    
+
+    function submitPatchCustomer(e) {
+        e.preventDefault()
+        fetch(`/${user.profile.id}`, {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                first_name: firstName,
+                last_name: lastName,
+                interested_in: interestedIn,
+                email,
+                city,
+                state,
+                phone_number: phoneNumber
+            })
+        })
+            .then((r) => {
+                if (r.ok) {
+                    r.json().then(user => setUserInfo(user))
+                } else {
+                    r.json().then(errors => setErrors(errors))
+                }
+            })
+    }
+
+    function submitPatchShelter(e) {
+        e.preventDefault()
+        fetch(`/profiles/${user.profile.id}`, {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                name: shelterName,
+                bio,
+                email,
+                city,
+                state,
+                phone_number: phoneNumber
+            })
+        })
+            .then((r) => {
+                if (r.ok) {
+                    r.json().then(user => setUserInfo(user))
+                } else {
+                    r.json().then(errors => setErrors(errors))
+                }
+            })
+    }
+
     return (
-        <Form id="edit-profile-information">
+        <Form id="edit-profile-information" onSubmit={isCustomer() ? submitPatchCustomer : submitPatchShelter}>
             {isCustomer() ?
                 <Form.Group className="mb-3" controlId="formBasicInput">
                     <Form.Label><b>Name:</b></Form.Label>
@@ -95,6 +148,17 @@ function EditProfileForm() {
                     Confirm Updates
                 </Button>
             </Container>
+
+            <br />
+            {errors ? <Form.Group>
+                {errors.map(error => {
+                    return (
+                        <Alert key={error}>
+                            {error}
+                        </Alert>
+                    )
+                })}
+            </Form.Group> : null}
         </Form>
     )
 }

@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import ShelterApplicationCard from "../../components/shelter_components/ShelterApplicationCard"
 
-const applications = [{
+const exampleApplications = [{
     id: 1,
     pet: {
         id: 1,
@@ -45,15 +45,35 @@ const applications = [{
 
 
 function ViewApplications() {
-    
-    const shelterApplicationCards = applications.map(application => {
-        return <ShelterApplicationCard 
-            key={application.id} 
-            application={application} 
+    const [shelterApplications, setShelterApplications] = useState([])
+
+    useEffect(() => {
+        fetch('/shelter-applications').then((r) => {
+            if (r.ok) {
+                r.json().then(applications => setShelterApplications(applications))
+            }
+        })
+    }, [])
+
+    function handleUpdateApplication(updatedApplication) {
+        const updatedApplications = shelterApplications.filter(application => {
+            if (application.id === updatedApplication.id) {
+                return updatedApplication
+            } else {
+                return application
+            }
+        })
+        setShelterApplications(updatedApplications)
+    }
+
+    const shelterApplicationCards = exampleApplications.map(application => {
+        return <ShelterApplicationCard
+            key={application.id}
+            application={application}
             handleUpdateApplication={handleUpdateApplication}
-            />
+        />
     })
-    
+
     return (
         <div id="active-applications">
             <h2>Active Applications</h2>

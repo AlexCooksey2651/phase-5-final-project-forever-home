@@ -4,7 +4,7 @@ import EditProfileForm from "../components/EditProfileForm"
 import ListGroup from "react-bootstrap/ListGroup"
 import { UserContext } from '../context/user'
 
-function Profile() {
+function Profile({ handleLogout }) {
     const { user } = useContext(UserContext)
 
     const isCustomer = () => {
@@ -31,6 +31,19 @@ function Profile() {
         const lastFour = arrayedNum.slice(-4).join('')
         const newNumStr = `(${firstThree}) ${secondThree}-${lastFour}`
         return newNumStr
+    }
+
+    function handleDeleteProfile() {
+        handleLogout()
+        if (user.profile_type === "customer") {
+            fetch(`/customers/${user.profile.id}`, {
+                method: "DELETE",
+            }) 
+        } else if (user.profile_type === "shelter") {
+            fetch(`/shelters/${user.profile.id}`, {
+                method: "DELETE",
+            })
+        }    
     }
 
     return (
@@ -85,7 +98,7 @@ function Profile() {
                             <Modal.Header closeButton>
                                 <Modal.Title>Are You Sure?</Modal.Title>
                             </Modal.Header>
-                            <Button variant="outline-dark">
+                            <Button variant="outline-dark" onClick={() => handleDeleteProfile()}>
                                 Confirm
                             </Button>
                         </Modal.Body>

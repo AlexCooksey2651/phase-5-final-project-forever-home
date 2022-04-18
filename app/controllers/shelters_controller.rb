@@ -6,7 +6,7 @@ rescue_from ActiveRecord::RecordInvalid, with: :invalid_record
         user = new_shelter.user.create!(user_params)
         user.profile_type = "shelter"
         session[:user_id] = user.id
-        render json: new_shelter, include: :user, status: :created
+        render json: new_shelter, status: :created
     end
 
     def update
