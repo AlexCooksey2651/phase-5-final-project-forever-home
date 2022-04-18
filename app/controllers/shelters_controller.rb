@@ -1,11 +1,15 @@
 class SheltersController < ApplicationController
 rescue_from ActiveRecord::RecordInvalid, with: :invalid_record
 
+    def index
+        shelters = Shelter.all
+        render json: shelters
+    end
+
+    
     def create
         new_shelter = Shelter.create!(shelter_params)
-        user = new_shelter.user.create!(user_params)
-        user.profile_type = "shelter"
-        session[:user_id] = user.id
+        session[:user_id] = new_shelter.user.id
         render json: new_shelter, status: :created
     end
 
@@ -40,10 +44,10 @@ rescue_from ActiveRecord::RecordInvalid, with: :invalid_record
     end
 
     def shelter_params
-        params.permit(:name, :bio)
+        params.permit(:name, :bio, user_attributes: [:email, :password, :password_confirmation, :phone_number, :city, :state])
     end
 
-    def user_params
-        (:email, :password, :password_confirmation, :phone_number, :city, :state)
-    end
+    # def user_params
+    #     (:email, :password, :password_confirmation, :phone_number, :city, :state)
+    # end
 end

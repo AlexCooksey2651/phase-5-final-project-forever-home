@@ -5,6 +5,7 @@ rescue_from ActiveRecord::RecordInvalid, with: :invalid_record
         user = User.find_by(id: session[:user_id])
         if user
             new_application = user.profile.pet_applications.create!(application_params)
+            # if pet.status isn't "application(s) pending", should update to pending
             render json: new_application, status: :created
         else
             render json: {error: "User not found"}, status: :not_found

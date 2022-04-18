@@ -1,25 +1,22 @@
 class CustomersController < ApplicationController
 rescue_from ActiveRecord::RecordInvalid, with: :invalid_record
 
+    def index
+        customers = Customer.all
+        render json: customers
+    end
+
     def create
         new_customer = Customer.create!(customer_params)
-        new_user = new_customer.user.create!(user_params)
-        
-        # new_user.profile = new_customer
-        # is this line necessary?
-        new_user.profile_type = "customer" 
-        # alternate...
-        # new_customer.user << User.create!(user_params)
-        # session[:user_id] = new_customer.user.id
-        session[:user_id] = new_user.id
+        session[:user_id] = new_customer.user.id
         render json: new_customer, status: :created
     end
 
     def update
-        user = User.find_by(id: session[:user_id])
-        if user
-            user.update!(user_params)
-            customer = user.profile
+        # user = User.find_by(id: session[:user_id])
+        # customer = Customer.find(user.profile.id)
+        customer = Customer.find_by(id: params[:id])
+        if customer
             customer.update!(customer_params)
             render json: customer
         else
@@ -28,15 +25,18 @@ rescue_from ActiveRecord::RecordInvalid, with: :invalid_record
     end
 
     def destroy
-        user = User.find_by(id: session[:user_id])
-        if user
-            customer_id = user.profile.id
-            customer = Customer.find_by(id: customer_id)
-            customer.destroy
-            head :no_content
-        else
-            render json: {error: "User not found"}, status: :not_found
-        end
+        # user = User.find_by(id: session[:user_id])
+        # if user
+        #     customer_id = user.profile.id
+        #     customer = Customer.find_by(id: customer_id)
+        #     customer.destroy
+        #     head :no_content
+        # else
+        #     render json: {error: "User not found"}, status: :not_found
+        # end
+        customer = Customer.find_by(id: params[:id])
+        customer.destroy
+        head :no_content
     end
 
     private 
@@ -46,11 +46,11 @@ rescue_from ActiveRecord::RecordInvalid, with: :invalid_record
     end
 
     def customer_params
-        params.permit(:first_name, :last_name, :interested_in)
+        params.permit(:first_name, :last_name, :interested_in, user_attributes: [:email, :password, :password_confirmation, :phone_number, :city, :state])
     end
 
-    def user_params
-       params.permit(:email, :password, :password_confirmation, :phone_number, :city, :state)
-    end
+    # def user_params
+    #    params.permit(:email, :password, :password_confirmation, :phone_number, :city, :state)
+    # end
 
 end

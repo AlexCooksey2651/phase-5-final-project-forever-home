@@ -1,5 +1,34 @@
 import React, { useState } from "react";
 
+// const exampleCustomerProfile = {
+//     "first_name": "Alex",
+//     "last_name": "Cooksey",
+//     "interested_in": ["Dog", "Cat", "Bird"],
+//     "user_attributes": {
+//         "email": "aecooksey@gmail.com",
+//         "password": "hellor",
+//         "password_confirmation": "hellor",
+//         "city": "Jersey City",
+//         "state": "NJ",
+//         "phone_number": "+17203018361"
+//     }
+// }
+
+// const exampleShelterProfile = {
+//     "name": "Kitty Kind",
+//     "bio": "we have great cats",
+//     "user_attributes": {
+//         "city": "New York City",
+//         "state": "NY",
+//         "phone_number": "+13148829097",
+//         "email": "acooksey.hp@gmail.com",
+//         "password": "hellor",
+//         "password_confirmation": "hellor"
+//     }
+// }
+
+
+
 const exampleCustomerUser = {
     email: "aecooksey2651@gmail.com",
     password: "hello",

@@ -30,6 +30,15 @@ function PetCard({ pet, user, handleUpdatePet, handleDeletePet }) {
         handleDeletePet(pet)
     }
 
+    const isBookmarked = () => {
+        const bookmarks = user.profile.bookmarks
+        if (bookmarks.some(bookmark => bookmark.pet.id === pet.id)) {
+            setBookmarked(true)
+        } else {
+            setBookmarked(false)
+        }
+    }
+
     if (userType === "shelter") {
         return (
             <Container>
@@ -123,17 +132,9 @@ function PetCard({ pet, user, handleUpdatePet, handleDeletePet }) {
                                 <Stack gap={2} className="col-md-5 mx-auto">
                                     <Container>
                                         <Button variant={bookmarked ? "dark" : "outline-dark"} onClick={() => setBookmarked(!bookmarked)}>
-                                            {bookmarked ? "Bookmarked" : "Bookmark"}
+                                            {isBookmarked() ? "Bookmarked" : "Bookmark"}
                                         </Button>
 
-                                        {/* <Modal show={showModal} onHide={handleClose} animation={false}>
-                                            <Modal.Header closeButton>
-                                                <Modal.Title>Pet Information:</Modal.Title>
-                                            </Modal.Header>
-                                            <Modal.Body>
-                                                <EditPetForm pet={pet} />
-                                            </Modal.Body>
-                                        </Modal> */}
                                     </Container>
                                     <Container>
                                         <Button variant="outline-dark" onClick={handleShowDelete}>
