@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   delete '/logout', to: 'sessions#destroy'
   get '/me', to: 'users#show'
   get '/shelter-pets', to: 'pets#shelter_index'
+  get '/customer-pets', to: 'pets#customer-index'
   patch '/pets/:pet_id/applications/:id', to: 'pets#adopt'
   # Routing logic: fallback requests for React Router.
   # Leave this here to help deploy your app later!
