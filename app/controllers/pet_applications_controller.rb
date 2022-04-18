@@ -34,10 +34,8 @@ rescue_from ActiveRecord::RecordInvalid, with: :invalid_record
     def shelter_index
         user = User.find_by(id: session[:user_id])
         if user
-            shelter_applications = user.profile.pet.pet_applications
-            # profile = user.profile
-            # shelter_applications = PetApplication.where(pet.shelter = profile)
-            render json: shelter_applications, status: :ok
+            shelter_applications = PetApplication.where(pet.shelter.user = user)
+            render json: shelter_applications, include: ['customer', 'customer.user'], status: :ok
         else
             render json {error: "User not found"}, status: :not_found
         end
@@ -47,9 +45,7 @@ rescue_from ActiveRecord::RecordInvalid, with: :invalid_record
         user = User.find_by(id: session[:user_id])
         if user
             customer_applications = user.profile.pet_applications
-            # profile = user.profile
-            # customer_applications = PetApplication.where(customer = profile)
-            render json: customer_applications, status: :ok
+            render json: customer_applications, include: ['pet', 'pet.shelter', 'pet.shelter.user'], status: :ok
         else
             render json {error: "User not found"}, status: :not_found
         end

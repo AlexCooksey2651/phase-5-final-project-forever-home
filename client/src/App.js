@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from "react"
+import React, { useEffect, useContext, useState } from "react"
 import { UserContext } from "./context/user";
 import { Routes, Route } from "react-router-dom"
 import './App.css';
@@ -13,36 +13,10 @@ import PreviousAdoptions from './pages/shelter_pages/PreviousAdoptions';
 import BookmarkedPets from "./pages/customer_pages/BookmarkedPets"
 import Profile from './pages/Profile';
 import Login from './pages/Login';
-// import { UserProvider } from "./context/user";
 
-// const exampleCustomerUser = {
-//   email: "aecooksey2651@gmail.com",
-//   password: "hello",
-//   city: "Jersey City",
-//   state: "NJ",
-//   phone_number: "+17203018361",
-//   profile_type: "customer",
-//   profile: {
-//     first_name: "Alex",
-//     last_name: "Cooksey",
-//     interested_in: ["Dog", "Cat", "Bird"]
-//   }
-// }
-
-// const exampleShelterUser = {
-//   email: "acooksey.hp@gmail.com",
-//   password: "hello",
-//   city: "New York City",
-//   state: "NY",
-//   phone_number: "+13148829097",
-//   profile_type: "shelter",
-//   profile: {
-//     name: "Awesome Dogs and Cats",
-//     bio: "We carry lots of Cats and Dogs in NYC"
-//   }
-// }
 function App() {
   const { user, setUser } = useContext(UserContext);
+  const [errors, setErrors] = useState([])
 
   useEffect(() => {
     fetch('/me').then((r) => {
@@ -59,6 +33,8 @@ function App() {
       .then(r => {
         if (r.ok) {
           setUser(null)
+        } else {
+          r.json().then(errors => setErrors(errors))
         }
       })
   }

@@ -107,8 +107,8 @@ function CustomerSignupForm({ onLogin }) {
                     <Form.Control type="password" placeholder="Confirm password" value={passwordConfirmation} onChange={e => setPasswordConfirmation(e.target.value)} />
                 </Form.Group>
 
-                <Stack gap={2} className="col-md-5 mx-auto" type="submit">
-                    <Button variant="outline-dark">
+                <Stack gap={2} className="col-md-5 mx-auto" >
+                    <Button variant="outline-dark" type="submit">
                         Submit
                     </Button>
                 </Stack>

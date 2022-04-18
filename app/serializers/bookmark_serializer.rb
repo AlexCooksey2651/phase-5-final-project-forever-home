@@ -1,3 +1,6 @@
 class BookmarkSerializer < ActiveModel::Serializer
-  attributes :id, :customer_id, :pet_id
+  attributes :id
+
+  belongs_to :pet
+  belongs_to :customer
 end

@@ -11,8 +11,8 @@ function NavBar({ handleLogout }) {
                     <Navbar.Brand href="/"><em>Forever Home</em></Navbar.Brand>
                     <Nav align="end" className="ml-auto">
                         <Nav.Link href="search-pets">Search</Nav.Link>
-                        <Nav.Link href="/my-applications">My Applications</Nav.Link>
                         <Nav.Link href="/bookmarked-pets">Bookmarked Pets</Nav.Link>
+                        <Nav.Link href="/my-applications">My Applications</Nav.Link>
                         <Nav.Link href="/profile">Account</Nav.Link>
                         <Nav.Link id="logout-button" onClick={handleLogout}>Logout</Nav.Link>
                     </Nav>
