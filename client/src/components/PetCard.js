@@ -12,7 +12,7 @@ const formatPhoneNum = (phoneNumber) => {
     return newNumStr
 }
 
-function PetCard({ pet, user }) {
+function PetCard({ pet, user, handleUpdatePet, handleDeletePet }) {
     const userType = user.profile_type
     const [bookmarked, setBookmarked] = useState(false)
     const [showModal, setShowModal] = useState(false)
@@ -22,6 +22,13 @@ function PetCard({ pet, user }) {
     const handleClose = () => setShowModal(false)
     const handleShowDelete = () => setShowDelete(true)
     const handleCloseDelete = () => setShowDelete(false)
+
+    function removeListing() {
+        fetch(`/pets/${pet.id}`, {
+            method: "DELETE"
+        })
+        handleDeletePet(pet)
+    }
 
     if (userType === "shelter") {
         return (
@@ -54,7 +61,7 @@ function PetCard({ pet, user }) {
                                                 <Modal.Title>Pet Information:</Modal.Title>
                                             </Modal.Header>
                                             <Modal.Body>
-                                                <EditPetForm pet={pet} />
+                                                <EditPetForm pet={pet} handleUpdatePet={handleUpdatePet}/>
                                             </Modal.Body>
                                         </Modal>
                                     </Container>
@@ -67,7 +74,7 @@ function PetCard({ pet, user }) {
                                                 <Modal.Header closeButton>
                                                     <Modal.Title>Are You Sure?</Modal.Title>
                                                 </Modal.Header>
-                                                <Button variant="outline-dark">
+                                                <Button variant="outline-dark" onClick={removeListing}>
                                                     Confirm
                                                 </Button>
                                             </Modal.Body>

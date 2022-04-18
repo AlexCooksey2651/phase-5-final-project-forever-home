@@ -1,4 +1,4 @@
-class PetSerializer < ApplicationSerializer
+class PetSerializer < ActiveModel::Serializer
   attributes :id, :name, :image, :bio, :species, :age, :age_unit, :adoption_status, :adoption_date
 
   has_many :applications

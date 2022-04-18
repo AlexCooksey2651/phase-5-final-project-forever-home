@@ -4,6 +4,7 @@ rescue_from ActiveRecord::RecordInvalid, with: :invalid_record
     def create
         new_customer = Customer.create!(customer_params)
         new_user = new_customer.user.create!(user_params)
+        
         # new_user.profile = new_customer
         # is this line necessary?
         new_user.profile_type = "customer" 

@@ -42,11 +42,18 @@ const applications = [{
     customer_text: "I'll be a great pug dad!"
 }]
 
-const shelterApplicationCards = applications.map(application => {
-    return <ShelterApplicationCard key={application.id} application={application} />
-})
+
 
 function ViewApplications() {
+    
+    const shelterApplicationCards = applications.map(application => {
+        return <ShelterApplicationCard 
+            key={application.id} 
+            application={application} 
+            handleUpdateApplication={handleUpdateApplication}
+            />
+    })
+    
     return (
         <div id="active-applications">
             <h2>Active Applications</h2>

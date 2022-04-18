@@ -1,5 +1,5 @@
-import React from 'react'
-import { Container, Card, Button, Accordion, Stack } from 'react-bootstrap'
+import React, { useState } from 'react'
+import { Container, Card, Button, Accordion, Stack, Alert } from 'react-bootstrap'
 
 const formatPhoneNum = (phoneNumber) => {
     const arrayedNum = phoneNumber.split('')
@@ -10,9 +10,51 @@ const formatPhoneNum = (phoneNumber) => {
     return newNumStr
 }
 
-function ShelterApplicationCard({ application }) {
+function ShelterApplicationCard({ application, handleUpdateApplication }) {
+    const [errors, setErrors] = useState([])
     const pet = application.pet
     const customer = application.customer
+
+    function adoptPet() {
+        fetch(`/pets/:pet_id/applications/${application.id}`, {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                ...application,
+                status: "Approved"
+            })
+        }).then((r) => {
+            if (r.ok) {
+                r.json().then(application => handleUpdateApplication(application))
+            } else {
+                r.json().then(data => setErrors(data.errors))
+            }
+        })
+    }
+
+    function denyApplication() {
+        fetch(`/applications/${application.id}`, {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                ...application,
+                status: "We're sorry, but your application has been denied"
+            })
+        }).then((r) => {
+            if (r.ok) {
+                r.json().then(application => handleUpdateApplication(application))
+            } else {
+                r.json().then(data => setErrors(data.errors))
+            }
+        })
+    }
+
+
+
 
 
     return (
@@ -20,7 +62,7 @@ function ShelterApplicationCard({ application }) {
             <Card className="application-card">
                 <div class="row no-gutters">
                     <div class="col-md-4">
-                        <Card.Img className="application-card-image" src={pet.image} alt="pet picture"/>
+                        <Card.Img className="application-card-image" src={pet.image} alt="pet picture" />
                     </div>
                     <div class="col-md-8">
                         <Card.Body>
@@ -44,9 +86,19 @@ function ShelterApplicationCard({ application }) {
                                 <em>{application.customer_text}</em>
                             </Card.Text>
                             <Stack gap={2} className="col-md-5 mx-auto">
-                                <Button variant="outline-dark">Approve Application</Button>
-                                <Button variant="outline-dark">Deny Application</Button>
+                                <Button variant="outline-dark" onClick={() => adoptPet()}>Approve Application</Button>
+                                <Button variant="outline-dark" onClick={() => denyApplication()}>Deny Application</Button>
                             </Stack>
+                            <br />
+                            {errors ? <Container>
+                                {errors.map(error => {
+                                    return (
+                                        <Alert key={error}>
+                                            {error}
+                                        </Alert>
+                                    )
+                                })}
+                            </Container> : null}
                         </Card.Body>
                     </div>
                 </div>

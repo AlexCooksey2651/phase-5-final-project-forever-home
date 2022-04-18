@@ -52,13 +52,22 @@ rescue_from ActiveRecord::RecordInvalid, with: :invalid_record
     end
 
     def adopt
-        application = PetApplication.find_by(id: params[:id])
-        if application
-            application.update!(params[:status])
-            application.pet.update!(pet_params)
-            render json: application, status: :ok
+        pet = Pet.find_by(id: params[:pet_id])
+        if pet
+            approved_application = PetApplication.find_by(id: params[:id])
+            if approved_application
+                approved_application.update!(status: "Approved")
+                denied_applications = pet.applications.where(:id != params[:id])
+                denied_applications.each do |application|
+                    application.update!(status: "Denied")
+                end
+                pet.update!(adoption_date: Date.today, adoption_status: "Adopted")
+                render json: approved_application, status: :ok
+            else
+                render json: {error: "Application not found"}, status: :not_found 
+            end
         else
-            render json: {error: "Application not found"}, status: :not_found
+            render json: {error: "Pet not found"}, status: :not_found
         end
     end
 

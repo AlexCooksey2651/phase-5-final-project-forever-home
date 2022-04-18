@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Form, Container, Button } from 'react-bootstrap'
+import { Form, Container, Button, Alert } from 'react-bootstrap'
 
 function NewPetForm() {
     const [name, setName] = useState("")
@@ -8,9 +8,42 @@ function NewPetForm() {
     const [bio, setBio] = useState("")
     const [age, setAge] = useState(0)
     const [ageUnit, setAgeUnit] = useState("")
-    
+    const [errors, setErrors] = useState([])
+
+    function handleSubmit(e) {
+        e.preventDefault()
+        fetch('/pets', {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                name,
+                image,
+                species,
+                age,
+                age_unit: ageUnit,
+                adoption_status: "Available"
+            })
+        })
+            .then(r => {
+                if (r.ok) {
+                    r.json().then(data => console.log(data))
+                    setErrors([])
+                    setName("")
+                    setImage("")
+                    setSpecies("")
+                    setBio("")
+                    setAge("")
+                    setAgeUnit("")
+                } else {
+                    r.json().then(data => setErrors(data.errors));
+                }
+            })
+    }
+
     return (
-        <Form id="new-pet-form">
+        <Form id="new-pet-form" onSubmit={handleSubmit}>
             <Form.Group className="mb-3" controlId="formBasicInput">
                 <Form.Label><b>Pet's Name:</b></Form.Label>
                 <Form.Control type="text" placeholder="Enter Pet's Name" value={name} onChange={e => setName(e.target.value)} />
@@ -55,6 +88,17 @@ function NewPetForm() {
                     Submit
                 </Button>
             </Container>
+
+            <br />
+            {errors ? <Form.Group>
+                {errors.map(error => {
+                    return (
+                        <Alert key={error}>
+                            {error}
+                        </Alert>
+                    )
+                })}
+            </Form.Group> : null}
         </Form>
     )
 }

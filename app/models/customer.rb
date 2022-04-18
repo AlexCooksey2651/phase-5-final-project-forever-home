@@ -7,8 +7,10 @@ class Customer < ApplicationRecord
     has_many :bookmarks, dependent: :destroy
     has_many :pets, through: :bookmarks
 
-    validates :first_name, presence: true, length: { min: 2 }
-    validates :last_name, presence: true, length: { min: 2 }
-    validates :interested_in, presence: true, inclusion: { in: ANIMALS }
+    validates :first_name, presence: true, length: { minimum: 2 }
+    validates :last_name, presence: true, length: { minimum: 2 }
+    # validates :interested_in, presence: true
 
 end
+
+# , inclusion: { in: ANIMALS }
