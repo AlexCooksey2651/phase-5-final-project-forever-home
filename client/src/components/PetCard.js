@@ -15,8 +15,10 @@ const formatPhoneNum = (phoneNumber) => {
 function PetCard({ pet, user, handleUpdatePet, handleDeletePet }) {
     const userType = user.profile_type
     const [bookmarked, setBookmarked] = useState(false)
+    const [bookmarkInfo, setBookmarkInfo] = useState({})
     const [showModal, setShowModal] = useState(false)
     const [showDelete, setShowDelete] = useState(false)
+    const [errors, setErrors] = useState([])
 
     const handleShow = () => setShowModal(true)
     const handleClose = () => setShowModal(false)
@@ -30,14 +32,53 @@ function PetCard({ pet, user, handleUpdatePet, handleDeletePet }) {
         handleDeletePet(pet)
     }
 
+    function postBookmark() {
+        fetch('/bookmarks/', {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                pet_id: pet.id,
+                customer_id: user.profile.id
+            })
+        })
+            .then(r => {
+                if (r.ok) {
+                    r.json().then(bookmark => {
+                        setBookmarkInfo(bookmark)
+                        setBookmarked(true)
+                    })
+                } else {
+                    r.json().then(errors => setErrors(errors))
+                }
+            })
+    }
+
+    function deleteBookmark() {
+        fetch(`/bookmarks/${bookmarkInfo.id}`, {
+            method: "DELETE",
+        })
+        setBookmarkInfo({})
+        setBookmarked(false)
+    }
+
     const isBookmarked = () => {
-        const bookmarks = user.profile.bookmarks
-        if (bookmarks.some(bookmark => bookmark.pet.id === pet.id)) {
-            setBookmarked(true)
+        if (userType === "customer") {
+            const bookmarks = user.profile.bookmarks
+            const found = bookmarks.find(bookmark => bookmark.pet.id === pet.id)
+            if (found) {
+                setBookmarkInfo(found)
+                setBookmarked(true)
+            } else {
+                setBookmarked(false)
+            }
         } else {
-            setBookmarked(false)
+            console.log("hello")
         }
     }
+
+    isBookmarked()
 
     if (userType === "shelter") {
         return (
@@ -70,7 +111,7 @@ function PetCard({ pet, user, handleUpdatePet, handleDeletePet }) {
                                                 <Modal.Title>Pet Information:</Modal.Title>
                                             </Modal.Header>
                                             <Modal.Body>
-                                                <EditPetForm pet={pet} handleUpdatePet={handleUpdatePet}/>
+                                                <EditPetForm pet={pet} handleUpdatePet={handleUpdatePet} />
                                             </Modal.Body>
                                         </Modal>
                                     </Container>
@@ -127,12 +168,12 @@ function PetCard({ pet, user, handleUpdatePet, handleDeletePet }) {
                                     <br />
                                     {pet.bio}
                                 </Card.Text>
-                                
+
                                 <Card.Text>Adoption Status: {pet.status}</Card.Text>
                                 <Stack gap={2} className="col-md-5 mx-auto">
                                     <Container>
-                                        <Button variant={bookmarked ? "dark" : "outline-dark"} onClick={() => setBookmarked(!bookmarked)}>
-                                            {isBookmarked() ? "Bookmarked" : "Bookmark"}
+                                        <Button variant={bookmarked ? "dark" : "outline-dark"} onClick={bookmarked ? (() => deleteBookmark()) : (() => postBookmark())}>
+                                            {bookmarked ? "Bookmarked" : "Bookmark"}
                                         </Button>
 
                                     </Container>

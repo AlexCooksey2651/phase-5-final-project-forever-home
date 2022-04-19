@@ -16,7 +16,7 @@ function ShelterApplicationCard({ application, handleUpdateApplication }) {
     const customer = application.customer
 
     function adoptPet() {
-        fetch(`/pets/:pet_id/applications/${application.id}`, {
+        fetch(`/pets/${pet.id}/applications/${application.id}`, {
             method: "PATCH",
             headers: {
                 "Content-Type": "application/json"

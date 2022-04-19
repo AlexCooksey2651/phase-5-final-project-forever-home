@@ -1,19 +1,19 @@
 class PetsController < ApplicationController
 rescue_from ActiveRecord::RecordInvalid, with: :invalid_record
-    # def create
-    #     user = User.find_by(id: session[:user_id])
-    #     if user
-    #         new_pet = user.profile.pets.create!(pet_params)
-    #         render json: new_pet, status: :created
-    #     else
-    #         render json: {error: "User not found"}, status: :not_found
-    #     end
-    # end
-
     def create
-        new_pet = Pet.create!(pet_params)
-        render json: new_pet, status: :created
+        user = User.find_by(id: session[:user_id])
+        if user
+            new_pet = user.profile.pets.create!(pet_params)
+            render json: new_pet, status: :created
+        else
+            render json: {error: "User not found"}, status: :not_found
+        end
     end
+
+    # def create
+    #     new_pet = Pet.create!(pet_params)
+    #     render json: new_pet, status: :created
+    # end
     
 
     def destroy

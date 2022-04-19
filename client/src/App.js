@@ -18,13 +18,13 @@ function App() {
   const { user, setUser } = useContext(UserContext);
   const [errors, setErrors] = useState([])
 
-  // useEffect(() => {
-  //   fetch('/me').then((r) => {
-  //     if (r.ok) {
-  //       r.json().then((user) => setUser(user));
-  //     }
-  //   })
-  // }, [])
+  useEffect(() => {
+    fetch('/me').then((r) => {
+      if (r.ok) {
+        r.json().then((user) => setUser(user));
+      }
+    })
+  }, [])
   
   function handleLogout() {
     fetch('/logout', {

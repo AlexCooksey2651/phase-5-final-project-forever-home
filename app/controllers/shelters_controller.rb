@@ -1,12 +1,12 @@
 class SheltersController < ApplicationController
 rescue_from ActiveRecord::RecordInvalid, with: :invalid_record
 
-    def index
-        shelters = Shelter.all
-        render json: shelters
-    end
+    # def index
+    #     shelters = Shelter.all
+    #     render json: shelters
+    # end
 
-    
+
     def create
         new_shelter = Shelter.create!(shelter_params)
         session[:user_id] = new_shelter.user.id
@@ -16,8 +16,8 @@ rescue_from ActiveRecord::RecordInvalid, with: :invalid_record
     def update
         user = User.find_by(id: session[:user_id])
         if user
-            user.update!(user_params)
-            shelter = user.profile
+            shelter_id = user.profile.id
+            shelter = Shelter.find_by(id: shelter_id)
             shelter.update!(shelter_params)
             render json: shelter
         else

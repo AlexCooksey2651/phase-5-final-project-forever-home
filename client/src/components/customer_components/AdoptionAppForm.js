@@ -4,7 +4,7 @@ import { UserContext } from '../../context/user'
 
 function AdoptionAppForm({ pet }) {
     const { user } = useContext(UserContext)
-    const [appText, setAppText] = useState("")
+    const [applicationText, setApplicationText] = useState("")
     const fullName = `${user.profile.first_name} ${user.profile.last_name}`
     const today = new Date().toLocaleDateString()
     const [errors, setErrors] = useState([])
@@ -20,7 +20,7 @@ function AdoptionAppForm({ pet }) {
                 customer_id: user.profile.id,
                 pet_id: pet.id,
                 date: today,
-                customer_text: appText,
+                customer_text: applicationText,
                 status: "Pending"
             })
         })
@@ -53,10 +53,10 @@ function AdoptionAppForm({ pet }) {
 
                 <Form.Group>
                     <Form.Label><b>Tell us why you'd be a great fit for {pet.name}:</b></Form.Label>
-                    <Form.Control as="textarea" rows={4} value={appText} onChange={e => setAppText(e.target.value)} />
+                    <Form.Control as="textarea" rows={4} value={applicationText} onChange={e => setApplicationText(e.target.value)} />
                 </Form.Group>
                 <br />
-                <Button variant="outline-dark" >
+                <Button variant="outline-dark" type="submit">
                     Submit Application
                 </Button>
                 <br />

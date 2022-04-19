@@ -1,37 +1,6 @@
 class PetApplicationsController < ApplicationController
 rescue_from ActiveRecord::RecordInvalid, with: :invalid_record
-
-    def create
-        user = User.find_by(id: session[:user_id])
-        if user
-            new_application = user.profile.pet_applications.create!(application_params)
-            # if pet.status isn't "application(s) pending", should update to pending
-            render json: new_application, status: :created
-        else
-            render json: {error: "User not found"}, status: :not_found
-        end
-    end
-
-    def destroy
-        application = PetApplication.find_by(id: params[:id])
-        if application
-            application.destroy
-            head :no_content
-        else
-            render json: {error: "Application not found"}, status: :not_found
-        end
-    end
-
-    def update
-        application = PetApplication.find_by(id: params[:id])
-        if application
-            application.update!(application_params)
-            render json: application, status: :ok
-        else
-            render json: {error: "Application not found"}, status: :not_found
-        end
-    end
-
+    
     def shelter_index
         user = User.find_by(id: session[:user_id])
         if user
@@ -52,6 +21,49 @@ rescue_from ActiveRecord::RecordInvalid, with: :invalid_record
         end
     end
 
+    def create
+        user = User.find_by(id: session[:user_id])
+        if user
+            new_application = user.profile.pet_applications.create!(application_params)
+            # NOTE: if pet.adoption_status isn't "application(s) pending", should update to pending
+            # pet = Pet.find_by(id: new_application.pet.id)
+            # if pet.status == "Available"
+            #     pet.update!(adoption_status: "Application(s) pending")
+            # end
+            render json: new_application, status: :created
+        else
+            render json: {error: "User not found"}, status: :not_found
+        end
+    end
+
+    def destroy
+        application = PetApplication.find_by(id: params[:id])
+        if application
+            
+            # NOTE: if pet.applications.length now = 0, adoption_status should update to "Available"
+            # pet = Pet.find_by(id: application.pet.id)
+            application.destroy
+            # if pet.applications.length = 0
+            #     pet.update!(adoption_status: "Available")
+            # end
+            
+            head :no_content
+        else
+            render json: {error: "Application not found"}, status: :not_found
+        end
+    end
+
+    def update
+        application = PetApplication.find_by(id: params[:id])
+        if application
+            # NOTE: if pet.applications doesn't have any that aren't 
+            application.update!(application_params)
+            render json: application, status: :ok
+        else
+            render json: {error: "Application not found"}, status: :not_found
+        end
+    end
+
     def adopt
         pet = Pet.find_by(id: params[:pet_id])
         if pet
@@ -60,7 +72,7 @@ rescue_from ActiveRecord::RecordInvalid, with: :invalid_record
                 approved_application.update!(status: "Approved")
                 denied_applications = pet.applications.where(:id != params[:id])
                 denied_applications.each do |application|
-                    application.update!(status: "Denied")
+                    application.update!(status: "We're sorry but your application has been denied")
                 end
                 pet.update!(adoption_date: Date.today, adoption_status: "Adopted")
                 render json: approved_application, status: :ok

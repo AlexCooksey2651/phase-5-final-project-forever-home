@@ -1,10 +1,10 @@
 class CustomersController < ApplicationController
 rescue_from ActiveRecord::RecordInvalid, with: :invalid_record
 
-    def index
-        customers = Customer.all
-        render json: customers
-    end
+    # def index
+    #     customers = Customer.all
+    #     render json: customers
+    # end
 
     def create
         new_customer = Customer.create!(customer_params)
@@ -13,10 +13,10 @@ rescue_from ActiveRecord::RecordInvalid, with: :invalid_record
     end
 
     def update
-        # user = User.find_by(id: session[:user_id])
-        # customer = Customer.find(user.profile.id)
-        customer = Customer.find_by(id: params[:id])
-        if customer
+        user = User.find_by(id: session[:user_id])
+        if user
+            customer_id = user.profile.id
+            customer = Customer.find_by(id: customer_id)
             customer.update!(customer_params)
             render json: customer
         else
@@ -25,18 +25,18 @@ rescue_from ActiveRecord::RecordInvalid, with: :invalid_record
     end
 
     def destroy
-        # user = User.find_by(id: session[:user_id])
-        # if user
-        #     customer_id = user.profile.id
-        #     customer = Customer.find_by(id: customer_id)
-        #     customer.destroy
-        #     head :no_content
-        # else
-        #     render json: {error: "User not found"}, status: :not_found
-        # end
-        customer = Customer.find_by(id: params[:id])
-        customer.destroy
-        head :no_content
+        user = User.find_by(id: session[:user_id])
+        if user
+            customer_id = user.profile.id
+            customer = Customer.find_by(id: customer_id)
+            customer.destroy
+            head :no_content
+        else
+            render json: {error: "User not found"}, status: :not_found
+        end
+        # customer = Customer.find_by(id: params[:id])
+        # customer.destroy
+        # head :no_content
     end
 
     private 
