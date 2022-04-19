@@ -87,7 +87,7 @@ function EditProfileForm() {
                 if (r.ok) {
                     r.json().then(user => setUserInfo(user))
                 } else {
-                    r.json().then(errors => setErrors(errors))
+                    r.json().then(data => setErrors(data.errors))
                 }
             })
     }
@@ -98,7 +98,7 @@ function EditProfileForm() {
                 <Form.Group className="mb-3" controlId="formBasicInput">
                     <Form.Label><b>Name:</b></Form.Label>
                     <Form.Control type="text" placeholder="First Name" value={firstName} onChange={e => setFirstName(e.target.value)} />
-                    <Form.Control type="text" pladeholder="Last Name" value={lastName} onChange={e => setLastName(e.target.value)} />
+                    <Form.Control type="text" placeholder="Last Name" value={lastName} onChange={e => setLastName(e.target.value)} />
                 </Form.Group> :
                 <Form.Group className="mb-3" controlId="formBasicInput">
                     <Form.Label><b>Shelter Name:</b></Form.Label>
@@ -110,7 +110,7 @@ function EditProfileForm() {
                 <Form.Label><b>{isCustomer() ? "Location" : "Shelter Location"}:</b></Form.Label>
                 <Form.Control type="text" placeholder="City" value={city} onChange={e => setCity(e.target.value)} />
                 <Form.Select aria-label="Default select example" value={state} onChange={e => setState(e.target.value)}>
-                    <option value="" disabled selected>State</option>
+                    <option value="" disabled>State</option>
                     {stateOptions}
                 </Form.Select>
             </Form.Group>
@@ -144,6 +144,7 @@ function EditProfileForm() {
             }
 
             <Container>
+                <br/>
                 <Button variant="outline-dark" type="submit">
                     Confirm Updates
                 </Button>

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import ShelterApplicationCard from "../../components/shelter_components/ShelterApplicationCard"
+import { Container } from 'react-bootstrap'
 
 const exampleApplications = [{
     id: 1,
@@ -66,20 +67,26 @@ function ViewApplications() {
         setShelterApplications(updatedApplications)
     }
 
-    const shelterApplicationCards = exampleApplications.map(application => {
-        return <ShelterApplicationCard
-            key={application.id}
-            application={application}
-            handleUpdateApplication={handleUpdateApplication}
-        />
-    })
+    const shelterApplicationCards = () => {
+        if (shelterApplications.length > 0) {
+            return shelterApplications.map(application => <ShelterApplicationCard key={application.id} application={application} handleUpdateApplication={handleUpdateApplication} />)
+        } else {
+            return (
+                <>
+                    <h2><em>There are no pending applications at the moment!</em></h2>
+                    <p>Make sure all of your animals' information is up to date, or consider reaching out to previous applicants!</p>
+                </>
+            )
+        }
+    }
 
     return (
-        <div id="active-applications">
+        <Container id="active-applications">
+            <br/>
             <h2>Active Applications</h2>
             <br />
-            {shelterApplicationCards}
-        </div>
+            {shelterApplicationCards()}
+        </Container>
     )
 }
 

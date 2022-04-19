@@ -1,10 +1,10 @@
 class CustomersController < ApplicationController
 rescue_from ActiveRecord::RecordInvalid, with: :invalid_record
 
-    # def index
-    #     customers = Customer.all
-    #     render json: customers
-    # end
+    def index
+        customers = Customer.all
+        render json: customers
+    end
 
     def create
         new_customer = Customer.create!(customer_params)
@@ -46,7 +46,7 @@ rescue_from ActiveRecord::RecordInvalid, with: :invalid_record
     end
 
     def customer_params
-        params.permit(:first_name, :last_name, :interested_in, user_attributes: [:email, :password, :password_confirmation, :phone_number, :city, :state])
+        params.permit(:first_name, :last_name, :interested_in => [], user_attributes: [:email, :password, :password_confirmation, :phone_number, :city, :state])
     end
 
     # def user_params

@@ -39,16 +39,28 @@ function PetSearch() {
             }
         })
     }, [])
-    
 
-    const petCards = pets.map(pet => {
-        return <PetCard key={pet.id} pet={pet} user={user} />
-    })
+
+    const petCards = () => {
+        if (pets.length > 0) {
+            return pets.map(pet => <PetCard key={pet.id} pet={pet} user={user} />)
+        } else {
+            return (
+                <>
+                    <h2><em>No animals match your search</em></h2>
+                    <p>Try altering your search above, or consider revising your preferences in the account page.</p>
+                </>
+
+            )
+        }
+    }
 
     return (
         <Container id="pet-search">
+            <br />
             <h2>Find Your New Best Friend!</h2>
-            {petCards}
+            <br />
+            {petCards()}
         </Container>
     )
 }

@@ -27,7 +27,7 @@ function LoginForm({ onLogin }) {
                 if (r.ok) {
                     r.json().then(user => {
                         onLogin(user)
-                        navigate('/home')
+                        // navigate('/home')
                     })
                 } else {
                     r.json().then(data => setErrors(data.errors));

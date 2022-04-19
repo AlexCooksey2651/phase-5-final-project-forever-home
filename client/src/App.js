@@ -1,4 +1,4 @@
-import React, { useEffect, useContext, useState } from "react"
+import React, { useEffect, useContext } from "react"
 import { UserContext } from "./context/user";
 import { Routes, Route } from "react-router-dom"
 import './App.css';
@@ -16,15 +16,14 @@ import Login from './pages/Login';
 
 function App() {
   const { user, setUser } = useContext(UserContext);
-  const [errors, setErrors] = useState([])
 
-  useEffect(() => {
-    fetch('/me').then((r) => {
-      if (r.ok) {
-        r.json().then((user) => setUser(user));
-      }
-    })
-  }, [])
+  // useEffect(() => {
+  //   fetch('/me').then((r) => {
+  //     if (r.ok) {
+  //       r.json().then((user) => setUser(user));
+  //     }
+  //   })
+  // }, [])
   
   function handleLogout() {
     fetch('/logout', {
@@ -33,8 +32,6 @@ function App() {
       .then(r => {
         if (r.ok) {
           setUser(null)
-        } else {
-          r.json().then(errors => setErrors(errors))
         }
       })
   }
@@ -54,7 +51,7 @@ function App() {
         <Route path="/my-applications" element={<MyApplications />} />
         <Route path="/bookmarked-pets" element={<BookmarkedPets />} />
         <Route path="/previous-adoptions" element={<PreviousAdoptions />} />
-        <Route path="/profile" element={<Profile handleLogout={handleLogout}/>} />
+        <Route path="/profile" element={<Profile handleLogout={handleLogout} />} />
         <Route path="/login" element={<Login />} />
       </Routes>
 

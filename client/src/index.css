@@ -5,6 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-image: url("http://oceansideveterinary.com/wp-content/uploads/2016/09/shutterstock_98165567.png")
 }
 
 code {
@@ -12,14 +13,19 @@ code {
     monospace;
 }
 
-#app-header {
+.app-header {
   /* background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTozoL6cjMD7wH2dwcwu6XSrN5v7v06Tt0qlUId0Y1r8V24I8-QeQjlt1hHnplKIO_f2Ow&usqp=CAU"); */
-  height: 10px;
+  height: 250px;
+  background-color: blanchedalmond;
+  color: blue;
+  width: 100%;
+  /* background-image: url("https://image.shutterstock.com/image-photo/large-collection-domestic-pets-interacting-260nw-358022486.jpg") */
 }
 
-/* #header-image {
-  object-fit: cover;
-} */
+.header-image {
+  /* width: 100%; */
+  object-fit: fill;
+}
 
 #manage-pets, #active-applications, #previous-adoptions {
   padding: 20px;
@@ -49,4 +55,13 @@ code {
 
 #login {
   justify-items: center;
+}
+
+#customer-applications-container, #profile-container, #bookmarked-pets-container, #pet-search, #manage-pets, #active-applications, #previous-adoptions {
+  background-color: blanchedalmond;
+  padding: 10px;
+  vertical-align: center;
+  width: 100%;
+  margin: 20px auto;
+  border: 1px solid black;
 }

@@ -1,9 +1,8 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import { UserContext } from '../../context/user'
 import { Container, Modal, Button } from 'react-bootstrap'
 import NewPetForm from '../../components/shelter_components/NewPetForm'
 import PetCard from '../../components/PetCard'
-import { useEffect } from 'react/cjs/react.production.min'
 
 // const pets = [{
 //     id: 1,
@@ -48,18 +47,22 @@ function ManagePets() {
         setPets(updatedPets)
     }
 
-    const petCards = pets.map(pet => {
-        return <PetCard 
-            key={pet.id} 
-            pet={pet} 
-            user={user} 
-            handleUpdatePet={handleUpdatePet}
-            handleDeletePet={handleDeletePet}
-            />
-    })
+    const petCards = () => {
+        if (pets.length > 0) {
+            return pets.map(pet => <PetCard key={pet.id} pet={pet} user={user} handleUpdatePet={handleUpdatePet} handleDeletePet={handleDeletePet}/>)
+        } else {
+            return (
+                <>
+                    <h2><em>Currently, the Shelter has no pets up for adoption.</em></h2>
+                    <p>Use the "Add Pet" form above to add information for new pets at your shelter.</p>
+                </>
+            )
+        }
+    }
 
     return (
-        <div id="manage-pets">
+        <Container id="manage-pets">
+            <br/>
             <h2>Manage Pets</h2>
             <br />
             <Container>
@@ -77,9 +80,9 @@ function ManagePets() {
             </Container>
             <br />
             <Container id="shelter-pet-card-container">
-                {petCards}
+                {petCards()}
             </Container>
-        </div>
+        </Container>
     )
 }
 

@@ -4,7 +4,7 @@ import EditProfileForm from "../components/EditProfileForm"
 import ListGroup from "react-bootstrap/ListGroup"
 import { UserContext } from '../context/user'
 
-function Profile({ handleLogout }) {
+function Profile({ handleLogout, errors }) {
     const { user } = useContext(UserContext)
 
     const isCustomer = () => {
@@ -18,7 +18,6 @@ function Profile({ handleLogout }) {
     const [showModal, setShowModal] = useState(false)
     const [showDelete, setShowDelete] = useState(false)
 
-    console.log(user.profile.interested_in)
     const handleShowEdit = () => setShowModal(true)
     const handleCloseEdit = () => setShowModal(false)
     const handleShowDelete = () => setShowDelete(true)
@@ -47,10 +46,10 @@ function Profile({ handleLogout }) {
     }
 
     return (
-        <div>
+        <Container id="profile-container">
             <h2>ACCOUNT INFORMATION</h2>
             {isCustomer() ?
-                <Container id="profile-container">
+                <Container >
                     <ListGroup variant="flush">
                         <ListGroup.Item>Name: {`${user.profile.first_name} ${user.profile.last_name}`}</ListGroup.Item>
                         <ListGroup.Item>Location: {user.city}, {user.state}</ListGroup.Item>
@@ -72,7 +71,7 @@ function Profile({ handleLogout }) {
                 </Container>
             }
 
-
+            <br />
             <Stack gap={2} className="col-md-5 mx-auto">
                 <Container>
                     <Button variant="outline-dark" onClick={handleShowEdit}>
@@ -105,7 +104,8 @@ function Profile({ handleLogout }) {
                     </Modal>
                 </Container>
             </Stack>
-        </div>
+
+        </Container>
     )
 }
 

@@ -100,11 +100,11 @@ function MyApplications() {
 
 
     return (
-        <Container>
+        <Container id="customer-applications-container">
             <br/>
             <Accordion>
                 <Accordion.Item eventKey={0} className="approved-applications">
-                    <Accordion.Header><h2>Application Approved!!! Say Hello to Your New Best Friend!</h2></Accordion.Header>
+                    <Accordion.Header><h2>Approved Applications! Come Meet Your New Best Friend!</h2></Accordion.Header>
                     <Accordion.Body>
                         {approvedApplicationCards()}
                     </Accordion.Body>

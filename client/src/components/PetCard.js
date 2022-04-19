@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Container, Card, Button, Stack, Modal, Accordion } from 'react-bootstrap'
+import { Container, Card, Button, Stack, Modal, Accordion, Alert } from 'react-bootstrap'
 import EditPetForm from './shelter_components/EditPetForm'
 import AdoptionAppForm from './customer_components/AdoptionAppForm'
 
@@ -190,12 +190,21 @@ function PetCard({ pet, user, handleUpdatePet, handleDeletePet }) {
                                             </Modal.Body>
                                         </Modal>
                                     </Container>
-
                                 </Stack>
                             </Card.Body>
                         </div>
                     </div>
                 </Card>
+                <Container>
+                    <br />
+                    {errors ? errors.map(error => {
+                        return (
+                            <Alert key={error}>
+                                {error}
+                            </Alert>
+                        )
+                    }) : null}
+                </Container>
             </Container>
         )
     }

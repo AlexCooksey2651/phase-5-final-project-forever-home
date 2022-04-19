@@ -60,13 +60,20 @@ function BookmarkedPets() {
         if (bookmarks.length > 0) {
             return bookmarks.map(bookmark => <PetCard user={user} key={bookmark.id} pet={bookmark.pet} />)
         } else {
-            return <h2>You have not bookmarked any pets</h2>
+            return (
+                <>
+                    <h2><em>You have not bookmarked any pets</em></h2>
+                    <p>Pop over to the Search page!</p>
+                </>
+            )
         }
     }
 
     return (
-    <Container>
+    <Container id="bookmarked-pets-container">
+        <br/>
         <h2>Bookmarked Pets</h2>
+        <br/>
         {bookmarkedPetCards()}
     </Container>
   )
