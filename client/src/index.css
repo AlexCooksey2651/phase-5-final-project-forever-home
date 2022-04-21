@@ -17,14 +17,17 @@ code {
   /* background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTozoL6cjMD7wH2dwcwu6XSrN5v7v06Tt0qlUId0Y1r8V24I8-QeQjlt1hHnplKIO_f2Ow&usqp=CAU"); */
   height: 250px;
   background-color: blanchedalmond;
-  color: blue;
+  display: flex;
+  justify-content: center;;
   width: 100%;
   /* background-image: url("https://image.shutterstock.com/image-photo/large-collection-domestic-pets-interacting-260nw-358022486.jpg") */
 }
 
-.header-image {
-  /* width: 100%; */
-  object-fit: fill;
+#header-image {
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
 }
 
 #manage-pets, #active-applications, #previous-adoptions {
@@ -57,11 +60,16 @@ code {
   justify-items: center;
 }
 
-#customer-applications-container, #profile-container, #bookmarked-pets-container, #pet-search, #manage-pets, #active-applications, #previous-adoptions {
+#customer-applications-container, #profile-container, #bookmarked-pets-container, #pet-search, #manage-pets, #active-applications, #previous-adoptions, #login {
   background-color: blanchedalmond;
   padding: 10px;
   vertical-align: center;
-  width: 100%;
+  width: 80%;
   margin: 20px auto;
   border: 1px solid black;
+}
+
+.pet-search-bar {
+  width: 50%;
+  margin: auto;
 }

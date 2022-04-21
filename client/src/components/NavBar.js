@@ -2,9 +2,10 @@ import React, { useContext } from 'react'
 import { Navbar, Container, Nav } from 'react-bootstrap'
 import { UserContext } from '../context/user'
 
-function NavBar({ handleLogout }) {
-    const { user } = useContext(UserContext)
-    if (user.profile_type === "customer") {
+function NavBar({ handleLogout, user }) {
+    // const { user } = useContext(UserContext)
+    
+    if (user.profile.type === "customer") {
         return (
             <Navbar bg="dark" variant="dark">
                 <Container>
@@ -19,7 +20,7 @@ function NavBar({ handleLogout }) {
                 </Container>
             </Navbar>
         )
-    } else if (user.profile_type === "shelter") {
+    } else if (user.profile.type === "shelter") {
         return (
             <Navbar bg="dark" variant="dark">
                 <Container>

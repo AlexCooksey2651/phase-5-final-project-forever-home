@@ -1,5 +1,5 @@
 class CustomerSerializer < ActiveModel::Serializer
-  attributes :id, :first_name, :last_name, :interested_in
+  attributes :id, :first_name, :last_name, :interested_in, :bookmarks
 
   has_one :user, as: :profile
   has_many :pet_applications

@@ -1,11 +1,11 @@
 class Pet < ApplicationRecord
     ANIMALS = ["Dog", "Cat", "Other Mammal", "Bird", "Reptile/Amphibian", "Fish"]
     AGE_UNITS = ["Weeks", "Months", "Years"]
-    has_many :applications, dependent: :destroy
-    has_many :customers, through: :applications
+    has_many :pet_applications, dependent: :destroy
+    has_many :customers, through: :pet_applications
     has_many :bookmarks, dependent: :destroy
     has_many :customers, through: :bookmarks
-    # belongs_to :shelter
+    belongs_to :shelter
 
     # validates :name, presence: true
     # validates :image, presence: true

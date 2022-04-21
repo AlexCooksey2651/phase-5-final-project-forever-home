@@ -4,10 +4,17 @@ rescue_from ActiveRecord::RecordInvalid, with: :invalid_record
     def shelter_index
         user = User.find_by(id: session[:user_id])
         if user
-            shelter_applications = PetApplication.where(pet.shelter.user = user)
-            render json: shelter_applications, include: ['customer', 'customer.user'], status: :ok
+            shelter = Shelter.find_by(id: user.profile.id)
+            pets = shelter.pets
+            applications = []
+            pets.each do |pet|
+                pet.pet_applications.each do |app|
+                    applications << app
+                end
+            end
+            render json: applications, status: :ok
         else
-            render json {error: "User not found"}, status: :not_found
+            render json: {error: "User not found"}, status: :not_found
         end
     end
 
@@ -17,7 +24,7 @@ rescue_from ActiveRecord::RecordInvalid, with: :invalid_record
             customer_applications = user.profile.pet_applications
             render json: customer_applications, include: ['pet', 'pet.shelter', 'pet.shelter.user'], status: :ok
         else
-            render json {error: "User not found"}, status: :not_found
+            render json: {error: "User not found"}, status: :not_found
         end
     end
 
@@ -70,11 +77,11 @@ rescue_from ActiveRecord::RecordInvalid, with: :invalid_record
             approved_application = PetApplication.find_by(id: params[:id])
             if approved_application
                 approved_application.update!(status: "Approved")
-                denied_applications = pet.applications.where(:id != params[:id])
+                pet.update!(adoption_date: Date.today, adoption_status: "Adopted")
+                denied_applications = pet.pet_applications.where.not(id: params[:id])
                 denied_applications.each do |application|
                     application.update!(status: "We're sorry but your application has been denied")
                 end
-                pet.update!(adoption_date: Date.today, adoption_status: "Adopted")
                 render json: approved_application, status: :ok
             else
                 render json: {error: "Application not found"}, status: :not_found 
@@ -98,3 +105,5 @@ rescue_from ActiveRecord::RecordInvalid, with: :invalid_record
         params.permit(:adoption_status, :adoption_date)
     end
 end
+
+# include: ['customer', 'customer.user']

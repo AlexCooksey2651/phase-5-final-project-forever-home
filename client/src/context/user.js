@@ -54,7 +54,8 @@ const exampleCustomerUser = {
     profile: {
         first_name: "Alex",
         last_name: "Cooksey",
-        interested_in: ["Dog", "Cat", "Bird"]
+        interested_in: ["Dog", "Cat", "Bird"],
+        bookmarks: []
     }
 }
 
@@ -75,7 +76,8 @@ const UserContext = React.createContext();
 
 // create a provider component
 function UserProvider({ children }) {
-    const [user, setUser] = useState(exampleShelterUser)
+    const [user, setUser] = useState(null)
+    // const loading = true
     // the value prop of the provider will be our context data
     // this value will be available to child components of this provider
     return <UserContext.Provider value={{ user, setUser }}>{children}</UserContext.Provider>;

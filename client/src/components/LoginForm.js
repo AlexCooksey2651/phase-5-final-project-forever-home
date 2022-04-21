@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { useNavigate } from "react-router-dom"
+import { UserContext } from '../context/user'
 import { Form, Container, Button, Stack, Alert } from 'react-bootstrap'
 
 function LoginForm({ onLogin }) {
@@ -7,6 +8,7 @@ function LoginForm({ onLogin }) {
     const [password, setPassword] = useState("")
     const [errors, setErrors] = useState([]);
     const navigate = useNavigate()
+    // const { user, setUser } = useContext(UserContext)
     
 
     function handleSubmit(e) {
@@ -36,8 +38,9 @@ function LoginForm({ onLogin }) {
     }
 
     return (
-        <Container>
-            <Form id="login-form" onSubmit={handleSubmit}>
+        <div id="login-form">
+            <Container>
+            <Form  onSubmit={handleSubmit}>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Label><b>Email Address:</b></Form.Label>
                     <Form.Control type="email" placeholder="Enter email" value={email} onChange={e => setEmail(e.target.value)} />
@@ -65,6 +68,8 @@ function LoginForm({ onLogin }) {
                 </Form.Group> : null}
             </Form>
         </Container>
+        </div>
+        
     )
 }
 

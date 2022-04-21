@@ -13,7 +13,7 @@ const formatPhoneNum = (phoneNumber) => {
 }
 
 function PetCard({ pet, user, handleUpdatePet, handleDeletePet }) {
-    const userType = user.profile_type
+    const userType = user.profile.type
     const [bookmarked, setBookmarked] = useState(false)
     const [bookmarkInfo, setBookmarkInfo] = useState({})
     const [showModal, setShowModal] = useState(false)
@@ -64,9 +64,9 @@ function PetCard({ pet, user, handleUpdatePet, handleDeletePet }) {
     }
 
     const isBookmarked = () => {
-        if (userType === "customer") {
-            const bookmarks = user.profile.bookmarks
-            const found = bookmarks.find(bookmark => bookmark.pet.id === pet.id)
+        if (userType === "customer" && user.profile.customer.bookmarks.length > 0) {
+            const bookmarks = user.profile.customer.bookmarks
+            const found = bookmarks.find(bookmark => bookmark.pet_id === pet.id)
             if (found) {
                 setBookmarkInfo(found)
                 setBookmarked(true)

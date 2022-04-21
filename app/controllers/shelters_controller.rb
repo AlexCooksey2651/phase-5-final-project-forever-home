@@ -1,10 +1,10 @@
 class SheltersController < ApplicationController
 rescue_from ActiveRecord::RecordInvalid, with: :invalid_record
 
-    # def index
-    #     shelters = Shelter.all
-    #     render json: shelters
-    # end
+    def index
+        shelters = Shelter.all
+        render json: shelters
+    end
 
 
     def create

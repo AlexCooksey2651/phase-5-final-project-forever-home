@@ -3,7 +3,7 @@ import { Container, Card, Button, Accordion } from 'react-bootstrap'
 
 
 
-function PreviousAdoptionCard({pet}) {
+function PreviousAdoptionCard({ pet }) {
     return (
         <Container>
             <Card className="application-card">

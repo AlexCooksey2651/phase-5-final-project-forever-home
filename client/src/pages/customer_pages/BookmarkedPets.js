@@ -42,17 +42,17 @@ import Container from 'react-bootstrap/Container'
 //     },
 // }]
 
-function BookmarkedPets() {
-    const { user } = useContext(UserContext)
+function BookmarkedPets({ user }) {
+    // const { user } = useContext(UserContext)
     const [bookmarks, setBookmarks] = useState([])
 
-    useEffect(() => {
-        fetch('/bookmarks').then(r => {
-            if (r.ok) {
-                r.json().then(bookmarks => setBookmarks(bookmarks))
-            }
-        })
-    }, [])
+    // useEffect(() => {
+    //     fetch('/bookmarks').then(r => {
+    //         if (r.ok) {
+    //             r.json().then(bookmarks => setBookmarks(bookmarks))
+    //         }
+    //     })
+    // }, [])
 
 
     

@@ -2,10 +2,10 @@ import React, { useState, useContext } from 'react'
 import { Container, Form, Button, Alert } from 'react-bootstrap'
 import { UserContext } from '../../context/user'
 
-function AdoptionAppForm({ pet }) {
-    const { user } = useContext(UserContext)
+function AdoptionAppForm({ pet, user }) {
+    // const { user } = useContext(UserContext)
     const [applicationText, setApplicationText] = useState("")
-    const fullName = `${user.profile.first_name} ${user.profile.last_name}`
+    const fullName = `${user.profile.customer.first_name} ${user.profile.customer.last_name}`
     const today = new Date().toLocaleDateString()
     const [errors, setErrors] = useState([])
 
@@ -17,7 +17,7 @@ function AdoptionAppForm({ pet }) {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                customer_id: user.profile.id,
+                customer_id: user.profile.customer.id,
                 pet_id: pet.id,
                 date: today,
                 customer_text: applicationText,

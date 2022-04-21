@@ -1,5 +1,6 @@
 class PetsController < ApplicationController
 rescue_from ActiveRecord::RecordInvalid, with: :invalid_record
+
     def create
         user = User.find_by(id: session[:user_id])
         if user
@@ -10,10 +11,10 @@ rescue_from ActiveRecord::RecordInvalid, with: :invalid_record
         end
     end
 
-    # def create
-    #     new_pet = Pet.create!(pet_params)
-    #     render json: new_pet, status: :created
-    # end
+    def index
+        pets = Pet.all
+        render json: pets
+    end
     
 
     def destroy

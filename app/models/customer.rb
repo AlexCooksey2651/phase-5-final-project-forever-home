@@ -1,7 +1,7 @@
 class Customer < ApplicationRecord
     ANIMALS = ["Dog", "Cat", "Other Mammal", "Bird", "Reptile/Amphibian", "Fish"]
 
-    has_one :user, as: :profile
+    has_one :user, as: :profile, dependent: :destroy
     has_many :pet_applications, dependent: :destroy
     has_many :pets, through: :pet_applications
     has_many :bookmarks, dependent: :destroy

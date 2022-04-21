@@ -1,16 +1,17 @@
 import React, { useState, useContext } from 'react'
 import { Container, Modal, Button, Stack } from 'react-bootstrap'
-import EditProfileForm from "../components/EditProfileForm"
+import EditCustomerProfileForm from "../components/customer_components/EditCustomerProfileForm"
 import ListGroup from "react-bootstrap/ListGroup"
 import { UserContext } from '../context/user'
+import EditShelterProfileForm from '../components/shelter_components/EditShelterProfileForm'
 
-function Profile({ handleLogout, errors }) {
-    const { user } = useContext(UserContext)
+function Profile({ handleLogout, errors, user }) {
+    // const { user } = useContext(UserContext)
 
     const isCustomer = () => {
-        if (user.profile_type === "customer") {
+        if (user.profile.type === "customer") {
             return true
-        } else if (user.profile_type === "shelter") {
+        } else if (user.profile.type === "shelter") {
             return false
         }
     }
@@ -34,11 +35,11 @@ function Profile({ handleLogout, errors }) {
 
     function handleDeleteProfile() {
         handleLogout()
-        if (user.profile_type === "customer") {
-            fetch(`/customers/${user.profile.id}`, {
+        if (user.profile.type === "customer") {
+            fetch(`/customers/${user.profile.customer.id}`, {
                 method: "DELETE",
             }) 
-        } else if (user.profile_type === "shelter") {
+        } else if (user.profile.type === "shelter") {
             fetch(`/shelters/${user.profile.id}`, {
                 method: "DELETE",
             })
@@ -47,26 +48,28 @@ function Profile({ handleLogout, errors }) {
 
     return (
         <Container id="profile-container">
+            <br/>
             <h2>ACCOUNT INFORMATION</h2>
+            <br/>
             {isCustomer() ?
                 <Container >
                     <ListGroup variant="flush">
-                        <ListGroup.Item>Name: {`${user.profile.first_name} ${user.profile.last_name}`}</ListGroup.Item>
+                        <ListGroup.Item>Name: {`${user.profile.customer.first_name} ${user.profile.customer.last_name}`}</ListGroup.Item>
                         <ListGroup.Item>Location: {user.city}, {user.state}</ListGroup.Item>
                         <ListGroup.Item>Phone: {formatPhoneNum(user.phone_number)}</ListGroup.Item>
                         <ListGroup.Item>Email: {user.email}</ListGroup.Item>
                         {/* <ListGroup.Item type="password">Password: {shelter.user.password}</ListGroup.Item> */}
-                        <ListGroup.Item>Looking For: {user.profile.interested_in.join(', ')}</ListGroup.Item>
+                        <ListGroup.Item>Looking For: {user.profile.customer.interested_in.join(', ')}</ListGroup.Item>
                     </ListGroup>
                 </Container> :
-                <Container id="profile-container">
+                <Container >
                     <ListGroup variant="flush">
-                        <ListGroup.Item>Name: {user.profile.name}</ListGroup.Item>
+                        <ListGroup.Item>Name: {user.profile.shelter.name}</ListGroup.Item>
                         <ListGroup.Item>Location: {user.city}, {user.state}</ListGroup.Item>
                         <ListGroup.Item>Phone: {formatPhoneNum(user.phone_number)}</ListGroup.Item>
                         <ListGroup.Item>Email Address: {user.email}</ListGroup.Item>
                         {/* <ListGroup.Item type="password">Password: {shelter.user.password}</ListGroup.Item> */}
-                        <ListGroup.Item>Bio: {user.profile.bio}</ListGroup.Item>
+                        <ListGroup.Item>Bio: {user.profile.shelter.bio}</ListGroup.Item>
                     </ListGroup>
                 </Container>
             }
@@ -83,7 +86,7 @@ function Profile({ handleLogout, errors }) {
                             <Modal.Title>Edit Account Information:</Modal.Title>
                         </Modal.Header>
                         <Modal.Body>
-                            <EditProfileForm user={user} />
+                            {isCustomer() ? <EditCustomerProfileForm user={user} /> : <EditShelterProfileForm user={user}/> }
                         </Modal.Body>
                     </Modal>
                 </Container>

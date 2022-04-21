@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from "react"
+import React, { useEffect, useState, useContext } from "react"
 import { UserContext } from "./context/user";
 import { Routes, Route } from "react-router-dom"
 import './App.css';
@@ -15,16 +15,17 @@ import Profile from './pages/Profile';
 import Login from './pages/Login';
 
 function App() {
-  const { user, setUser } = useContext(UserContext);
+  // const { user, setUser } = useContext(UserContext);
+  const [user, setUser] = useState(null)
 
-  // useEffect(() => {
-  //   fetch('/me').then((r) => {
-  //     if (r.ok) {
-  //       r.json().then((user) => setUser(user));
-  //     }
-  //   })
-  // }, [])
-  
+  useEffect(() => {
+    fetch('/me').then((r) => {
+      if (r.ok) {
+        r.json().then((user) => setUser(user));
+      }
+    })
+  }, [])
+
   function handleLogout() {
     fetch('/logout', {
       method: "DELETE"
@@ -32,26 +33,26 @@ function App() {
       .then(r => {
         if (r.ok) {
           setUser(null)
+          // console.log('hello')
         }
       })
   }
 
-  if (!user) return <Login onLogin={setUser} />
+  if (!user) return <Login onLogin={setUser}/>
 
   return (
     <div className="App">
-
       <Header />
-      <NavBar handleLogout={handleLogout} />
+      <NavBar handleLogout={handleLogout} user={user}/>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/manage-pets" element={<ManagePets />} />
-        <Route path="/search-pets" element={<PetSearch />} />
-        <Route path="/view-applications" element={<ViewApplications />} />
-        <Route path="/my-applications" element={<MyApplications />} />
-        <Route path="/bookmarked-pets" element={<BookmarkedPets />} />
-        <Route path="/previous-adoptions" element={<PreviousAdoptions />} />
-        <Route path="/profile" element={<Profile handleLogout={handleLogout} />} />
+        <Route path="/manage-pets" element={<ManagePets user={user}/>} />
+        <Route path="/search-pets" element={<PetSearch user={user}/>} />
+        <Route path="/view-applications" element={<ViewApplications user={user}/>} />
+        <Route path="/my-applications" element={<MyApplications user={user}/>} />
+        <Route path="/bookmarked-pets" element={<BookmarkedPets user={user}/>} />
+        <Route path="/previous-adoptions" element={<PreviousAdoptions user={user}/>} />
+        <Route path="/profile" element={<Profile handleLogout={handleLogout} user={user}/>} />
         <Route path="/login" element={<Login />} />
       </Routes>
 

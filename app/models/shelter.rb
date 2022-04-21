@@ -1,5 +1,5 @@
 class Shelter < ApplicationRecord
-    has_one :user, as: :profile
+    has_one :user, as: :profile, dependent: :destroy
     has_many :pets, dependent: :destroy
     has_many :pet_applications, through: :pets
 
