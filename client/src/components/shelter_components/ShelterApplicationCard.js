@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import { Container, Card, Button, Accordion, Stack, Alert } from 'react-bootstrap'
+import { Container, Card, Button, Accordion, Stack, Alert, Modal } from 'react-bootstrap'
+import ContactForm from '../ContactForm'
 
 const formatPhoneNum = (phoneNumber) => {
     const arrayedNum = phoneNumber.split('')
@@ -10,8 +11,12 @@ const formatPhoneNum = (phoneNumber) => {
     return newNumStr
 }
 
-function ShelterApplicationCard({ application, handleUpdateApplication }) {
+function ShelterApplicationCard({ application, handleUpdateApplication, user }) {
+    const [showContact, setShowContact] = useState(false)
     const [errors, setErrors] = useState([])
+    const showContactForm = () => setShowContact(true)
+    const closeContactForm = () => setShowContact(false)
+
     const pet = application.pet
     const customer = application.customer
 
@@ -53,9 +58,12 @@ function ShelterApplicationCard({ application, handleUpdateApplication }) {
         })
     }
 
-
-
-
+    function cleanupDate(date) {
+        const year = date.substr(0, 4)
+        const month = date.substr(5, 2)
+        const day = date.substr(8, 2)
+        return `${month}/${day}/${year}`
+    }
 
     return (
         <Container>
@@ -67,7 +75,7 @@ function ShelterApplicationCard({ application, handleUpdateApplication }) {
                     <div class="col-md-8">
                         <Card.Body>
                             <Card.Title>{pet.name}</Card.Title>
-                            <Card.Text>Application Date: {application.date}</Card.Text>
+                            <Card.Text>Application Date: {cleanupDate(application.created_at)}</Card.Text>
                             <Card.Text>
                                 <Accordion>
                                     <Accordion.Item eventKey="0">
@@ -75,7 +83,19 @@ function ShelterApplicationCard({ application, handleUpdateApplication }) {
                                         <Accordion.Body>
                                             <p>Email: {customer.user.email}</p>
                                             <p>Phone Number: {formatPhoneNum(customer.user.phone_number)}</p>
-                                            <Button variant="outline-dark">Contact Customer</Button>
+                                            <Container>
+                                                <Button variant="outline-dark" onClick={showContactForm}>
+                                                    Contact Customer
+                                                </Button>
+                                                <Modal show={showContact} onHide={closeContactForm} animation={false}>
+                                                    <Modal.Header closeButton>
+                                                        <Modal.Title>Contact Customer</Modal.Title>
+                                                    </Modal.Header>
+                                                    <Modal.Body>
+                                                        <ContactForm sender={user} recipient={customer} />
+                                                    </Modal.Body>
+                                                </Modal>
+                                            </Container>
                                         </Accordion.Body>
                                     </Accordion.Item>
                                 </Accordion>

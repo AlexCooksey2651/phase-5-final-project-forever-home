@@ -41,6 +41,10 @@ function ManagePets({ user }) {
         }
     }
 
+    function handleAddPet(newPet) {
+        setPets([...pets, newPet])
+    }
+
     function handleUpdatePet(updatedPet) {
         const updatedPets = pets.filter(pet => {
             if (pet.id === updatedPet.id) {
@@ -59,7 +63,7 @@ function ManagePets({ user }) {
 
     const petCards = () => {
         if (searchedPets().length > 0) {
-            return searchedPets().map(pet => <PetCard key={pet.id} pet={pet} user={user} handleUpdatePet={handleUpdatePet} handleDeletePet={handleDeletePet}/>)
+            return searchedPets().map(pet => <PetCard key={pet.id} pet={pet} user={user} handleAddPet={handleAddPet} handleUpdatePet={handleUpdatePet} handleDeletePet={handleDeletePet}/>)
         } else {
             return (
                 <>

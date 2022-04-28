@@ -38,19 +38,19 @@ function Profile({ handleLogout, errors, user }) {
         if (user.profile.type === "customer") {
             fetch(`/customers/${user.profile.customer.id}`, {
                 method: "DELETE",
-            }) 
+            })
         } else if (user.profile.type === "shelter") {
-            fetch(`/shelters/${user.profile.id}`, {
+            fetch(`/shelters/${user.profile.shelter.id}`, {
                 method: "DELETE",
             })
-        }    
+        }
     }
 
     return (
         <Container id="profile-container">
-            <br/>
+            <br />
             <h2>ACCOUNT INFORMATION</h2>
-            <br/>
+            <br />
             {isCustomer() ?
                 <Container >
                     <ListGroup variant="flush">
@@ -86,7 +86,7 @@ function Profile({ handleLogout, errors, user }) {
                             <Modal.Title>Edit Account Information:</Modal.Title>
                         </Modal.Header>
                         <Modal.Body>
-                            {isCustomer() ? <EditCustomerProfileForm user={user} /> : <EditShelterProfileForm user={user}/> }
+                            {isCustomer() ? <EditCustomerProfileForm user={user} /> : <EditShelterProfileForm user={user} />}
                         </Modal.Body>
                     </Modal>
                 </Container>
@@ -95,14 +95,21 @@ function Profile({ handleLogout, errors, user }) {
                         Delete Account
                     </Button>
 
-                    <Modal show={showDelete} onHide={handleCloseDelete} animation={false}>
+                    <Modal aria-labelledby="contained-modal-title-vcenter"
+                        centered show={showDelete} onHide={handleCloseDelete} animation={false}>
                         <Modal.Body>
-                            <Modal.Header closeButton>
-                                <Modal.Title>Are You Sure?</Modal.Title>
+                            <Modal.Header closeButton style={{
+                                display: "flex",
+                                justifyContent: "center",
+                                alignItems: "center",
+                            }}>
+                                <Modal.Title className="are-you-sure">Are You Sure?</Modal.Title>
                             </Modal.Header>
-                            <Button variant="outline-dark" onClick={() => handleDeleteProfile()}>
-                                Confirm
-                            </Button>
+                            <Stack>
+                                <Button variant="outline-dark" onClick={() => handleDeleteProfile()}>
+                                    Confirm
+                                </Button>
+                            </Stack>
                         </Modal.Body>
                     </Modal>
                 </Container>

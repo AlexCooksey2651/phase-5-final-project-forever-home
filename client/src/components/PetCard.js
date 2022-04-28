@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
-import { Container, Card, Button, Stack, Modal, Accordion, Alert } from 'react-bootstrap'
+import { Container, Card, Button, Stack, Modal, Accordion, Alert, ModalBody } from 'react-bootstrap'
 import EditPetForm from './shelter_components/EditPetForm'
 import AdoptionAppForm from './customer_components/AdoptionAppForm'
+import ContactForm from './ContactForm'
 
 const formatPhoneNum = (phoneNumber) => {
     const arrayedNum = phoneNumber.split('')
@@ -14,16 +15,24 @@ const formatPhoneNum = (phoneNumber) => {
 
 function PetCard({ pet, user, handleUpdatePet, handleDeletePet }) {
     const userType = user.profile.type
-    const [bookmarked, setBookmarked] = useState(false)
-    const [bookmarkInfo, setBookmarkInfo] = useState({})
-    const [showModal, setShowModal] = useState(false)
-    const [showDelete, setShowDelete] = useState(false)
     const [errors, setErrors] = useState([])
 
-    const handleShow = () => setShowModal(true)
-    const handleClose = () => setShowModal(false)
+    const [showEdit, setShowEdit] = useState(false)
+    const showEditForm = () => setShowEdit(true)
+    const closeEditForm = () => setShowEdit(false)
+
+    const [showDelete, setShowDelete] = useState(false)
     const handleShowDelete = () => setShowDelete(true)
     const handleCloseDelete = () => setShowDelete(false)
+
+    const [showContact, setShowContact] = useState(false)
+    const showContactForm = () => setShowContact(true)
+    const closeContactForm = () => setShowContact(false)
+
+    const customerId = user.profile.customer.id
+
+    // const [bookmarked, setBookmarked] = useState(false)
+    // const [bookmarkInfo, setBookmarkInfo] = useState(null)
 
     function removeListing() {
         fetch(`/pets/${pet.id}`, {
@@ -40,14 +49,13 @@ function PetCard({ pet, user, handleUpdatePet, handleDeletePet }) {
             },
             body: JSON.stringify({
                 pet_id: pet.id,
-                customer_id: user.profile.id
+                customer_id: customerId
             })
         })
             .then(r => {
                 if (r.ok) {
                     r.json().then(bookmark => {
-                        setBookmarkInfo(bookmark)
-                        setBookmarked(true)
+                        console.log(bookmark)
                     })
                 } else {
                     r.json().then(errors => setErrors(errors))
@@ -56,11 +64,9 @@ function PetCard({ pet, user, handleUpdatePet, handleDeletePet }) {
     }
 
     function deleteBookmark() {
-        fetch(`/bookmarks/${bookmarkInfo.id}`, {
+        fetch(`/bookmarks/${customerId}/${pet.id}`, {
             method: "DELETE",
         })
-        setBookmarkInfo({})
-        setBookmarked(false)
     }
 
     const isBookmarked = () => {
@@ -68,17 +74,29 @@ function PetCard({ pet, user, handleUpdatePet, handleDeletePet }) {
             const bookmarks = user.profile.customer.bookmarks
             const found = bookmarks.find(bookmark => bookmark.pet_id === pet.id)
             if (found) {
-                setBookmarkInfo(found)
-                setBookmarked(true)
+                return true
             } else {
-                setBookmarked(false)
+                return false
             }
         } else {
             console.log("hello")
         }
     }
 
-    isBookmarked()
+    const hasApplications = () => {
+        if (userType === "customer" && user.profile.customer.pet_applications.length > 0) {
+            const applications = user.profile.customer.pet_applications
+            const found = applications.find(application => application.pet_id === pet.id)
+            if (found) {
+                return true
+            } else {
+                return false
+            }
+        } else {
+            console.log('hello')
+        }
+    }
+    // isBookmarked()
 
     if (userType === "shelter") {
         return (
@@ -92,21 +110,21 @@ function PetCard({ pet, user, handleUpdatePet, handleDeletePet }) {
                             <Card.Body>
                                 <Card.Title><h2>{pet.name}</h2></Card.Title>
                                 <Card.Text>Species: {pet.species}</Card.Text>
-                                <Card.Text>Age: {pet.age} {pet.ageUnit} old</Card.Text>
+                                <Card.Text>Age: {pet.age} {pet.age_unit} old</Card.Text>
 
                                 <Card.Text>
                                     <b>Pet Bio:</b>
                                     <br />
                                     {pet.bio}
                                 </Card.Text>
-                                <Card.Text>Adoption Status: {pet.status}</Card.Text>
+                                <Card.Text>Adoption Status: {pet.adoption_status}</Card.Text>
                                 <Stack gap={2} className="col-md-5 mx-auto">
                                     <Container>
-                                        <Button variant="outline-dark" onClick={handleShow}>
+                                        <Button variant="outline-dark" onClick={showEditForm}>
                                             Edit Pet Information
                                         </Button>
 
-                                        <Modal show={showModal} onHide={handleClose} animation={false}>
+                                        <Modal show={showEdit} onHide={closeEditForm} animation={false}>
                                             <Modal.Header closeButton>
                                                 <Modal.Title>Pet Information:</Modal.Title>
                                             </Modal.Header>
@@ -150,7 +168,7 @@ function PetCard({ pet, user, handleUpdatePet, handleDeletePet }) {
                             <Card.Body>
                                 <Card.Title><h2>{pet.name}</h2></Card.Title>
                                 <Card.Text>Species: {pet.species}</Card.Text>
-                                <Card.Text>Age: {pet.age} {pet.ageUnit} old</Card.Text>
+                                <Card.Text>Age: {pet.age} {pet.age_unit} old</Card.Text>
                                 <Card.Text>
                                     <Accordion>
                                         <Accordion.Item eventKey="0">
@@ -158,7 +176,19 @@ function PetCard({ pet, user, handleUpdatePet, handleDeletePet }) {
                                             <Accordion.Body>
                                                 <p>Email: {pet.shelter.user.email}</p>
                                                 <p>Phone Number: {formatPhoneNum(pet.shelter.user.phone_number)}</p>
-                                                <Button variant="outline-dark">Contact Shelter</Button>
+                                                <Container>
+                                                    <Button variant="outline-dark" onClick={showContactForm}>
+                                                        Contact Shelter
+                                                    </Button>
+                                                    <Modal show={showContact} onHide={closeContactForm} animation={false}>
+                                                        <Modal.Header closeButton>
+                                                            <Modal.Title>Contact Shelter</Modal.Title>
+                                                        </Modal.Header>
+                                                        <Modal.Body>
+                                                            <ContactForm sender={user} recipient={pet.shelter} />
+                                                        </Modal.Body>
+                                                    </Modal>
+                                                </Container>
                                             </Accordion.Body>
                                         </Accordion.Item>
                                     </Accordion>
@@ -169,26 +199,40 @@ function PetCard({ pet, user, handleUpdatePet, handleDeletePet }) {
                                     {pet.bio}
                                 </Card.Text>
 
-                                <Card.Text>Adoption Status: {pet.status}</Card.Text>
+                                <Card.Text>Adoption Status: {pet.adoption_status}</Card.Text>
                                 <Stack gap={2} className="col-md-5 mx-auto">
                                     <Container>
-                                        <Button variant={bookmarked ? "dark" : "outline-dark"} onClick={bookmarked ? (() => deleteBookmark()) : (() => postBookmark())}>
-                                            {bookmarked ? "Bookmarked" : "Bookmark"}
-                                        </Button>
-
+                                        {isBookmarked() ? 
+                                            <Button variant="dark" onClick={deleteBookmark}>
+                                                Bookmarked
+                                            </Button> : 
+                                            <Button variant="outline-dark" onClick={postBookmark}>
+                                                Bookmark
+                                            </Button>}
+                                        {/* <Button variant={isBookmarked() ? "dark" : "outline-dark"} onClick={isBookmarked() ? (() => deleteBookmark()) : (() => postBookmark())}>
+                                            {isBookmarked() ? "Bookmarked" : "Bookmark"}
+                                        </Button> */}
                                     </Container>
+                                    
                                     <Container>
-                                        <Button variant="outline-dark" onClick={handleShowDelete}>
-                                            Apply to Adopt {pet.name}
-                                        </Button>
-                                        <Modal show={showDelete} onHide={handleCloseDelete} animation={false}>
-                                            <Modal.Header closeButton>
-                                                <Modal.Title>Adoption Application Form</Modal.Title>
-                                            </Modal.Header>
-                                            <Modal.Body>
-                                                <AdoptionAppForm pet={pet} user={user} />
-                                            </Modal.Body>
-                                        </Modal>
+                                        {hasApplications() ?
+                                            <Button variant="dark">
+                                                Already Applied
+                                            </Button> :
+                                            <>
+                                                <Button variant="outline-dark" onClick={handleShowDelete}>
+                                                    Apply to Adopt {pet.name}
+                                                </Button>
+                                                <Modal show={showDelete} onHide={handleCloseDelete} animation={false}>
+                                                    <Modal.Header closeButton>
+                                                        <Modal.Title>Adoption Application Form</Modal.Title>
+                                                    </Modal.Header>
+                                                    <Modal.Body>
+                                                        <AdoptionAppForm pet={pet} user={user} />
+                                                    </Modal.Body>
+                                                </Modal>
+                                            </>
+                                        }
                                     </Container>
                                 </Stack>
                             </Card.Body>

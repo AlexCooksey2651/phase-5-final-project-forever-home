@@ -20,17 +20,15 @@ s4 = Shelter.create(name: "Scales and Claws", bio: "A lot of people abandon wond
 
 s5 = Shelter.create(name: "Rocky Mountain Rescue", bio: "Based in Littleton, CO, we help people find their new best friends.", user_attributes: { email: "rockymtnrescue@gmail.com", password: "ilovefood", password_confirmation: "ilovefood", phone_number: "+10123456789", city: "Littleton", state: "CO"})
 
-Shelter.all.each.do |shelter|
+Shelter.all.each do |shelter|
     10.times do
         shelter.pets.create(
             name: Faker::Creature::Dog.name,
-            image: null,
             species: species.sample,
             bio: "I am a great pet!",
             age: rand(1..11),
             age_unit: age_units.sample,
-            adoption_status: "Available",
-            adoption_date: null
+            adoption_status: "Available"
         )
     end
 end

@@ -6,12 +6,14 @@ function AdoptionAppForm({ pet, user }) {
     // const { user } = useContext(UserContext)
     const [applicationText, setApplicationText] = useState("")
     const fullName = `${user.profile.customer.first_name} ${user.profile.customer.last_name}`
-    const today = new Date().toLocaleDateString()
+    const [date, setDate] = useState(new Date().toLocaleDateString())
     const [errors, setErrors] = useState([])
+
+    console.log(typeof date)
 
     function submitApplication(e) {
         e.preventDefault()
-        fetch('/applications', {
+        fetch('/pet_applications', {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -19,7 +21,6 @@ function AdoptionAppForm({ pet, user }) {
             body: JSON.stringify({
                 customer_id: user.profile.customer.id,
                 pet_id: pet.id,
-                date: today,
                 customer_text: applicationText,
                 status: "Pending"
             })
@@ -28,7 +29,7 @@ function AdoptionAppForm({ pet, user }) {
                 if (r.ok) {
                     r.json().then(application => console.log(application))
                 } else {
-                    r.json().then(errors => setErrors(errors))
+                    r.json().then(data => setErrors(data.errors))
                 }
             })
     }
@@ -48,12 +49,12 @@ function AdoptionAppForm({ pet, user }) {
 
                 <Form.Group className="mb-3" controlId="formBasicInput">
                     <Form.Label><b>Application Date:</b></Form.Label>
-                    <Form.Control disabled value={today}></Form.Control>
+                    <Form.Control disabled value={date}></Form.Control>
                 </Form.Group>
 
                 <Form.Group>
                     <Form.Label><b>Tell us why you'd be a great fit for {pet.name}:</b></Form.Label>
-                    <Form.Control as="textarea" rows={4} value={applicationText} onChange={e => setApplicationText(e.target.value)} />
+                    <Form.Control required maxlength="200" as="textarea" rows={4} value={applicationText} onChange={e => setApplicationText(e.target.value)} />
                 </Form.Group>
                 <br />
                 <Button variant="outline-dark" type="submit">

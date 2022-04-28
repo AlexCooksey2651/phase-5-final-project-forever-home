@@ -19,7 +19,7 @@ rescue_from ActiveRecord::RecordInvalid, with: :invalid_record
             shelter_id = user.profile.id
             shelter = Shelter.find_by(id: shelter_id)
             shelter.update!(shelter_params)
-            render json: shelter
+            render json: user
         else
             render json: {error: "User not found"}, status: :not_found
         end

@@ -18,7 +18,8 @@ function EditCustomerProfileForm({ user }) {
     const [state, setState] = useState(userInfo.state)
     const [phoneNumber, setPhoneNumber] = useState(userInfo.phone_number)
     const [email, setEmail] = useState(userInfo.email)
-    const [password, setPassword] = useState(userInfo.password)
+    const [newPassword, setNewPassword] = useState("")
+    const [newPasswordConfirmation, setNewPasswordConfirmation] = useState("")
     const [interestedIn, setInterestedIn] = useState(userInfo.profile.customer.interested_in)
 
     function modifyWantedAnimals(animalType) {
@@ -40,17 +41,21 @@ function EditCustomerProfileForm({ user }) {
                 first_name: firstName,
                 last_name: lastName,
                 interested_in: interestedIn,
-                email,
-                city,
-                state,
-                phone_number: phoneNumber
+                user_attributes: {
+                    email,
+                    password: newPassword,
+                    password_confirmation: newPasswordConfirmation,
+                    city,
+                    state,
+                    phone_number: phoneNumber
+                }
             })
         })
             .then((r) => {
                 if (r.ok) {
                     r.json().then(user => setUserInfo(user))
                 } else {
-                    r.json().then(errors => setErrors(errors))
+                    r.json().then(data => setErrors(data.errors))
                 }
             })
     }
@@ -58,14 +63,14 @@ function EditCustomerProfileForm({ user }) {
         <Form className="edit-profile-information" onSubmit={submitPatchCustomer}>
             <Form.Group className="mb-3" controlId="formBasicInput">
                 <Form.Label><b>Name:</b></Form.Label>
-                <Form.Control type="text" placeholder="First Name" value={firstName} onChange={e => setFirstName(e.target.value)} />
-                <Form.Control type="text" placeholder="Last Name" value={lastName} onChange={e => setLastName(e.target.value)} />
+                <Form.Control required minlength="2" maxlength="20" type="text" placeholder="First Name" value={firstName} onChange={e => setFirstName(e.target.value)} />
+                <Form.Control required minlength="2" maxlength="20" type="text" placeholder="Last Name" value={lastName} onChange={e => setLastName(e.target.value)} />
             </Form.Group>
 
             <Form.Group>
                 <Form.Label><b>Location:</b></Form.Label>
                 <Form.Control type="text" placeholder="City" value={city} onChange={e => setCity(e.target.value)} />
-                <Form.Select aria-label="Default select example" value={state} onChange={e => setState(e.target.value)}>
+                <Form.Select required aria-label="Default select example" value={state} onChange={e => setState(e.target.value)}>
                     <option value="" disabled>State</option>
                     {stateOptions}
                 </Form.Select>
@@ -73,17 +78,18 @@ function EditCustomerProfileForm({ user }) {
 
             <Form.Group>
                 <Form.Label><b>Phone Number:</b></Form.Label>
-                <PhoneInput country="US" placeholder="Phone Number" value={phoneNumber} onChange={setPhoneNumber}></PhoneInput>
+                <PhoneInput required country="US" placeholder="Phone Number" value={phoneNumber} onChange={setPhoneNumber}></PhoneInput>
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="formBasicInput">
                 <Form.Label><b>Email Address:</b></Form.Label>
-                <Form.Control type="text" placeholder="Email" value={email} onChange={e => setEmail(e.target.value)} />
+                <Form.Control required type="text" placeholder="Email" value={email} onChange={e => setEmail(e.target.value)} />
             </Form.Group>
 
-            <Form.Group className="mb-3" controlId="formBasicInput">
+            <Form.Group className="mb-3" controlId="formBasicPassword">
                 <Form.Label><b>Reset Password:</b></Form.Label>
-                <Form.Control type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)} />
+                <Form.Control minlength="6" maxlength="20" type="password" placeholder="Password" value={newPassword} onChange={e => setNewPassword(e.target.value)} />
+                <Form.Control minlength="6" maxlength="20" type="password" placeholder="Confirm password" value={newPasswordConfirmation} onChange={e => setNewPasswordConfirmation(e.target.value)} />
             </Form.Group>
 
 

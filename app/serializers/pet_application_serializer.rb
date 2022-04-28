@@ -1,5 +1,5 @@
 class PetApplicationSerializer < ActiveModel::Serializer
-  attributes :id, :date, :customer_text, :status
+  attributes :id, :customer_text, :status, :created_at, :customer 
 
   belongs_to :customer
   belongs_to :pet

@@ -56,7 +56,7 @@ function MyApplications({ user }) {
                 r.json().then(applications => setCustomerApplications(applications))
             }
         })
-    })
+    }, [])
 
     function handleRemoveApplication(deletedApplication) {
         const updatedCustomerApplications = customerApplications.filter(application => application.id !== deletedApplication.id)

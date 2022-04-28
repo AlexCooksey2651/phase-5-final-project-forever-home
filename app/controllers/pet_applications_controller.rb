@@ -8,15 +8,26 @@ rescue_from ActiveRecord::RecordInvalid, with: :invalid_record
             pets = shelter.pets
             applications = []
             pets.each do |pet|
-                pet.pet_applications.each do |app|
-                    applications << app
-                end
+                apps = pet.pet_applications
+                matching = apps.where(status: "Pending")
+                applications << matching
             end
-            render json: applications, status: :ok
+            render json: applications, include: ['pet', 'customer', 'customer.user'], status: :ok
         else
             render json: {error: "User not found"}, status: :not_found
         end
     end
+
+    # def matching_application
+    #     pet = Pet.find_by(id: params[:pet_id])
+    #     if pet
+    #         applications = pet.pet_applications
+    #         approved = applications.find{ |app| app.status == "Approved"}
+    #         render json: approved, include: ['customer', 'customer.user'], status: :ok
+    #     else 
+    #         render json: {error: "Customer not found"}, status: :not_found
+    #     end
+    # end
 
     def customer_index
         user = User.find_by(id: session[:user_id])
@@ -46,7 +57,6 @@ rescue_from ActiveRecord::RecordInvalid, with: :invalid_record
     def destroy
         application = PetApplication.find_by(id: params[:id])
         if application
-            
             # NOTE: if pet.applications.length now = 0, adoption_status should update to "Available"
             # pet = Pet.find_by(id: application.pet.id)
             application.destroy

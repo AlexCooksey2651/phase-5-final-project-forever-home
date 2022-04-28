@@ -15,6 +15,11 @@ rescue_from ActiveRecord::RecordInvalid, with: :invalid_record
         pets = Pet.all
         render json: pets
     end
+
+    def show
+        pet = Pet.find_by(id: params[:id])
+        render json: pet
+    end
     
 
     def destroy
@@ -51,7 +56,7 @@ rescue_from ActiveRecord::RecordInvalid, with: :invalid_record
         user = User.find_by(id: session[:user_id])
         if user
             pets = Pet.where("adoption_status = ? AND shelter_id = ?", "Adopted", user.profile.id)
-            render json: pets
+            render json: pets, include: ['pet_applications', 'pet_applications.customer.user']
         else
             render json: {error: "User not found"}, status: :not_found
         end
@@ -64,8 +69,9 @@ rescue_from ActiveRecord::RecordInvalid, with: :invalid_record
         if user
             interested_in = user.profile.interested_in
             pets = Pet.all
-            shown_pets = pets.filter { |pet| interested_in.include?(pet[:species]) }
-            render json: shown_pets, include: ['shelter', 'shelter.user']
+            available_pets = pets.where(adoption_status: ["Available", "Application Pending"])
+            shown_pets = available_pets.filter { |pet| interested_in.include?(pet[:species]) }
+            render json: shown_pets, include: ['shelter', 'shelter.user', 'pet.bookmarks']
         else
             render json: {error: "User not found"}, status: :not_found
         end

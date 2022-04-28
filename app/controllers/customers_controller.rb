@@ -18,7 +18,7 @@ rescue_from ActiveRecord::RecordInvalid, with: :invalid_record
             customer_id = user.profile.id
             customer = Customer.find_by(id: customer_id)
             customer.update!(customer_params)
-            render json: customer
+            render json: user
         else
             render json: {error: "User not found"}, status: :not_found
         end

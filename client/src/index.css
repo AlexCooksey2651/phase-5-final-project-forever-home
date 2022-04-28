@@ -24,7 +24,7 @@ code {
 }
 
 #header-image {
-  width: 50%;
+  width: 40%;
   margin-left: auto;
   margin-right: auto;
   display: block;
@@ -38,6 +38,10 @@ code {
   width: 70%;
   margin: auto
 }
+
+/* .about-header {
+  text-align: center;
+} */
 
 .application-card {
   width: 90%;
@@ -60,7 +64,7 @@ code {
   justify-items: center;
 }
 
-#customer-applications-container, #profile-container, #bookmarked-pets-container, #pet-search, #manage-pets, #active-applications, #previous-adoptions, #login {
+#customer-applications-container, #profile-container, #bookmarked-pets-container, #pet-search, #manage-pets, #active-applications, #previous-adoptions, #login, #about {
   background-color: blanchedalmond;
   padding: 10px;
   vertical-align: center;
@@ -72,4 +76,10 @@ code {
 .pet-search-bar {
   width: 50%;
   margin: auto;
+}
+
+.about-text {
+  text-align: left;
+  padding-left: 10px;
+  padding-right: 10px;
 }

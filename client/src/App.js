@@ -45,7 +45,7 @@ function App() {
       <Header />
       <NavBar handleLogout={handleLogout} user={user}/>
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Home user={user}/>} />
         <Route path="/manage-pets" element={<ManagePets user={user}/>} />
         <Route path="/search-pets" element={<PetSearch user={user}/>} />
         <Route path="/view-applications" element={<ViewApplications user={user}/>} />

@@ -1,5 +1,5 @@
-import React from 'react'
-import { Container, Card, Accordion, Stack, Button } from 'react-bootstrap'
+import React, { useState } from 'react'
+import { Container, Card, Accordion, Stack, Button, Modal } from 'react-bootstrap'
 
 // const exampleApplication = {
 //     pet: {
@@ -52,6 +52,7 @@ const formatPhoneNum = (phoneNumber) => {
 }
 
 function CustomerApplicationCard({ withdraw, application, user, handleRemoveApplication }) {
+    const [showModal, setShowModal] = useState(false)
     const pet = application.pet
     const shelter = application.pet.shelter
     const isApproved = () => {
@@ -62,11 +63,21 @@ function CustomerApplicationCard({ withdraw, application, user, handleRemoveAppl
         }
     }
 
+    const handleShowModal = () => setShowModal(true)
+    const handleCloseModal = () => setShowModal(false)
+
     function deleteApplication() {
-        fetch(`/applications/${application.id}`, {
+        fetch(`/pet_applications/${application.id}`, {
             method: "DELETE"
         })
         handleRemoveApplication(application)
+    }
+
+    function cleanupDate(date) {
+        const year = date.substr(0, 4)
+        const month = date.substr(5, 2)
+        const day = date.substr(8, 2)
+        return `${month}/${day}/${year}`
     }
 
     return (
@@ -74,17 +85,17 @@ function CustomerApplicationCard({ withdraw, application, user, handleRemoveAppl
             <Card className="application-card">
                 <div class="row no-gutters">
                     <div class="col-md-4">
-                        <Card.Img className="application-card-image" src={pet.image} alt="pet picture"/>
+                        <Card.Img className="application-card-image" src={pet.image} alt="pet picture" />
                     </div>
                     <div class="col-md-8">
                         <Card.Body>
                             <Card.Title>{pet.name}</Card.Title>
-                            <Card.Text>Application Date: {application.date}</Card.Text>
+                            <Card.Text>Application Date: {cleanupDate(application.created_at)}</Card.Text>
                             <Card.Text>
                                 Application Status: {application.status}
                             </Card.Text>
                             {isApproved() ? <Card.Text>
-                                Adoption Date: {application.pet.adoption_date}
+                                Adoption Date: {cleanupDate(application.pet.adoption_date)}
                             </Card.Text> : null}
                             <Card.Text>
                                 <Accordion>
@@ -104,7 +115,29 @@ function CustomerApplicationCard({ withdraw, application, user, handleRemoveAppl
                                 <em>{application.customer_text}</em>
                             </Card.Text>
                             <Stack gap={2} className="col-md-5 mx-auto">
-                                {withdraw ? <Button variant="outline-dark" onClick={() => deleteApplication()}>Withdraw Application</Button> : null}
+                                {withdraw ?
+                                    <>
+                                        <Button variant="outline-dark" onClick={() => handleShowModal()}>
+                                            Withdraw Application
+                                        </Button>
+                                        <Modal aria-labelledby="contained-modal-title-vcenter"
+                                            centered show={showModal} onHide={handleCloseModal} animation={false}>
+                                            <Modal.Body>
+                                                <Modal.Header closeButton style={{
+                                                    display: "flex",
+                                                    justifyContent: "center",
+                                                    alignItems: "center",
+                                                }}>
+                                                    <Modal.Title className="are-you-sure">Are You Sure?</Modal.Title>
+                                                </Modal.Header>
+                                                <Stack>
+                                                    <Button variant="outline-dark" onClick={() => deleteApplication()}>
+                                                        Confirm
+                                                    </Button>
+                                                </Stack>
+                                            </Modal.Body>
+                                        </Modal>
+                                    </> : null}
                             </Stack>
                         </Card.Body>
                     </div>

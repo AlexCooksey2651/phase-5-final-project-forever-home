@@ -33,13 +33,13 @@ function PetSearch({ user }) {
     const [pets, setPets] = useState([])
     const [searchText, setSearchText] = useState("")
 
-    // useEffect(() => {
-    //     fetch('/customer-pets').then(r => {
-    //         if (r.ok) {
-    //             r.json().then(pets => setPets(pets))
-    //         }
-    //     })
-    // }, [])
+    useEffect(() => {
+        fetch('/customer-pets').then(r => {
+            if (r.ok) {
+                r.json().then(pets => setPets(pets))
+            }
+        })
+    }, [])
 
     const searchedPets = () => {
         if (pets.length > 0) {

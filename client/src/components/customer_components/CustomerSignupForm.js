@@ -41,13 +41,15 @@ function CustomerSignupForm({ onLogin }) {
             body: JSON.stringify({
                 first_name: firstName,
                 last_name: lastName,
-                city,
-                state,
-                phone_number: phoneNumber,
-                email,
-                password,
-                password_confirmation: passwordConfirmation,
                 interested_in: interestedIn,
+                user_attributes: {
+                    email,
+                    password,
+                    password_confirmation: passwordConfirmation,
+                    city,
+                    state,
+                    phone_number: phoneNumber,
+                } 
             })
         })
             .then(r => {
@@ -62,50 +64,57 @@ function CustomerSignupForm({ onLogin }) {
     return (
         <Container>
             <Form onSubmit={handleSubmit}>
-                <Form.Group>
+                <Form.Group className="mb-3" controlId="formBasicInput">
+                    <Form.Label><b>Name:</b></Form.Label>
+                    <Form.Control required minlength="2" maxlength="20" type="text" placeholder="First Name" value={firstName} onChange={e => setFirstName(e.target.value)} />
+                    <Form.Control required minlength="2" maxlength="20" type="text" placeholder="Last Name" value={lastName} onChange={e => setLastName(e.target.value)} />
+                </Form.Group>
+
+                {/* <Form.Group>
                     <Form.Label><b>First Name:</b></Form.Label>
-                    <Form.Control type="text" placeholder="Enter First Name" value={firstName} onChange={e => setFirstName(e.target.value)} />
+                    <Form.Control required minlength="2" maxlength="20" type="text" placeholder="Enter First Name" value={firstName} onChange={e => setFirstName(e.target.value)} />
                 </Form.Group>
                 <Form.Group>
                     <Form.Label><b>Last Name:</b></Form.Label>
-                    <Form.Control type="text" placeholder="Enter Last Name" value={lastName} onChange={e => setLastName(e.target.value)} />
-                </Form.Group>
+                    <Form.Control required minlength="2" maxlength="20" type="text" placeholder="Enter Last Name" value={lastName} onChange={e => setLastName(e.target.value)} />
+                </Form.Group> */}
 
                 <Form.Group>
                     <Form.Label><b>Location:</b></Form.Label>
-                    <Form.Control type="text" placeholder="Enter City" value={city} onChange={e => setCity(e.target.value)} />
-                    <Form.Select aria-label="Default select example" value={state} onChange={e => setState(e.target.value)}>
+                    <Form.Control required minlength="2" maxlength="20" type="text" placeholder="Enter City" value={city} onChange={e => setCity(e.target.value)} />
+                    <Form.Select required aria-label="Default select example" value={state} onChange={e => setState(e.target.value)}>
                         <option value="" disabled >State</option>
                         {stateOptions}
                     </Form.Select>
                 </Form.Group>
-
+                <br/>
                 <Form.Group>
                     <Form.Label><b>Phone Number:</b></Form.Label>
-                    <PhoneInput country="US" placeholder="Enter Telephone" value={phoneNumber} onChange={setPhoneNumber}></PhoneInput>
+                    <PhoneInput required country="US" placeholder="Enter Telephone" value={phoneNumber} onChange={setPhoneNumber}></PhoneInput>
                 </Form.Group>
-
+                <br/>
                 <Form.Group>
                     <Form.Label><b>What Kind(s) of Pet are you Looking For?</b></Form.Label>
                     {allPets.map(animal => {
                         return <Form.Check defaultChecked key={animal} label={animal} value={animal} onChange={(event) => modifyWantedAnimals(event.target.value)} />
                     })}
                 </Form.Group>
-
+                <br/>
                 <Form.Group>
                     <Form.Label><b>Email Address:</b></Form.Label>
-                    <Form.Control type="email" placeholder="Enter Email" value={email} onChange={e => setEmail(e.target.value)} />
+                    <Form.Control required type="email" placeholder="Enter Email" value={email} onChange={e => setEmail(e.target.value)} />
                 </Form.Group>
-
+                <br/>
                 <Form.Group className="mb-3" controlId="formBasicPassword">
                     <Form.Label><b>Password:</b></Form.Label>
-                    <Form.Control type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)} />
+                    <Form.Control required minlength="6" maxlength="20" type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)} />
+                    <Form.Control required minlength="6" maxlength="20" type="password" placeholder="Confirm password" value={passwordConfirmation} onChange={e => setPasswordConfirmation(e.target.value)} />
                 </Form.Group>
 
-                <Form.Group className="mb-3" controlId="formBasicPasswordConfirmation">
+                {/* <Form.Group className="mb-3" controlId="formBasicPasswordConfirmation">
                     <Form.Label><b>Confirm Password:</b></Form.Label>
-                    <Form.Control type="password" placeholder="Confirm password" value={passwordConfirmation} onChange={e => setPasswordConfirmation(e.target.value)} />
-                </Form.Group>
+                    <Form.Control required minlength="6" maxlength="20" type="password" placeholder="Confirm password" value={passwordConfirmation} onChange={e => setPasswordConfirmation(e.target.value)} />
+                </Form.Group> */}
 
                 <Stack gap={2} className="col-md-5 mx-auto" >
                     <Button variant="outline-dark" type="submit">
@@ -129,3 +138,10 @@ function CustomerSignupForm({ onLogin }) {
 }
 
 export default CustomerSignupForm
+
+                // email,
+                // password,
+                // password_confirmation: passwordConfirmation,
+                // city,
+                // state,
+                // phone_number: phoneNumber

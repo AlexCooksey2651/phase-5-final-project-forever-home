@@ -45,7 +45,7 @@ import { Container } from 'react-bootstrap'
 
 
 
-function ViewApplications() {
+function ViewApplications({ user }) {
     const [shelterApplications, setShelterApplications] = useState([])
 
     useEffect(() => {
@@ -69,7 +69,7 @@ function ViewApplications() {
 
     const shelterApplicationCards = () => {
         if (shelterApplications.length > 0) {
-            return shelterApplications.map(application => <ShelterApplicationCard key={application.id} application={application} handleUpdateApplication={handleUpdateApplication} />)
+            return shelterApplications.map(application => <ShelterApplicationCard key={application.id} application={application} user={user} handleUpdateApplication={handleUpdateApplication} />)
         } else {
             return (
                 <>

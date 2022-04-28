@@ -25,7 +25,7 @@ import { Container } from 'react-bootstrap'
 //     }
 // }]
 
-function PreviousAdoptions() {
+function PreviousAdoptions({ user }) {
     const [previousAdoptions, setPreviousAdoptions] = useState([])
 
     useEffect(() => {
@@ -34,12 +34,12 @@ function PreviousAdoptions() {
                 r.json().then(pets => setPreviousAdoptions(pets))
             }
         })
-    })
+    }, [])
 
 
     const previousAdoptionCards = () => {
         if (previousAdoptions.length > 0) {
-            return previousAdoptions.map(pet => <PreviousAdoptionCard key={pet.id} pet={pet} />)
+            return previousAdoptions.map(pet => <PreviousAdoptionCard key={pet.id} pet={pet} user={user}/>)
         } else {
             return (
                 <>
