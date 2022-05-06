@@ -54,7 +54,7 @@ function CustomerSignupForm({ onLogin }) {
         })
             .then(r => {
                 if (r.ok) {
-                    r.json().then(customer => onLogin(customer.user))
+                    r.json().then(user => onLogin(user))
                     navigate('/home')
                 } else {
                     r.json().then(data => setErrors(data.errors))

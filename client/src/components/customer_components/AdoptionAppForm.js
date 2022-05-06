@@ -1,5 +1,6 @@
 import React, { useState, useContext } from 'react'
 import { Container, Form, Button, Alert } from 'react-bootstrap'
+import { useNavigate } from 'react-router-dom'
 import { UserContext } from '../../context/user'
 
 function AdoptionAppForm({ pet, user }) {
@@ -8,8 +9,7 @@ function AdoptionAppForm({ pet, user }) {
     const fullName = `${user.profile.customer.first_name} ${user.profile.customer.last_name}`
     const [date, setDate] = useState(new Date().toLocaleDateString())
     const [errors, setErrors] = useState([])
-
-    console.log(typeof date)
+    const navigate = useNavigate()
 
     function submitApplication(e) {
         e.preventDefault()
@@ -28,6 +28,7 @@ function AdoptionAppForm({ pet, user }) {
             .then((r) => {
                 if (r.ok) {
                     r.json().then(application => console.log(application))
+                    navigate('/my-applications')
                 } else {
                     r.json().then(data => setErrors(data.errors))
                 }

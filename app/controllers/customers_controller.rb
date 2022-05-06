@@ -9,14 +9,18 @@ rescue_from ActiveRecord::RecordInvalid, with: :invalid_record
     def create
         new_customer = Customer.create!(customer_params)
         session[:user_id] = new_customer.user.id
-        render json: new_customer, status: :created
+        user = User.find_by(id: session[:user_id])
+        if user
+            render json: user, status: :created
+        else
+            render json: {error: "User not found"}
+        end
     end
 
     def update
         user = User.find_by(id: session[:user_id])
         if user
-            customer_id = user.profile.id
-            customer = Customer.find_by(id: customer_id)
+            customer = Customer.find_by(id: params[:id])
             customer.update!(customer_params)
             render json: user
         else

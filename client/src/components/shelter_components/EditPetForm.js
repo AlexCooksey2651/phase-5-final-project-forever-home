@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Form, Container, Button, Alert } from 'react-bootstrap'
 
 
-function EditPetForm({ pet, handleUpdatePet }) {
+function EditPetForm({ pet, handleUpdatePet, closeEditForm }) {
     const [name, setName] = useState(pet.name)
     const [image, setImage] = useState(pet.image)
     const [species, setSpecies] = useState(pet.species)
@@ -32,6 +32,7 @@ function EditPetForm({ pet, handleUpdatePet }) {
             .then(r => {
                 if (r.ok) {
                     r.json().then(pet => handleUpdatePet(pet))
+                    closeEditForm()
                 }
                 else {
                     r.json().then(data => setErrors(data.errors))
@@ -85,7 +86,7 @@ function EditPetForm({ pet, handleUpdatePet }) {
                 <Form.Select required aria-label="Default select example" value={adoptionStatus} onChange={e => setAdoptionStatus(e.target.value)}>
                     <option value="" disabled selected>Adoption Status</option>
                     <option value="Available">Available</option>
-                    <option value="Application Pending">Application(s) Pending</option>
+                    <option value="Application(s) Pending">Application(s) Pending</option>
                     <option value="Adopted">Adopted</option>
                 </Form.Select>
             </Form.Group>

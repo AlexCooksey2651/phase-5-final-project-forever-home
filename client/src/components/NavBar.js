@@ -9,7 +9,7 @@ function NavBar({ handleLogout, user }) {
         return (
             <Navbar bg="dark" variant="dark">
                 <Container>
-                    <Navbar.Brand href="/"><em>Forever Home</em></Navbar.Brand>
+                    <Navbar.Brand href="/home"><em>Forever Home</em></Navbar.Brand>
                     <Nav align="end" className="ml-auto">
                         <Nav.Link href="search-pets">Search</Nav.Link>
                         <Nav.Link href="/bookmarked-pets">Bookmarked Pets</Nav.Link>
@@ -24,7 +24,7 @@ function NavBar({ handleLogout, user }) {
         return (
             <Navbar bg="dark" variant="dark">
                 <Container>
-                    <Navbar.Brand href="/"><em>Forever Home</em></Navbar.Brand>
+                    <Navbar.Brand href="/home"><em>Forever Home</em></Navbar.Brand>
                     <Nav align="end" className="ml-auto">
                         <Nav.Link href="manage-pets">Pets</Nav.Link>
                         <Nav.Link href="/view-applications">Applications</Nav.Link>

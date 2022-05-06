@@ -115,7 +115,7 @@ function MyApplications({ user }) {
                     <Accordion.Body>{pendingApplicationCards()}</Accordion.Body>
                 </Accordion.Item>
                 <br />
-                <Accordion.Item eventKey={2} className="pending-applications">
+                <Accordion.Item eventKey={2} className="denied-applications">
                     <Accordion.Header><h2>Denied Applications</h2></Accordion.Header>
                     <Accordion.Body>{deniedApplicationCards()}</Accordion.Body>
                 </Accordion.Item>

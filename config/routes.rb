@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   resources :users, only: [:index, :destroy]
   resources :pets, only: [:update, :destroy, :create, :index, :show]
   resources :pet_applications, only: [:create, :destroy, :update]
-  resources :bookmarks, exclude: [:show, :update, :destroy]
+  resources :bookmarks, exclude: [:show, :update]
   resources :shelters, only: [:index]
   resources :customers, only: [:index]
   post "/signup-customer", to: 'customers#create'

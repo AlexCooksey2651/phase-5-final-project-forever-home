@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { Container, Card, Button, Accordion, Stack, Alert, Modal } from 'react-bootstrap'
 import ContactForm from '../ContactForm'
 
@@ -11,9 +12,10 @@ const formatPhoneNum = (phoneNumber) => {
     return newNumStr
 }
 
-function ShelterApplicationCard({ application, handleUpdateApplication, user }) {
+function ShelterApplicationCard({ application, handleUpdateApplication, user, active }) {
     const [showContact, setShowContact] = useState(false)
     const [errors, setErrors] = useState([])
+    const navigate = useNavigate()
     const showContactForm = () => setShowContact(true)
     const closeContactForm = () => setShowContact(false)
 
@@ -33,6 +35,7 @@ function ShelterApplicationCard({ application, handleUpdateApplication, user }) 
         }).then((r) => {
             if (r.ok) {
                 r.json().then(application => handleUpdateApplication(application))
+                navigate('/previous-adoptions')
             } else {
                 r.json().then(data => setErrors(data.errors))
             }
@@ -40,7 +43,7 @@ function ShelterApplicationCard({ application, handleUpdateApplication, user }) 
     }
 
     function denyApplication() {
-        fetch(`/applications/${application.id}`, {
+        fetch(`/pet_applications/${application.id}`, {
             method: "PATCH",
             headers: {
                 "Content-Type": "application/json"
@@ -105,10 +108,11 @@ function ShelterApplicationCard({ application, handleUpdateApplication, user }) 
                                 <br />
                                 <em>{application.customer_text}</em>
                             </Card.Text>
+                            {active ? 
                             <Stack gap={2} className="col-md-5 mx-auto">
                                 <Button variant="outline-dark" onClick={() => adoptPet()}>Approve Application</Button>
                                 <Button variant="outline-dark" onClick={() => denyApplication()}>Deny Application</Button>
-                            </Stack>
+                            </Stack> : null}
                             <br />
                             {errors ? <Container>
                                 {errors.map(error => {

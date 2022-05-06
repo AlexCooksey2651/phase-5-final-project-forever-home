@@ -46,7 +46,7 @@ function ManagePets({ user }) {
     }
 
     function handleUpdatePet(updatedPet) {
-        const updatedPets = pets.filter(pet => {
+        const updatedPets = pets.map(pet => {
             if (pet.id === updatedPet.id) {
                 return updatedPet
             } else {
@@ -63,7 +63,7 @@ function ManagePets({ user }) {
 
     const petCards = () => {
         if (searchedPets().length > 0) {
-            return searchedPets().map(pet => <PetCard key={pet.id} pet={pet} user={user} handleAddPet={handleAddPet} handleUpdatePet={handleUpdatePet} handleDeletePet={handleDeletePet}/>)
+            return searchedPets().map(pet => <PetCard key={pet.id} pet={pet} user={user} handleUpdatePet={handleUpdatePet} handleDeletePet={handleDeletePet}/>)
         } else {
             return (
                 <>
@@ -89,7 +89,7 @@ function ManagePets({ user }) {
                         <Modal.Title>Add a New Pet to your Shelter</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <NewPetForm />
+                        <NewPetForm handleAddPet={handleAddPet}/>
                     </Modal.Body>
                 </Modal>
             </Container>

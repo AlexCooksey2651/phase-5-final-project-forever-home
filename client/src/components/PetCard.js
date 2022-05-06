@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
 import { Container, Card, Button, Stack, Modal, Accordion, Alert, ModalBody } from 'react-bootstrap'
+import { useNavigate } from 'react-router-dom'
 import EditPetForm from './shelter_components/EditPetForm'
 import AdoptionAppForm from './customer_components/AdoptionAppForm'
 import ContactForm from './ContactForm'
+import { Navigate } from 'react-router-dom'
 
 const formatPhoneNum = (phoneNumber) => {
     const arrayedNum = phoneNumber.split('')
@@ -16,6 +18,7 @@ const formatPhoneNum = (phoneNumber) => {
 function PetCard({ pet, user, handleUpdatePet, handleDeletePet }) {
     const userType = user.profile.type
     const [errors, setErrors] = useState([])
+    const navigate = useNavigate()
 
     const [showEdit, setShowEdit] = useState(false)
     const showEditForm = () => setShowEdit(true)
@@ -29,7 +32,14 @@ function PetCard({ pet, user, handleUpdatePet, handleDeletePet }) {
     const showContactForm = () => setShowContact(true)
     const closeContactForm = () => setShowContact(false)
 
-    const customerId = user.profile.customer.id
+
+    const customerId = () => {
+        if (userType === "customer") {
+            return user.profile.customer.id
+        } else {
+            return null
+        }
+    }
 
     // const [bookmarked, setBookmarked] = useState(false)
     // const [bookmarkInfo, setBookmarkInfo] = useState(null)
@@ -49,13 +59,14 @@ function PetCard({ pet, user, handleUpdatePet, handleDeletePet }) {
             },
             body: JSON.stringify({
                 pet_id: pet.id,
-                customer_id: customerId
+                customer_id: customerId()
             })
         })
             .then(r => {
                 if (r.ok) {
                     r.json().then(bookmark => {
                         console.log(bookmark)
+                        isBookmarked()
                     })
                 } else {
                     r.json().then(errors => setErrors(errors))
@@ -64,9 +75,10 @@ function PetCard({ pet, user, handleUpdatePet, handleDeletePet }) {
     }
 
     function deleteBookmark() {
-        fetch(`/bookmarks/${customerId}/${pet.id}`, {
+        fetch(`/bookmarks/${customerId()}/${pet.id}`, {
             method: "DELETE",
         })
+        isBookmarked()
     }
 
     const isBookmarked = () => {
@@ -129,7 +141,7 @@ function PetCard({ pet, user, handleUpdatePet, handleDeletePet }) {
                                                 <Modal.Title>Pet Information:</Modal.Title>
                                             </Modal.Header>
                                             <Modal.Body>
-                                                <EditPetForm pet={pet} handleUpdatePet={handleUpdatePet} />
+                                                <EditPetForm pet={pet} handleUpdatePet={handleUpdatePet} closeEditForm={closeEditForm}/>
                                             </Modal.Body>
                                         </Modal>
                                     </Container>

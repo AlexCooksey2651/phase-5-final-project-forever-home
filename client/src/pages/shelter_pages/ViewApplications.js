@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import ShelterApplicationCard from "../../components/shelter_components/ShelterApplicationCard"
-import { Container } from 'react-bootstrap'
+import { Container, Accordion } from 'react-bootstrap'
 
 // const exampleApplications = [{
 //     id: 1,
@@ -57,7 +57,7 @@ function ViewApplications({ user }) {
     }, [])
 
     function handleUpdateApplication(updatedApplication) {
-        const updatedApplications = shelterApplications.filter(application => {
+        const updatedApplications = shelterApplications.map(application => {
             if (application.id === updatedApplication.id) {
                 return updatedApplication
             } else {
@@ -67,9 +67,13 @@ function ViewApplications({ user }) {
         setShelterApplications(updatedApplications)
     }
 
-    const shelterApplicationCards = () => {
-        if (shelterApplications.length > 0) {
-            return shelterApplications.map(application => <ShelterApplicationCard key={application.id} application={application} user={user} handleUpdateApplication={handleUpdateApplication} />)
+    const pendingApplicationCards = () => {
+        const pendingApplications = shelterApplications.filter(application => application.status === "Pending")
+        const cards = pendingApplications.map(application => {
+            return <ShelterApplicationCard key={application.id} application={application} user={user} active={true} handleUpdateApplication={handleUpdateApplication} />
+        })
+        if (cards.length > 0) {
+            return cards
         } else {
             return (
                 <>
@@ -80,12 +84,43 @@ function ViewApplications({ user }) {
         }
     }
 
+    const deniedApplicationCards = () => {
+        const deniedApplications = shelterApplications.filter(application => application.status === "We're sorry, but your application has been denied")
+        const cards = deniedApplications.map(application => <ShelterApplicationCard key={application.id} application={application} user={user} active={false} handleUpdateApplication={handleUpdateApplication} />)
+        if (cards.length > 0) {
+            return cards
+        } else {
+            return <h2>No applications have been denied</h2>
+        }
+    }
+
+    // const shelterApplicationCards = () => {
+    //     if (shelterApplications.length > 0) {
+    //         return shelterApplications.map(application => <ShelterApplicationCard key={application.id} application={application} user={user} active={true} handleUpdateApplication={handleUpdateApplication} />)
+    //     } else {
+    //         return (
+    //             <>
+    //                 <h2><em>There are no pending applications at the moment!</em></h2>
+    //                 <p>Make sure all of your animals' information is up to date, or consider reaching out to previous applicants!</p>
+    //             </>
+    //         )
+    //     }
+    // }
+
     return (
         <Container id="active-applications">
             <br/>
-            <h2>Active Applications</h2>
-            <br />
-            {shelterApplicationCards()}
+            <Accordion>
+                <Accordion.Item eventKey={0} className="pending-applications">
+                    <Accordion.Header><h2>Pending Applications</h2></Accordion.Header>
+                    <Accordion.Body>{pendingApplicationCards()}</Accordion.Body>
+                </Accordion.Item>
+                <br />
+                <Accordion.Item eventKey={1} className="pending-applications">
+                    <Accordion.Header><h2>Denied Applications</h2></Accordion.Header>
+                    <Accordion.Body>{deniedApplicationCards()}</Accordion.Body>
+                </Accordion.Item>
+            </Accordion>
         </Container>
     )
 }

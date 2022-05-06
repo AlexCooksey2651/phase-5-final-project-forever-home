@@ -9,8 +9,10 @@ rescue_from ActiveRecord::RecordInvalid, with: :invalid_record
             applications = []
             pets.each do |pet|
                 apps = pet.pet_applications
-                matching = apps.where(status: "Pending")
-                applications << matching
+                matching = apps.where.not(status: "Approved").order(:created_at)
+                matching.each do |app|
+                    applications << app
+                end
             end
             render json: applications, include: ['pet', 'customer', 'customer.user'], status: :ok
         else
@@ -32,7 +34,7 @@ rescue_from ActiveRecord::RecordInvalid, with: :invalid_record
     def customer_index
         user = User.find_by(id: session[:user_id])
         if user
-            customer_applications = user.profile.pet_applications
+            customer_applications = user.profile.pet_applications.order(:created_at)
             render json: customer_applications, include: ['pet', 'pet.shelter', 'pet.shelter.user'], status: :ok
         else
             render json: {error: "User not found"}, status: :not_found
@@ -48,6 +50,10 @@ rescue_from ActiveRecord::RecordInvalid, with: :invalid_record
             # if pet.status == "Available"
             #     pet.update!(adoption_status: "Application(s) pending")
             # end
+            pet = Pet.find_by(id: params[:pet_id])
+            if pet.adoption_status == "Available"
+                pet.update!(adoption_status: "Application(s) Pending")
+            end
             render json: new_application, status: :created
         else
             render json: {error: "User not found"}, status: :not_found
@@ -60,6 +66,14 @@ rescue_from ActiveRecord::RecordInvalid, with: :invalid_record
             # NOTE: if pet.applications.length now = 0, adoption_status should update to "Available"
             # pet = Pet.find_by(id: application.pet.id)
             application.destroy
+            pet = Pet.find_by(id: application.pet.id)
+            petApps = pet.pet_applications
+            active = petApps.where(status: "Pending")
+            if active.length > 0
+                pet.update(adoption_status: "Application(s) Pending")
+            else
+                pet.update!(adoption_status: "Available")
+            end
             # if pet.applications.length = 0
             #     pet.update!(adoption_status: "Available")
             # end
@@ -70,11 +84,19 @@ rescue_from ActiveRecord::RecordInvalid, with: :invalid_record
         end
     end
 
-    def update
+    def update 
         application = PetApplication.find_by(id: params[:id])
         if application
             # NOTE: if pet.applications doesn't have any that aren't 
             application.update!(application_params)
+            pet = Pet.find_by(id: application.pet.id)
+            petApps = pet.pet_applications
+            active = petApps.where(status: "Pending")
+            if active.length > 0
+                pet.update(adoption_status: "Application(s) Pending")
+            else
+                pet.update!(adoption_status: "Available")
+            end
             render json: application, status: :ok
         else
             render json: {error: "Application not found"}, status: :not_found

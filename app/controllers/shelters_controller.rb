@@ -10,8 +10,25 @@ rescue_from ActiveRecord::RecordInvalid, with: :invalid_record
     def create
         new_shelter = Shelter.create!(shelter_params)
         session[:user_id] = new_shelter.user.id
-        render json: new_shelter, status: :created
+        user = User.find_by(id: session[:user_id])
+        if user
+            render json: user, status: :created
+        else
+            render json: {error: "User not found"}
+        end
     end
+
+    # TEST CUSTOMER VERSION TO SEE IF WORKS BETTER
+    # def create
+    #     new_shelter = Shelter.create!(shelter_params)
+    #     session[:user_id] = new_shelter.user.id
+    #     user = User.find_by(id: session[:user_id])
+    #     if user
+    #         render json: user, status: :created
+    #     else
+    #         render json: {error: "User not found"}
+    #     end
+    # end
 
     def update
         user = User.find_by(id: session[:user_id])

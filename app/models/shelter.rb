@@ -7,8 +7,9 @@ class Shelter < ApplicationRecord
     validates :bio, presence: true, length: { maximum: 200 }
 
     accepts_nested_attributes_for :user
+end
 
-    # def set_adoption_status
+ # def set_adoption_status
     #     if self.applications.any? { |application| application.status == "Adopted" }
     #         self.adoption_status = "Adopted"
     #     elsif self.applications.any? { |application| application.status == "Application Pending" }
@@ -17,4 +18,3 @@ class Shelter < ApplicationRecord
     #         self.adoption_status = "Available"
     #     end
     # end
-end

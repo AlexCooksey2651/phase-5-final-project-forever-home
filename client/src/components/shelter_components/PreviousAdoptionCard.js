@@ -37,7 +37,7 @@ function PreviousAdoptionCard({ pet, user }) {
                     <div className="col-md-8">
                         <Card.Body>
                             <Card.Title>{pet.name}</Card.Title>
-                            <Card.Text>Adoption Date: {cleanupDate(pet.adoptionDate)}</Card.Text>
+                            <Card.Text>Adoption Date: {cleanupDate(pet.adoption_date)}</Card.Text>
                             <Card.Text>
                                 <Accordion>
                                     <Accordion.Item eventKey="0">

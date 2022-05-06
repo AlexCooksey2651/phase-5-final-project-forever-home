@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { Form, Container, Button, Alert } from 'react-bootstrap'
 
 function NewPetForm({ handleAddPet }) {
@@ -9,6 +10,7 @@ function NewPetForm({ handleAddPet }) {
     const [age, setAge] = useState(0)
     const [ageUnit, setAgeUnit] = useState("")
     const [errors, setErrors] = useState([])
+    const navigate = useNavigate()
 
     function handleSubmit(e) {
         e.preventDefault()
@@ -37,6 +39,7 @@ function NewPetForm({ handleAddPet }) {
                     setBio("")
                     setAge("")
                     setAgeUnit("")
+                    navigate('/manage-pets')
                 } else {
                     r.json().then(data => setErrors(data.errors));
                 }

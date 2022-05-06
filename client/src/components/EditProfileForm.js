@@ -53,10 +53,14 @@ function EditProfileForm({ user }) {
                 first_name: firstName,
                 last_name: lastName,
                 interested_in: interestedIn,
-                email,
-                city,
-                state,
-                phone_number: phoneNumber
+                user_attributes: {
+                    email,
+                    password,
+                    password_confirmation: 
+                    city,
+                    state,
+                    phone_number: phoneNumber
+                }
             })
         })
             .then((r) => {

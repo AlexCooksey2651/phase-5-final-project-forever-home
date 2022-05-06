@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext } from "react"
 import { UserContext } from "./context/user";
-import { Routes, Route } from "react-router-dom"
+import { Routes, Route, Navigate } from "react-router-dom"
 import './App.css';
 import NavBar from './components/NavBar';
 import Header from './components/Header';
@@ -33,7 +33,6 @@ function App() {
       .then(r => {
         if (r.ok) {
           setUser(null)
-          // console.log('hello')
         }
       })
   }
@@ -45,7 +44,7 @@ function App() {
       <Header />
       <NavBar handleLogout={handleLogout} user={user}/>
       <Routes>
-        <Route path="/" element={<Home user={user}/>} />
+        <Route path="/home" element={<Home user={user}/>} />
         <Route path="/manage-pets" element={<ManagePets user={user}/>} />
         <Route path="/search-pets" element={<PetSearch user={user}/>} />
         <Route path="/view-applications" element={<ViewApplications user={user}/>} />
