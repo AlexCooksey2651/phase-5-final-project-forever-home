@@ -70,15 +70,6 @@ function CustomerSignupForm({ onLogin }) {
                     <Form.Control required minlength="2" maxlength="20" type="text" placeholder="Last Name" value={lastName} onChange={e => setLastName(e.target.value)} />
                 </Form.Group>
 
-                {/* <Form.Group>
-                    <Form.Label><b>First Name:</b></Form.Label>
-                    <Form.Control required minlength="2" maxlength="20" type="text" placeholder="Enter First Name" value={firstName} onChange={e => setFirstName(e.target.value)} />
-                </Form.Group>
-                <Form.Group>
-                    <Form.Label><b>Last Name:</b></Form.Label>
-                    <Form.Control required minlength="2" maxlength="20" type="text" placeholder="Enter Last Name" value={lastName} onChange={e => setLastName(e.target.value)} />
-                </Form.Group> */}
-
                 <Form.Group>
                     <Form.Label><b>Location:</b></Form.Label>
                     <Form.Control required minlength="2" maxlength="20" type="text" placeholder="Enter City" value={city} onChange={e => setCity(e.target.value)} />
@@ -111,11 +102,6 @@ function CustomerSignupForm({ onLogin }) {
                     <Form.Control required minlength="6" maxlength="20" type="password" placeholder="Confirm password" value={passwordConfirmation} onChange={e => setPasswordConfirmation(e.target.value)} />
                 </Form.Group>
 
-                {/* <Form.Group className="mb-3" controlId="formBasicPasswordConfirmation">
-                    <Form.Label><b>Confirm Password:</b></Form.Label>
-                    <Form.Control required minlength="6" maxlength="20" type="password" placeholder="Confirm password" value={passwordConfirmation} onChange={e => setPasswordConfirmation(e.target.value)} />
-                </Form.Group> */}
-
                 <Stack gap={2} className="col-md-5 mx-auto" >
                     <Button variant="outline-dark" type="submit">
                         Submit
@@ -138,10 +124,3 @@ function CustomerSignupForm({ onLogin }) {
 }
 
 export default CustomerSignupForm
-
-                // email,
-                // password,
-                // password_confirmation: passwordConfirmation,
-                // city,
-                // state,
-                // phone_number: phoneNumber

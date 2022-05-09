@@ -8,13 +8,3 @@ class Shelter < ApplicationRecord
 
     accepts_nested_attributes_for :user
 end
-
- # def set_adoption_status
-    #     if self.applications.any? { |application| application.status == "Adopted" }
-    #         self.adoption_status = "Adopted"
-    #     elsif self.applications.any? { |application| application.status == "Application Pending" }
-    #         self.adoption_status = "Application(s) Pending"
-    #     else
-    #         self.adoption_status = "Available"
-    #     end
-    # end

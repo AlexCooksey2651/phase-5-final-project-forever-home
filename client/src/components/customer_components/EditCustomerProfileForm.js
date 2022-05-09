@@ -59,6 +59,7 @@ function EditCustomerProfileForm({ user }) {
                 }
             })
     }
+    
     return (
         <Form className="edit-profile-information" onSubmit={submitPatchCustomer}>
             <Form.Group className="mb-3" controlId="formBasicInput">

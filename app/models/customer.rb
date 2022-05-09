@@ -15,4 +15,3 @@ class Customer < ApplicationRecord
 
 end
 
-# , inclusion: { in: ANIMALS }

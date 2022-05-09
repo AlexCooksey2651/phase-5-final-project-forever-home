@@ -20,17 +20,6 @@ rescue_from ActiveRecord::RecordInvalid, with: :invalid_record
         end
     end
 
-    # def matching_application
-    #     pet = Pet.find_by(id: params[:pet_id])
-    #     if pet
-    #         applications = pet.pet_applications
-    #         approved = applications.find{ |app| app.status == "Approved"}
-    #         render json: approved, include: ['customer', 'customer.user'], status: :ok
-    #     else 
-    #         render json: {error: "Customer not found"}, status: :not_found
-    #     end
-    # end
-
     def customer_index
         user = User.find_by(id: session[:user_id])
         if user

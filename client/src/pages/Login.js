@@ -4,7 +4,6 @@ import LoginForm from "../components/LoginForm"
 import SignupForm from "../components/SignupForm"
 import Header from '../components/Header'
 
-
 function Login({ onLogin }) {
     const [loginPage, setLoginPage] = useState(true)
 

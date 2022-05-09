@@ -16,6 +16,13 @@ class Pet < ApplicationRecord
     validates :shelter_id, presence: true
     # validates :adoption_status, >>> want it "Available" on instantiation
     # validates :adoption_date, >>> want it NIL on instantiation
-    
-    
+    def has_bookmark
+        if self.bookmarks.length > 0
+            puts "true"
+        else
+            puts "false"
+        end
+    end
 end
+
+# custom method for determining bookmark button status? Here or in user? 

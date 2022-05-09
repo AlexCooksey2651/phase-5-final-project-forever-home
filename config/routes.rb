@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
   
-  resources :users, only: [:index, :destroy]
-  resources :pets, only: [:update, :destroy, :create, :index, :show]
+  resources :users, only: [:index]
+  resources :pets, exclude: [:index]
   resources :pet_applications, only: [:create, :destroy, :update]
-  resources :bookmarks, exclude: [:show, :update]
+  resources :bookmarks, exclude: [:show, :update, :destroy]
   resources :shelters, only: [:index]
   resources :customers, only: [:index]
   post "/signup-customer", to: 'customers#create'
@@ -16,8 +16,7 @@ Rails.application.routes.draw do
   delete '/logout', to: 'sessions#destroy'
   get '/me', to: 'users#show'
   get '/shelter-pets', to: 'pets#shelter_index'
-  get '/adopted-pets', to: 'pets#adopted_pets_index'
-  # get '/applications/:pet_id', to: 'pet_applications#matching_application' 
+  get '/adopted-pets', to: 'pets#adopted_pets_index' 
   get '/customer-pets', to: 'pets#customer_index'
   get '/shelter-applications', to: 'pet_applications#shelter_index'
   get '/customer-applications', to: 'pet_applications#customer_index'
@@ -27,3 +26,5 @@ Rails.application.routes.draw do
   # Leave this here to help deploy your app later!
   get "*path", to: "fallback#index", constraints: ->(req) { !req.xhr? && req.format.html? }
 end
+
+# , only: [:update, :destroy, :create, :index, :show]

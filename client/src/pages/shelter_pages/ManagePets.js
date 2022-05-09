@@ -4,17 +4,6 @@ import { Container, Modal, Button, Form } from 'react-bootstrap'
 import NewPetForm from '../../components/shelter_components/NewPetForm'
 import PetCard from '../../components/PetCard'
 
-// const pets = [{
-//     id: 1,
-//     name: "Sparky",
-//     image: "https://post.healthline.com/wp-content/uploads/2020/08/3180-Pug_green_grass-732x549-thumbnail-732x549.jpg",
-//     bio: "Sparky is a 2-year old Pug. He weighs 19lbs. He loves cuddles and sleeps a lot, but is feisty if you take him on walks. He'll make you very happy!",
-//     age: 2,
-//     ageUnit: "years",
-//     species: "Dog",
-//     status: "Available"
-// }]
-
 function ManagePets({ user }) {
     // const { user } = useContext(UserContext)
     const [showModal, setShowModal] = useState(false)

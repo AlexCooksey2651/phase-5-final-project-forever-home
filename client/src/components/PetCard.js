@@ -1,10 +1,10 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Container, Card, Button, Stack, Modal, Accordion, Alert, ModalBody } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
 import EditPetForm from './shelter_components/EditPetForm'
 import AdoptionAppForm from './customer_components/AdoptionAppForm'
 import ContactForm from './ContactForm'
-import { Navigate } from 'react-router-dom'
+
 
 const formatPhoneNum = (phoneNumber) => {
     const arrayedNum = phoneNumber.split('')
@@ -32,6 +32,21 @@ function PetCard({ pet, user, handleUpdatePet, handleDeletePet }) {
     const showContactForm = () => setShowContact(true)
     const closeContactForm = () => setShowContact(false)
 
+    const [bookmarked, setBookmarked] = useState(false)
+
+    useEffect(() => {
+        if (userType === "customer" && user.profile.customer.bookmarks.length > 0) {
+            const bookmarks = user.profile.customer.bookmarks
+            const found = bookmarks.find(bookmark => bookmark.pet_id === pet.id)
+            if (found) {
+                setBookmarked(true)
+            } else {
+                setBookmarked(false)
+            }
+        } else {
+            console.log("hello")
+        }
+    }, [])
 
     const customerId = () => {
         if (userType === "customer") {
@@ -40,9 +55,6 @@ function PetCard({ pet, user, handleUpdatePet, handleDeletePet }) {
             return null
         }
     }
-
-    // const [bookmarked, setBookmarked] = useState(false)
-    // const [bookmarkInfo, setBookmarkInfo] = useState(null)
 
     function removeListing() {
         fetch(`/pets/${pet.id}`, {
@@ -66,7 +78,7 @@ function PetCard({ pet, user, handleUpdatePet, handleDeletePet }) {
                 if (r.ok) {
                     r.json().then(bookmark => {
                         console.log(bookmark)
-                        isBookmarked()
+                        setBookmarked(true)
                     })
                 } else {
                     r.json().then(errors => setErrors(errors))
@@ -78,22 +90,22 @@ function PetCard({ pet, user, handleUpdatePet, handleDeletePet }) {
         fetch(`/bookmarks/${customerId()}/${pet.id}`, {
             method: "DELETE",
         })
-        isBookmarked()
+        setBookmarked(false)
     }
 
-    const isBookmarked = () => {
-        if (userType === "customer" && user.profile.customer.bookmarks.length > 0) {
-            const bookmarks = user.profile.customer.bookmarks
-            const found = bookmarks.find(bookmark => bookmark.pet_id === pet.id)
-            if (found) {
-                return true
-            } else {
-                return false
-            }
-        } else {
-            console.log("hello")
-        }
-    }
+    // const isBookmarked = () => {
+    //     if (userType === "customer" && user.profile.customer.bookmarks.length > 0) {
+    //         const bookmarks = user.profile.customer.bookmarks
+    //         const found = bookmarks.find(bookmark => bookmark.pet_id === pet.id)
+    //         if (found) {
+    //             return true
+    //         } else {
+    //             return false
+    //         }
+    //     } else {
+    //         console.log("hello")
+    //     }
+    // }
 
     const hasApplications = () => {
         if (userType === "customer" && user.profile.customer.pet_applications.length > 0) {
@@ -108,7 +120,6 @@ function PetCard({ pet, user, handleUpdatePet, handleDeletePet }) {
             console.log('hello')
         }
     }
-    // isBookmarked()
 
     if (userType === "shelter") {
         return (
@@ -214,16 +225,13 @@ function PetCard({ pet, user, handleUpdatePet, handleDeletePet }) {
                                 <Card.Text>Adoption Status: {pet.adoption_status}</Card.Text>
                                 <Stack gap={2} className="col-md-5 mx-auto">
                                     <Container>
-                                        {isBookmarked() ? 
+                                        {bookmarked ? 
                                             <Button variant="dark" onClick={deleteBookmark}>
                                                 Bookmarked
                                             </Button> : 
                                             <Button variant="outline-dark" onClick={postBookmark}>
                                                 Bookmark
                                             </Button>}
-                                        {/* <Button variant={isBookmarked() ? "dark" : "outline-dark"} onClick={isBookmarked() ? (() => deleteBookmark()) : (() => postBookmark())}>
-                                            {isBookmarked() ? "Bookmarked" : "Bookmark"}
-                                        </Button> */}
                                     </Container>
                                     
                                     <Container>

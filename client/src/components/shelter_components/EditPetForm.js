@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { Form, Container, Button, Alert } from 'react-bootstrap'
 
-
 function EditPetForm({ pet, handleUpdatePet, closeEditForm }) {
     const [name, setName] = useState(pet.name)
     const [image, setImage] = useState(pet.image)

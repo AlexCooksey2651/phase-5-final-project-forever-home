@@ -5,4 +5,3 @@ class Bookmark < ApplicationRecord
     validates :pet_id, presence: true, uniqueness: { scope: :customer_id }
     validates :customer_id, presence: true
 end
-# , uniqueness: { scope: :pet_id }

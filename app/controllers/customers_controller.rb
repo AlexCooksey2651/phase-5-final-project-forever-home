@@ -38,9 +38,6 @@ rescue_from ActiveRecord::RecordInvalid, with: :invalid_record
         else
             render json: {error: "User not found"}, status: :not_found
         end
-        # customer = Customer.find_by(id: params[:id])
-        # customer.destroy
-        # head :no_content
     end
 
     private 
@@ -52,9 +49,5 @@ rescue_from ActiveRecord::RecordInvalid, with: :invalid_record
     def customer_params
         params.permit(:first_name, :last_name, :interested_in => [], user_attributes: [:email, :password, :password_confirmation, :phone_number, :city, :state])
     end
-
-    # def user_params
-    #    params.permit(:email, :password, :password_confirmation, :phone_number, :city, :state)
-    # end
-
+    
 end
