@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Form, Container, Button, Alert } from 'react-bootstrap'
 
-function NewPetForm({ handleAddPet }) {
+function NewPetForm({ handleAddPet, handleClose }) {
     const [name, setName] = useState("")
     const [image, setImage] = useState("")
     const [species, setSpecies] = useState("")
@@ -40,6 +40,7 @@ function NewPetForm({ handleAddPet }) {
                     setAge("")
                     setAgeUnit("")
                     navigate('/manage-pets')
+                    handleClose()
                 } else {
                     r.json().then(data => setErrors(data.errors));
                 }

@@ -78,7 +78,7 @@ function ManagePets({ user }) {
                         <Modal.Title>Add a New Pet to your Shelter</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <NewPetForm handleAddPet={handleAddPet}/>
+                        <NewPetForm handleAddPet={handleAddPet} handleClose={handleClose}/>
                     </Modal.Body>
                 </Modal>
             </Container>

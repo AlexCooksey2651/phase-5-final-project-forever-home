@@ -47,7 +47,7 @@ rescue_from ActiveRecord::RecordInvalid, with: :invalid_record
     end
 
     def customer_params
-        params.permit(:first_name, :last_name, :interested_in => [], user_attributes: [:email, :password, :password_confirmation, :phone_number, :city, :state])
+        params.permit(:first_name, :last_name, :interested_in => [], user_attributes: [:id, :email, :password, :password_confirmation, :phone_number, :city, :state])
     end
-    
+
 end

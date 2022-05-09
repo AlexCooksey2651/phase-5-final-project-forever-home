@@ -8,8 +8,8 @@ const stateOptions = stateAbbreviations.map(state => {
 })
 const allPets = ["Dog", "Cat", "Other Mammal", "Bird", "Reptile/Amphibian", "Fish"]
 
-function EditCustomerProfileForm({ user }) {
-    const [userInfo, setUserInfo] = useState(user)
+function EditCustomerProfileForm({ userInfo, setUserInfo, handleCloseEdit }) {
+    // const [userInfo, setUserInfo] = useState(user)
     const [errors, setErrors] = useState([])
 
     const [firstName, setFirstName] = useState(userInfo.profile.customer.first_name)
@@ -32,7 +32,7 @@ function EditCustomerProfileForm({ user }) {
 
     function submitPatchCustomer(e) {
         e.preventDefault()
-        fetch(`/customers/${user.profile.customer.id}`, {
+        fetch(`/customers/${userInfo.profile.customer.id}`, {
             method: "PATCH",
             headers: {
                 "Content-Type": "application/json"
@@ -42,6 +42,7 @@ function EditCustomerProfileForm({ user }) {
                 last_name: lastName,
                 interested_in: interestedIn,
                 user_attributes: {
+                    id: userInfo.id,
                     email,
                     password: newPassword,
                     password_confirmation: newPasswordConfirmation,
@@ -53,13 +54,16 @@ function EditCustomerProfileForm({ user }) {
         })
             .then((r) => {
                 if (r.ok) {
-                    r.json().then(user => setUserInfo(user))
+                    r.json().then(user => {
+                        setUserInfo(user)
+                        handleCloseEdit()
+                    })
                 } else {
                     r.json().then(data => setErrors(data.errors))
                 }
             })
     }
-    
+
     return (
         <Form className="edit-profile-information" onSubmit={submitPatchCustomer}>
             <Form.Group className="mb-3" controlId="formBasicInput">

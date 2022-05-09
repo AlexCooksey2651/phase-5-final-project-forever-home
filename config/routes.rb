@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   patch "/customers/:id", to: 'customers#update'
   delete "/customers/:id", to: 'customers#destroy'
   post '/signup-shelter', to: 'shelters#create'
-  patch "/shelters", to: "shelters#update"
+  patch "/shelters/:id", to: "shelters#update"
   delete "/shelters/:id", to: "shelters#destroy"
   post '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'

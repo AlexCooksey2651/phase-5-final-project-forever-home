@@ -7,8 +7,8 @@ const stateOptions = stateAbbreviations.map(state => {
     return <option key={state} value={state}>{state}</option>
 })
 
-function EditShelterProfileForm({ user }) {
-    const [userInfo, setUserInfo] = useState(user)
+function EditShelterProfileForm({ userInfo, setUserInfo, handleCloseEdit }) {
+    // const [userInfo, setUserInfo] = useState(user)
     const [errors, setErrors] = useState([])
     const [shelterName, setShelterName] = useState(userInfo.profile.shelter.name)
     const [city, setCity] = useState(userInfo.city)
@@ -21,7 +21,7 @@ function EditShelterProfileForm({ user }) {
 
     function submitPatchShelter(e) {
         e.preventDefault()
-        fetch(`/shelters/${user.profile.shelter.id}`, {
+        fetch(`/shelters/${userInfo.profile.shelter.id}`, {
             method: "PATCH",
             headers: {
                 "Content-Type": "application/json"
@@ -30,6 +30,7 @@ function EditShelterProfileForm({ user }) {
                 name: shelterName,
                 bio,
                 user_attributes: {
+                    id: userInfo.id,
                     email,
                     password: newPassword,
                     password_confirmation: newPasswordConfirmation,
@@ -41,7 +42,10 @@ function EditShelterProfileForm({ user }) {
         })
             .then((r) => {
                 if (r.ok) {
-                    r.json().then(user => setUserInfo(user))
+                    r.json().then(user => {
+                        setUserInfo(user)
+                        handleCloseEdit()
+                    })
                 } else {
                     r.json().then(data => setErrors(data.errors))
                 }

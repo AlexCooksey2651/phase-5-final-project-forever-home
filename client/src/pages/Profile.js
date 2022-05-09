@@ -7,6 +7,7 @@ import EditShelterProfileForm from '../components/shelter_components/EditShelter
 
 function Profile({ handleLogout, errors, user }) {
     // const { user } = useContext(UserContext)
+    const [userInfo, setUserInfo] = useState(user)
 
     const isCustomer = () => {
         if (user.profile.type === "customer") {
@@ -54,22 +55,22 @@ function Profile({ handleLogout, errors, user }) {
             {isCustomer() ?
                 <Container >
                     <ListGroup variant="flush">
-                        <ListGroup.Item>Name: {`${user.profile.customer.first_name} ${user.profile.customer.last_name}`}</ListGroup.Item>
-                        <ListGroup.Item>Location: {user.city}, {user.state}</ListGroup.Item>
-                        <ListGroup.Item>Phone: {formatPhoneNum(user.phone_number)}</ListGroup.Item>
-                        <ListGroup.Item>Email: {user.email}</ListGroup.Item>
+                        <ListGroup.Item>Name: {`${userInfo.profile.customer.first_name} ${userInfo.profile.customer.last_name}`}</ListGroup.Item>
+                        <ListGroup.Item>Location: {userInfo.city}, {userInfo.state}</ListGroup.Item>
+                        <ListGroup.Item>Phone: {formatPhoneNum(userInfo.phone_number)}</ListGroup.Item>
+                        <ListGroup.Item>Email: {userInfo.email}</ListGroup.Item>
                         {/* <ListGroup.Item type="password">Password: {shelter.user.password}</ListGroup.Item> */}
-                        <ListGroup.Item>Looking For: {user.profile.customer.interested_in.join(', ')}</ListGroup.Item>
+                        <ListGroup.Item>Looking For: {userInfo.profile.customer.interested_in.join(', ')}</ListGroup.Item>
                     </ListGroup>
                 </Container> :
                 <Container >
                     <ListGroup variant="flush">
-                        <ListGroup.Item>Name: {user.profile.shelter.name}</ListGroup.Item>
-                        <ListGroup.Item>Location: {user.city}, {user.state}</ListGroup.Item>
-                        <ListGroup.Item>Phone: {formatPhoneNum(user.phone_number)}</ListGroup.Item>
-                        <ListGroup.Item>Email Address: {user.email}</ListGroup.Item>
+                        <ListGroup.Item>Name: {userInfo.profile.shelter.name}</ListGroup.Item>
+                        <ListGroup.Item>Location: {userInfo.city}, {userInfo.state}</ListGroup.Item>
+                        <ListGroup.Item>Phone: {formatPhoneNum(userInfo.phone_number)}</ListGroup.Item>
+                        <ListGroup.Item>Email Address: {userInfo.email}</ListGroup.Item>
                         {/* <ListGroup.Item type="password">Password: {shelter.user.password}</ListGroup.Item> */}
-                        <ListGroup.Item>Bio: {user.profile.shelter.bio}</ListGroup.Item>
+                        <ListGroup.Item>Bio: {userInfo.profile.shelter.bio}</ListGroup.Item>
                     </ListGroup>
                 </Container>
             }
@@ -86,7 +87,7 @@ function Profile({ handleLogout, errors, user }) {
                             <Modal.Title>Edit Account Information:</Modal.Title>
                         </Modal.Header>
                         <Modal.Body>
-                            {isCustomer() ? <EditCustomerProfileForm user={user} /> : <EditShelterProfileForm user={user} />}
+                            {isCustomer() ? <EditCustomerProfileForm userInfo={userInfo} setUserInfo={setUserInfo} handleCloseEdit={handleCloseEdit}/> : <EditShelterProfileForm userInfo={userInfo} setUserInfo={setUserInfo} handleCloseEdit={handleCloseEdit}/>}
                         </Modal.Body>
                     </Modal>
                 </Container>
