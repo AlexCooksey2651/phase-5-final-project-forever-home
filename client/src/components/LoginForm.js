@@ -9,7 +9,8 @@ function LoginForm({ onLogin }) {
     const [errors, setErrors] = useState([]);
     const navigate = useNavigate()
     // const { user, setUser } = useContext(UserContext)
-    
+
+
 
     function handleSubmit(e) {
         e.preventDefault()
@@ -40,36 +41,37 @@ function LoginForm({ onLogin }) {
     return (
         <div id="login-form">
             <Container>
-            <Form  onSubmit={handleSubmit}>
-                <Form.Group className="mb-3" controlId="formBasicEmail">
-                    <Form.Label><b>Email Address:</b></Form.Label>
-                    <Form.Control required type="email" placeholder="Enter email" value={email} onChange={e => setEmail(e.target.value)} />
-                </Form.Group>
+                <Form onSubmit={handleSubmit}>
+                    <Form.Group className="mb-3" controlId="formBasicEmail">
+                        <Form.Label><b>Email Address:</b></Form.Label>
+                        <Form.Control required type="email" placeholder="Enter email" value={email} onChange={e => setEmail(e.target.value)} />
+                    </Form.Group>
 
-                <Form.Group className="mb-3" controlId="formBasicPassword">
-                    <Form.Label><b>Password:</b></Form.Label>
-                    <Form.Control required type="password" placeholder="Enter password" value={password} onChange={e => setPassword(e.target.value)} />
-                </Form.Group>
+                    <Form.Group className="mb-3" controlId="formBasicPassword">
+                        <Form.Label><b>Password:</b></Form.Label>
+                        <Form.Control required type="password" placeholder="Enter password" value={password} onChange={e => setPassword(e.target.value)} />
+                    </Form.Group>
 
-                <Stack gap={2} className="col-md-5 mx-auto">
-                    <Button variant="outline-dark" type="submit">
-                        Login
-                    </Button>
-                </Stack>
-                <br />
-                {errors ? <Form.Group>
-                    {errors.map(error => {
-                        return (
-                            <Alert key={error}>
-                                {error}
-                            </Alert>
-                        )
-                    })}
-                </Form.Group> : null}
-            </Form>
-        </Container>
+                    <Stack gap={2} className="col-md-5 mx-auto">
+                        <Button variant="outline-dark" type="submit">
+                            Login
+                        </Button>
+
+                    </Stack>
+                    <br />
+                    {errors ? <Form.Group>
+                        {errors.map(error => {
+                            return (
+                                <Alert key={error}>
+                                    {error}
+                                </Alert>
+                            )
+                        })}
+                    </Form.Group> : null}
+                </Form>
+            </Container>
         </div>
-        
+
     )
 }
 

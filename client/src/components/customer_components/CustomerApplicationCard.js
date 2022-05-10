@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Container, Card, Accordion, Stack, Button, Modal } from 'react-bootstrap'
+import ContactForm from '../ContactForm'
 
 const formatPhoneNum = (phoneNumber) => {
     const arrayedNum = phoneNumber.split('')
@@ -12,6 +13,8 @@ const formatPhoneNum = (phoneNumber) => {
 
 function CustomerApplicationCard({ withdraw, application, user, handleRemoveApplication }) {
     const [showModal, setShowModal] = useState(false)
+    const [showContact, setShowContact] = useState(false)
+    
     const pet = application.pet
     const shelter = application.pet.shelter
     const isApproved = () => {
@@ -24,6 +27,8 @@ function CustomerApplicationCard({ withdraw, application, user, handleRemoveAppl
 
     const handleShowModal = () => setShowModal(true)
     const handleCloseModal = () => setShowModal(false)
+    const showContactForm = () => setShowContact(true)
+    const closeContactForm = () => setShowContact(false)
 
     function deleteApplication() {
         fetch(`/pet_applications/${application.id}`, {
@@ -63,7 +68,20 @@ function CustomerApplicationCard({ withdraw, application, user, handleRemoveAppl
                                         <Accordion.Body>
                                             <p>Email: {shelter.user.email}</p>
                                             <p>Phone Number: {formatPhoneNum(shelter.user.phone_number)}</p>
-                                            <Button variant="outline-dark">Contact Shelter</Button>
+                                            {/* <Button variant="outline-dark">Contact Shelter</Button> */}
+                                            <Container>
+                                                    <Button variant="outline-dark" onClick={showContactForm}>
+                                                        Contact Shelter
+                                                    </Button>
+                                                    <Modal show={showContact} onHide={closeContactForm} animation={false}>
+                                                        <Modal.Header closeButton>
+                                                            <Modal.Title>Contact Shelter</Modal.Title>
+                                                        </Modal.Header>
+                                                        <Modal.Body>
+                                                            <ContactForm sender={user} recipient={pet.shelter} petName={pet.name}/>
+                                                        </Modal.Body>
+                                                    </Modal>
+                                                </Container>
                                         </Accordion.Body>
                                     </Accordion.Item>
                                 </Accordion>

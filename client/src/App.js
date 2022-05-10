@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext } from "react"
 import { UserContext } from "./context/user";
-import { Routes, Route, Navigate } from "react-router-dom"
+import { Routes, Route } from "react-router-dom"
 import './App.css';
 import NavBar from './components/NavBar';
 import Header from './components/Header';
@@ -13,6 +13,7 @@ import PreviousAdoptions from './pages/shelter_pages/PreviousAdoptions';
 import BookmarkedPets from "./pages/customer_pages/BookmarkedPets"
 import Profile from './pages/Profile';
 import Login from './pages/Login';
+import MessageContainer from './pages/MessageContainer'
 
 function App() {
   // const { user, setUser } = useContext(UserContext);
@@ -52,9 +53,9 @@ function App() {
         <Route path="/bookmarked-pets" element={<BookmarkedPets user={user}/>} />
         <Route path="/previous-adoptions" element={<PreviousAdoptions user={user}/>} />
         <Route path="/profile" element={<Profile handleLogout={handleLogout} user={user}/>} />
+        <Route path="/messages" element={<MessageContainer user={user}/>} />
         <Route path="/login" element={<Login />} />
       </Routes>
-
     </div>
   );
 }

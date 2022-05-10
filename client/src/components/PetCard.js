@@ -208,7 +208,7 @@ function PetCard({ pet, user, handleUpdatePet, handleDeletePet }) {
                                                             <Modal.Title>Contact Shelter</Modal.Title>
                                                         </Modal.Header>
                                                         <Modal.Body>
-                                                            <ContactForm sender={user} recipient={pet.shelter} />
+                                                            <ContactForm sender={user} recipient={pet.shelter} petName={pet.name}/>
                                                         </Modal.Body>
                                                     </Modal>
                                                 </Container>

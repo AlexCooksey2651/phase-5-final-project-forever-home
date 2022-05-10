@@ -14,6 +14,7 @@ function NavBar({ handleLogout, user }) {
                         <Nav.Link href="search-pets">Search</Nav.Link>
                         <Nav.Link href="/bookmarked-pets">Bookmarked Pets</Nav.Link>
                         <Nav.Link href="/my-applications">My Applications</Nav.Link>
+                        <Nav.Link href="/messages">Messages</Nav.Link>
                         <Nav.Link href="/profile">Account</Nav.Link>
                         <Nav.Link id="logout-button" onClick={handleLogout}>Logout</Nav.Link>
                     </Nav>
@@ -29,6 +30,7 @@ function NavBar({ handleLogout, user }) {
                         <Nav.Link href="manage-pets">Pets</Nav.Link>
                         <Nav.Link href="/view-applications">Applications</Nav.Link>
                         <Nav.Link href="/previous-adoptions">Previous Adoptions</Nav.Link>
+                        <Nav.Link href="/messages">Messages</Nav.Link>
                         <Nav.Link href="/profile">Account</Nav.Link>
                         <Nav.Link id="logout-button" onClick={handleLogout}>Logout</Nav.Link>
                     </Nav>
