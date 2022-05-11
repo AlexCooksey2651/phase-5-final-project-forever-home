@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   
+  resources :messages, only: [:create, :index, :destroy]
   resources :users, only: [:index]
   resources :pets, exclude: [:index]
   resources :pet_applications, only: [:create, :destroy, :update]
@@ -22,6 +23,8 @@ Rails.application.routes.draw do
   get '/customer-applications', to: 'pet_applications#customer_index'
   patch '/pets/:pet_id/applications/:id', to: 'pet_applications#adopt'
   delete 'bookmarks/:customer_id/:pet_id', to: 'bookmarks#destroy'
+  post 'password/reset', to: 'passwords#forgot'
+  post 'password/reset', to: 'password_resets#create'
   # Routing logic: fallback requests for React Router.
   # Leave this here to help deploy your app later!
   get "*path", to: "fallback#index", constraints: ->(req) { !req.xhr? && req.format.html? }

@@ -3,5 +3,6 @@ class ShelterSerializer < ActiveModel::Serializer
 
   has_one :user, as: :profile
   has_many :pets
+  has_many :messages
   
 end

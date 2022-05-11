@@ -78,7 +78,7 @@ function CustomerApplicationCard({ withdraw, application, user, handleRemoveAppl
                                                             <Modal.Title>Contact Shelter</Modal.Title>
                                                         </Modal.Header>
                                                         <Modal.Body>
-                                                            <ContactForm sender={user} recipient={pet.shelter} petName={pet.name}/>
+                                                            <ContactForm sender={user} recipient={pet.shelter} petName={pet.name} closeContactForm={closeContactForm}/>
                                                         </Modal.Body>
                                                     </Modal>
                                                 </Container>

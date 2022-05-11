@@ -95,7 +95,7 @@ function ShelterApplicationCard({ application, handleUpdateApplication, user, ac
                                                         <Modal.Title>Contact Customer</Modal.Title>
                                                     </Modal.Header>
                                                     <Modal.Body>
-                                                        <ContactForm sender={user} recipient={customer} petName={pet.name}/>
+                                                        <ContactForm sender={user} recipient={customer} petName={pet.name} closeContactForm={closeContactForm}/>
                                                     </Modal.Body>
                                                 </Modal>
                                             </Container>

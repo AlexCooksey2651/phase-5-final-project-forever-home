@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Form, Container, Button, Alert } from 'react-bootstrap'
 
-function ContactForm({ sender, recipient, petName }) {
+function ContactForm({ sender, recipient, petName, closeContactForm }) {
     const [message, setMessage] = useState("")
     const [senderType, setSenderType] = useState(sender.profile.type)
     const [pet, setPet] = useState(petName)
@@ -36,15 +36,19 @@ function ContactForm({ sender, recipient, petName }) {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
+                    customer_id: sender.profile.customer.id,
                     shelter_id: recipient.id,
                     pet_name: pet,
-                    message,
-                    sender_type: senderType,
+                    message_text: message,
+                    sender: senderType,
                 })
             })
                 .then(r => {
                     if (r.ok) {
-                        r.json().then(data => console.log(data))
+                        r.json().then(data => {
+                            console.log(data)
+                            closeContactForm()
+                        })
                     } else {
                         r.json().then(data => setErrors(data.errors));
                     }
@@ -56,10 +60,11 @@ function ContactForm({ sender, recipient, petName }) {
                         "Content-Type": "application/json",
                     },
                     body: JSON.stringify({
-                        shelter_id: recipient.id,
+                        customer_id: recipient.id,
+                        shelter_id: sender.profile.shelter.id,
                         pet_name: pet,
-                        message,
-                        sender_type: senderType,
+                        message_text: message,
+                        sender: senderType,
                     })
                 })
                     .then(r => {
@@ -74,7 +79,7 @@ function ContactForm({ sender, recipient, petName }) {
 
     return (
             <Container>
-                <Form >
+                <Form onSubmit={handleSubmit}>
                     <Form.Group className="mb-3" controlId="formBasicInput">
                         <Form.Label><b>Name:</b></Form.Label>
                         <Form.Control disabled type="text" value={senderName()}></Form.Control>

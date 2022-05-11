@@ -64,7 +64,7 @@ code {
   justify-items: center;
 }
 
-#customer-applications-container, #profile-container, #bookmarked-pets-container, #pet-search, #manage-pets, #active-applications, #previous-adoptions, #login, #about {
+#customer-applications-container, #profile-container, #bookmarked-pets-container, #pet-search, #manage-pets, #active-applications, #previous-adoptions, #login, #about, #messages {
   background-color: blanchedalmond;
   padding: 10px;
   vertical-align: center;
@@ -82,4 +82,8 @@ code {
   text-align: left;
   padding-left: 10px;
   padding-right: 10px;
+}
+
+.message-card {
+  border: 1px solid black;
 }

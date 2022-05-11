@@ -1,20 +1,35 @@
-# Project Template: React/Rails API
+# FOREVER HOME
 
-## Description
+## Alex Cooksey, Flatiron School Software Engineering Program
+### Phase 5 Capstone Project
 
-This project is scaffolded so that you can build a React frontend and Rails
-backend together, and easily deploy them to Heroku.
+## Introduction
 
-## Requirements
+Forever Home is an app designed to help more pets get adopted into loving homes. A user can sign up as either an animal shelter or as a customer, and the app experience is different depending on which type of profile they sign up with. When a user signs up, Forever Home sends them a welcome email. There is also a "Forgot Password" function that triggers a password reset email. 
 
-- Ruby 2.7.4
-- NodeJS (v16), and npm
-- Heroku CLI
-- Postgresql
+Customers can browse pets that match their interests, bookmark pets for future reference, and submit adoption applications. They can also view their applications (sorted into approved applications, pending, and denied), send shelters direct messages about a specific animal, view direct messages received from shelters, and edit their profile information (or delete the account). 
 
-See Environment Setup below for instructions on installing these tools if you
-don't already have them.
+Shelters can view the animals they have listed for adoption, edit/remove those listings, view customers' applications (sorted into pending and denied), and view prior adoptions (i.e. "approved" applications). When viewing customers' applications, shelters can send a customer a direct message. In the messages page, shelters can see any messages they have received and reply. Finally, shelters can also edit profile information or delete their account.
 
+## Running the Application
+
+Enter `rails s` from the application folder in the terminal to run the backend server at [http://localhost:3000](http://localhost:3000).
+
+Navigate to a new tab in the terminal and enter `npm start --prefix client` to run the frontend at [http://localhost:4000](http://localhost:4000).
+
+This app utilizes `react-router-dom` and `react-bootstrap` on the frontend; if needed, navigate to the frontend folder by entering `cd client` in the terminal, then entering `npm install react-router-dom@6.3.0` and `npm install react-bootstrap` to use these dependencies. For further information on utilizing React-Bootstrap, please visit [React-Bootstrap](https://react-bootstrap.github.io/).
+
+## Future Developments and Edits
+
+Some ideas for future edits or additional features:
+
+-Refactor code to utilize `useContext` hook and/or Redux to reduce "prop drilling" of data utilized in various React components, such as User information. 
+
+-Create custom serializers to reduce volume of data being loaded and optimize performance.
+
+-Create background functions for background tasks, such as when loading different pages. 
+
+-
 ## Setup
 
 Start by **cloning** (not forking) the project template repository and removing

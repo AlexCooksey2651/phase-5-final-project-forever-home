@@ -6,5 +6,6 @@ class CustomerSerializer < ActiveModel::Serializer
   has_many :pets, through: :pet_applications
   has_many :bookmarks
   has_many :pets, through: :bookmarks
+  has_many :messages
 
 end

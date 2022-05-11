@@ -6,6 +6,8 @@ class Customer < ApplicationRecord
     has_many :pets, through: :pet_applications
     has_many :bookmarks, dependent: :destroy
     has_many :pets, through: :bookmarks
+    has_many :messages, dependent: :destroy
+    has_many :shelters, through: :messages
 
     validates :first_name, presence: true, length: { minimum: 2 }
     validates :last_name, presence: true, length: { minimum: 2 }

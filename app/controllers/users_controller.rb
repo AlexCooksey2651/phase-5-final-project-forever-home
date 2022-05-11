@@ -4,6 +4,14 @@ class UsersController < ApplicationController
         render json: users
     end
 
+    # def recover_password
+    #     user = User.find_by(email: params[:email])
+    #     if user
+    #         UserMailer.forgot_password(user).deliver
+    #         render json: "Email has been sent"
+    #     end
+    # end
+
     # def destroy
     #     user = User.find_by(id: params[:id])
     #     user.destroy
