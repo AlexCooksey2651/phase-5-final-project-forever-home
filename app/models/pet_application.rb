@@ -10,7 +10,3 @@ class PetApplication < ApplicationRecord
     validates :status, inclusion: { in: STATUSES }
 end
 
-# build custom method - set adoption status; 
-# if no applications or none with status = "Pending", adoption_status = "Available"
-# if any application swith status = "Approved", adoption_status = "Adopted"
-# if any applications with status = "Pending", adoption_status = "Application(s) Pending"
