@@ -5,7 +5,9 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-image: url("http://oceansideveterinary.com/wp-content/uploads/2016/09/shutterstock_98165567.png")
+  background-image: url("https://cache.desktopnexus.com/thumbseg/1690/1690747-bigthumbnail.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 code {
@@ -24,7 +26,7 @@ code {
 }
 
 #header-image {
-  width: 40%;
+  width: 60%;
   margin-left: auto;
   margin-right: auto;
   display: block;

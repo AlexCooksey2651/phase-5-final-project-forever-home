@@ -6,7 +6,7 @@ function Header() {
             {/* <h1>FOREVER HOME</h1> */}
 
 
-            <img id="header-image" alt="Mixed pets" src="https://image.shutterstock.com/image-photo/large-collection-domestic-pets-interacting-260nw-358022486.jpg" />
+            <img id="header-image" alt="Mixed pets" src="https://shantelswaggingtails.com/wp-content/uploads/2015/07/Depositphotos_8775384_m.jpg" />
 
 
         </div>

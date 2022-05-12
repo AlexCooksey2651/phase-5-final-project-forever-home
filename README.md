@@ -23,6 +23,8 @@ This app utilizes `react-router-dom` and `react-bootstrap` on the frontend; if n
 
 Some ideas for future edits or additional features:
 
+-I am currently working to incorporate mailers that will send a welcome email to users when they sign up for an account, as well as password reset functionality, which will include sending an email to users with a temporary password to be used when resetting the password.
+
 -Refactor code to utilize `useContext` hook and/or Redux to reduce "prop drilling" of data utilized in various React components, such as User information. Some other variables/functions are repeated in multiple components, and these could possibly be moved into parent components and passed as props to reduce redundancy, or moved into Context if appropriate. In general, a lot of redundancy exists in order to avoid messier conditional statements that would determine what to render based on which type of user is utilizing the app. As much as possible, I would like to reduce redundancy while keeping the code as clean and easy to understand as possible. 
 
 -Create custom serializers to reduce volume of data being loaded and optimize performance.
@@ -37,7 +39,7 @@ Forever Home was built with a React frontend and a Ruby-on-Rails backend, and wi
 
 Seed data created with the assistance of the Faker gem. To learn more about Faker, please visit this [link](https://github.com/faker-ruby/faker).
 
-Check out a brief video walkthrough of the app [here](VIDEO WALKTHROUGH LINK). 
+Check out a brief video walkthrough of the app [here](https://youtu.be/p14MoKJbuk0). 
 
 Please check out these blog posts on Medium to learn more about a couple of the challenges I encountered and learned from over the course of building Forever Home:
 -To learn about creating multiple types of users through polymorphic associations, visit [here](https://medium.com/@aecooksey2651/allowing-multiple-types-of-users-and-user-experiences-on-react-ruby-on-rails-2c5b33fac828).

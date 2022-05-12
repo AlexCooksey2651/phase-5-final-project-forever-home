@@ -2,8 +2,9 @@ class PasswordsController < ApplicationController
     before_action :find_user
 
     def forgot
+        user = User.find_by(email: params[:email])
         token = password_reset_token
-        user.update!(password: token)
+        user.update!(recovery_password: token)
         if user.recovery_password_digest != nil
             PasswordMailer.reset_password(user).deliver_now
             render json: { alert: "An email has been sent to reset your password." }, status: :ok

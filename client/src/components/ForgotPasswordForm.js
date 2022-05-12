@@ -16,6 +16,7 @@ function ForgotPasswordForm({ handleCloseModal }) {
             body: JSON.stringify({
                 email
             })
+        })
             .then(r => {
                 if (r.ok) {
                     r.json().then(data => setErrors(data.alert))
@@ -23,7 +24,6 @@ function ForgotPasswordForm({ handleCloseModal }) {
                     r.json().then(data => setErrors(data.errors))
                 }
             })
-        })
         handleCloseModal()
     }
     
