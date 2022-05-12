@@ -3,7 +3,7 @@ import { Button, Container, Stack, Modal } from 'react-bootstrap'
 import LoginForm from "../components/LoginForm"
 import SignupForm from "../components/SignupForm"
 import Header from '../components/Header'
-import RetrievePasswordForm from './RetrievePasswordForm'
+import ForgotPasswordForm from '../components/ForgotPasswordForm'
 
 function Login({ onLogin }) {
     const [loginPage, setLoginPage] = useState(true)
@@ -29,10 +29,10 @@ function Login({ onLogin }) {
                             </Button>
                             <Modal show={showModal} onHide={handleCloseModal} animation={false}>
                                 <Modal.Header closeButton>
-                                    <Modal.Title>Retrieve Password:</Modal.Title>
+                                    <Modal.Title>Forgot Password?</Modal.Title>
                                 </Modal.Header>
                                 <Modal.Body>
-                                    <RetrievePasswordForm handleCloseModal={handleCloseModal} />
+                                    <ForgotPasswordForm handleCloseModal={handleCloseModal} />
                                 </Modal.Body>
                             </Modal>
                         </>

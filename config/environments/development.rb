@@ -58,19 +58,24 @@ Rails.application.configure do
   #   location: '/usr/sbin/sendmail',
   #   arguments: '-i'
   # }
+  config.action_mailer.default_url_options = { host: 'localhost:3000', protocol: 'http' }
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.default_options = {from: 'foreverhome.aec@gmail.com'}
 
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-  address:              'smtp.gmail.com',
-  port:                 587,
-  # domain:               'example.com',
-  user_name:            ENV['gmail_username'],
-  password:             ENV['gmail_password'],
-  authentication:       'plain',
-  enable_starttls_auto: true  }
+    address:              'smtp.gmail.com',
+    port:                 587,
+    # domain:               'foreverhome.herokuapp.com',
+    user_name:            'foreverhome.aec@gmail.com',
+    password:             'AECflatironphase5',
+    authentication:       'plain',
+    enable_starttls_auto: true  
+  }
+
+  # ENV['gmail_username']
+  # ENV['gmail_password']
 
   # Raises error for missing translations.
   # config.i18n.raise_on_missing_translations = true

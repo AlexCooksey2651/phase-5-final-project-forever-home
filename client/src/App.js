@@ -54,7 +54,7 @@ function App() {
         <Route path="/previous-adoptions" element={<PreviousAdoptions user={user}/>} />
         <Route path="/profile" element={<Profile handleLogout={handleLogout} user={user}/>} />
         <Route path="/messages" element={<MessageContainer user={user}/>} />
-        <Route path="/login" element={<Login />} />
+        <Route path="/login" element={<Login onLogin={setUser}/>} />
       </Routes>
     </div>
   );
