@@ -2,13 +2,7 @@ import React, { useState } from 'react'
 import { useNavigate } from "react-router-dom"
 import PhoneInput from 'react-phone-number-input/input'
 import { Form, Container, Stack, Button, Alert } from 'react-bootstrap'
-
-const stateAbbreviations = ['AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC', 'FL', 'GA', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR', 'PA', 'PR', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'WA', 'WV', 'WI', 'WY']
-// SRC = "https://gist.github.com/bubblerun/a624de5b4fa8ff0980010054a7220977#file-array-js"
-const stateOptions = stateAbbreviations.map(state => {
-    return <option key={state} value={state}>{state}</option>
-})
-
+import { stateOptions } from '../../Resources'
 
 function ShelterSignupForm({ onLogin }) {
     const [shelterName, setShelterName] = useState("")
@@ -23,7 +17,6 @@ function ShelterSignupForm({ onLogin }) {
     const navigate = useNavigate()
 
     function handleSubmit(e) {
-        // console.log("hello")
         e.preventDefault()
         setErrors([])
         fetch('/signup-shelter', {

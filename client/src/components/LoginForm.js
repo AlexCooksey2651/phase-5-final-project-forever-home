@@ -10,8 +10,6 @@ function LoginForm({ onLogin }) {
     const navigate = useNavigate()
     // const { user, setUser } = useContext(UserContext)
 
-
-
     function handleSubmit(e) {
         e.preventDefault()
         fetch('/login', {

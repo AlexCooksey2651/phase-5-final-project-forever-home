@@ -20,10 +20,6 @@ function BookmarkCard({ pet, user, bookmark, removeBookmark }) {
     const [errors, setErrors] = useState([])
     const navigate = useNavigate()
 
-    const [showEdit, setShowEdit] = useState(false)
-    const showEditForm = () => setShowEdit(true)
-    const closeEditForm = () => setShowEdit(false)
-
     const [showDelete, setShowDelete] = useState(false)
     const handleShowDelete = () => setShowDelete(true)
     const handleCloseDelete = () => setShowDelete(false)
@@ -32,20 +28,12 @@ function BookmarkCard({ pet, user, bookmark, removeBookmark }) {
     const showContactForm = () => setShowContact(true)
     const closeContactForm = () => setShowContact(false)
 
-
     const customerId = () => {
         if (userType === "customer") {
             return user.profile.customer.id
         } else {
             return null
         }
-    }
-
-    function deleteBookmark() {
-        fetch(`/bookmarks/${customerId()}/${pet.id}`, {
-            method: "DELETE",
-        })
-        removeBookmark(bookmark)
     }
 
     const hasApplications = () => {
@@ -61,6 +49,15 @@ function BookmarkCard({ pet, user, bookmark, removeBookmark }) {
             console.log('hello')
         }
     }
+
+    function deleteBookmark() {
+        fetch(`/bookmarks/${customerId()}/${pet.id}`, {
+            method: "DELETE",
+        })
+        removeBookmark(bookmark)
+    }
+
+    
 
     return (
         <Container>

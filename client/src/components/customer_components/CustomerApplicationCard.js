@@ -1,15 +1,7 @@
 import React, { useState } from 'react'
 import { Container, Card, Accordion, Stack, Button, Modal } from 'react-bootstrap'
 import ContactForm from '../ContactForm'
-
-const formatPhoneNum = (phoneNumber) => {
-    const arrayedNum = phoneNumber.split('')
-    const firstThree = arrayedNum.slice(2, 5).join('')
-    const secondThree = arrayedNum.slice(5, 8).join('')
-    const lastFour = arrayedNum.slice(-4).join('')
-    const newNumStr = `(${firstThree}) ${secondThree}-${lastFour}`
-    return newNumStr
-}
+import { formatPhoneNum, cleanupDate } from '../../Resources'
 
 function CustomerApplicationCard({ withdraw, application, user, handleRemoveApplication }) {
     const [showModal, setShowModal] = useState(false)
@@ -35,13 +27,6 @@ function CustomerApplicationCard({ withdraw, application, user, handleRemoveAppl
             method: "DELETE"
         })
         handleRemoveApplication(application)
-    }
-
-    function cleanupDate(date) {
-        const year = date.substr(0, 4)
-        const month = date.substr(5, 2)
-        const day = date.substr(8, 2)
-        return `${month}/${day}/${year}`
     }
 
     return (

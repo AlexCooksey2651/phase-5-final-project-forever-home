@@ -1,15 +1,7 @@
 import React, { useState } from 'react'
 import { Container, Card, Button, Accordion, Modal } from 'react-bootstrap'
 import ContactForm from '../ContactForm'
-
-const formatPhoneNum = (phoneNumber) => {
-    const arrayedNum = phoneNumber.split('')
-    const firstThree = arrayedNum.slice(2, 5).join('')
-    const secondThree = arrayedNum.slice(5, 8).join('')
-    const lastFour = arrayedNum.slice(-4).join('')
-    const newNumStr = `(${firstThree}) ${secondThree}-${lastFour}`
-    return newNumStr
-}
+import { formatPhoneNum, cleanupDate } from '../../Resources'
 
 function PreviousAdoptionCard({ pet, user }) {
     const [showContact, setShowContact] = useState(false)
@@ -19,13 +11,6 @@ function PreviousAdoptionCard({ pet, user }) {
 
     const showContactForm = () => setShowContact(true)
     const closeContactForm = () => setShowContact(false)
-
-    function cleanupDate(date) {
-        const year = date.substr(0, 4)
-        const month = date.substr(5, 2)
-        const day = date.substr(8, 2)
-        return `${month}/${day}/${year}`
-    }
 
     return (
         <Container>

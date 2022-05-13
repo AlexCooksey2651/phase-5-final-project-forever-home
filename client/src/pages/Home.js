@@ -1,14 +1,15 @@
 import React from 'react'
 import Container from 'react-bootstrap/Container'
+import { isCustomer } from '../Resources'
 
 function Home({ user }) {
-    const isCustomer = () => {
-        if (user.profile.type === "customer") {
-            return true
-        } else if (user.profile.type === "shelter") {
-            return false
-        }
-    }
+    // const isCustomer = () => {
+    //     if (user.profile.type === "customer") {
+    //         return true
+    //     } else if (user.profile.type === "shelter") {
+    //         return false
+    //     }
+    // }
 
     return (
         <Container id="about">
@@ -24,7 +25,7 @@ function Home({ user }) {
             <br />
             <h2 className="about-header">New to Forever Home? Start Here!</h2>
             <br/>
-            {isCustomer() ?
+            {isCustomer(user) ?
                 <div className="about-text">
                     <p>
                         Here to look for a new best friend? If you're interested in adopting a pet (or pets!), please navigate to the SEARCH page. There, you'll be able to browse animals that match what you're looking for. Use the search bar to look up an animal by name, or search for matching information in their bio.

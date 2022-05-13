@@ -4,18 +4,11 @@ import EditCustomerProfileForm from "../components/customer_components/EditCusto
 import ListGroup from "react-bootstrap/ListGroup"
 import { UserContext } from '../context/user'
 import EditShelterProfileForm from '../components/shelter_components/EditShelterProfileForm'
+import { isCustomer, formatPhoneNum } from '../Resources'
 
 function Profile({ handleLogout, errors, user }) {
     // const { user } = useContext(UserContext)
     const [userInfo, setUserInfo] = useState(user)
-
-    const isCustomer = () => {
-        if (user.profile.type === "customer") {
-            return true
-        } else if (user.profile.type === "shelter") {
-            return false
-        }
-    }
 
     const [showModal, setShowModal] = useState(false)
     const [showDelete, setShowDelete] = useState(false)
@@ -24,15 +17,6 @@ function Profile({ handleLogout, errors, user }) {
     const handleCloseEdit = () => setShowModal(false)
     const handleShowDelete = () => setShowDelete(true)
     const handleCloseDelete = () => setShowDelete(false)
-
-    const formatPhoneNum = (phoneNumber) => {
-        const arrayedNum = phoneNumber.split('')
-        const firstThree = arrayedNum.slice(2, 5).join('')
-        const secondThree = arrayedNum.slice(5, 8).join('')
-        const lastFour = arrayedNum.slice(-4).join('')
-        const newNumStr = `(${firstThree}) ${secondThree}-${lastFour}`
-        return newNumStr
-    }
 
     function handleDeleteProfile() {
         handleLogout()
@@ -52,7 +36,7 @@ function Profile({ handleLogout, errors, user }) {
             <br />
             <h2>ACCOUNT INFORMATION</h2>
             <br />
-            {isCustomer() ?
+            {isCustomer(user) ?
                 <Container >
                     <ListGroup variant="flush">
                         <ListGroup.Item>Name: {`${userInfo.profile.customer.first_name} ${userInfo.profile.customer.last_name}`}</ListGroup.Item>
@@ -69,7 +53,6 @@ function Profile({ handleLogout, errors, user }) {
                         <ListGroup.Item>Location: {userInfo.city}, {userInfo.state}</ListGroup.Item>
                         <ListGroup.Item>Phone: {formatPhoneNum(userInfo.phone_number)}</ListGroup.Item>
                         <ListGroup.Item>Email Address: {userInfo.email}</ListGroup.Item>
-                        {/* <ListGroup.Item type="password">Password: {shelter.user.password}</ListGroup.Item> */}
                         <ListGroup.Item>Bio: {userInfo.profile.shelter.bio}</ListGroup.Item>
                     </ListGroup>
                 </Container>
@@ -87,7 +70,7 @@ function Profile({ handleLogout, errors, user }) {
                             <Modal.Title>Edit Account Information:</Modal.Title>
                         </Modal.Header>
                         <Modal.Body>
-                            {isCustomer() ? <EditCustomerProfileForm userInfo={userInfo} setUserInfo={setUserInfo} handleCloseEdit={handleCloseEdit}/> : <EditShelterProfileForm userInfo={userInfo} setUserInfo={setUserInfo} handleCloseEdit={handleCloseEdit}/>}
+                            {isCustomer(user) ? <EditCustomerProfileForm userInfo={userInfo} setUserInfo={setUserInfo} handleCloseEdit={handleCloseEdit}/> : <EditShelterProfileForm userInfo={userInfo} setUserInfo={setUserInfo} handleCloseEdit={handleCloseEdit}/>}
                         </Modal.Body>
                     </Modal>
                 </Container>

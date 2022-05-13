@@ -4,16 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import EditPetForm from './shelter_components/EditPetForm'
 import AdoptionAppForm from './customer_components/AdoptionAppForm'
 import ContactForm from './ContactForm'
-
-
-const formatPhoneNum = (phoneNumber) => {
-    const arrayedNum = phoneNumber.split('')
-    const firstThree = arrayedNum.slice(2, 5).join('')
-    const secondThree = arrayedNum.slice(5, 8).join('')
-    const lastFour = arrayedNum.slice(-4).join('')
-    const newNumStr = `(${firstThree}) ${secondThree}-${lastFour}`
-    return newNumStr
-}
+import { formatPhoneNum, isCustomer } from '../Resources'
 
 function PetCard({ pet, user, handleUpdatePet, handleDeletePet }) {
     const userType = user.profile.type
@@ -93,20 +84,6 @@ function PetCard({ pet, user, handleUpdatePet, handleDeletePet }) {
         setBookmarked(false)
     }
 
-    // const isBookmarked = () => {
-    //     if (userType === "customer" && user.profile.customer.bookmarks.length > 0) {
-    //         const bookmarks = user.profile.customer.bookmarks
-    //         const found = bookmarks.find(bookmark => bookmark.pet_id === pet.id)
-    //         if (found) {
-    //             return true
-    //         } else {
-    //             return false
-    //         }
-    //     } else {
-    //         console.log("hello")
-    //     }
-    // }
-
     const hasApplications = () => {
         if (userType === "customer" && user.profile.customer.pet_applications.length > 0) {
             const applications = user.profile.customer.pet_applications
@@ -121,6 +98,7 @@ function PetCard({ pet, user, handleUpdatePet, handleDeletePet }) {
         }
     }
 
+    
     if (userType === "shelter") {
         return (
             <Container>

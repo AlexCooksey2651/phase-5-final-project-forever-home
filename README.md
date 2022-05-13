@@ -45,8 +45,10 @@ Please check out these blog posts on Medium to learn more about a couple of the 
 -To learn about creating multiple types of users through polymorphic associations, visit [here](https://medium.com/@aecooksey2651/allowing-multiple-types-of-users-and-user-experiences-on-react-ruby-on-rails-2c5b33fac828).
 -To learn how I linked Pet attributes so that they were updated dynamically as a function of PetApplication activity, visit this [article](https://medium.com/@aecooksey2651/linking-dependent-updates-across-multiple-tables-in-ruby-on-rails-8b6fd12a4c82).
 
-Background image on app header found [here](BACKGROUND IMAGE LINK).
+State abbreviations array borrowed from this Github [page](https://gist.github.com/bubblerun/a624de5b4fa8ff0980010054a7220977#file-array-js).
 
-Background image on app body found [here](BACKGROUND IMAGE LINK).
+Background image on app header found [here](https://shantelswaggingtails.com/wp-content/uploads/2015/07/Depositphotos_8775384_m.jpg).
+
+Background image on app body found [here](https://cache.desktopnexus.com/thumbseg/1690/1690747-bigthumbnail.jpg).
 
 

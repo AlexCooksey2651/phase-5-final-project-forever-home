@@ -2,15 +2,7 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Container, Card, Button, Accordion, Stack, Alert, Modal } from 'react-bootstrap'
 import ContactForm from '../ContactForm'
-
-const formatPhoneNum = (phoneNumber) => {
-    const arrayedNum = phoneNumber.split('')
-    const firstThree = arrayedNum.slice(2, 5).join('')
-    const secondThree = arrayedNum.slice(5, 8).join('')
-    const lastFour = arrayedNum.slice(-4).join('')
-    const newNumStr = `(${firstThree}) ${secondThree}-${lastFour}`
-    return newNumStr
-}
+import { formatPhoneNum } from '../../Resources'
 
 function ShelterApplicationCard({ application, handleUpdateApplication, user, active }) {
     const [showContact, setShowContact] = useState(false)

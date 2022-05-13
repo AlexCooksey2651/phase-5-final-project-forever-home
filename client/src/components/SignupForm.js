@@ -6,13 +6,14 @@ import CustomerSignupForm from './customer_components/CustomerSignupForm'
 function SignupForm({ onLogin }) {
     const [profileType, setProfileType] = useState("customer")
 
-    const isCustomer = () => {
+    const customer = () => {
         if (profileType === "customer") {
             return true
         } else if (profileType === "shelter") {
             return false
         }
     }
+
     return (
         <Container id="signup-form">
             <Form>
@@ -34,7 +35,7 @@ function SignupForm({ onLogin }) {
                     />
                 </Form.Group>
             </Form>
-            {isCustomer() ? <CustomerSignupForm onLogin={onLogin} /> : <ShelterSignupForm onLogin={onLogin}/>}
+            {customer() ? <CustomerSignupForm onLogin={onLogin} /> : <ShelterSignupForm onLogin={onLogin}/>}
         </Container>
 
     )

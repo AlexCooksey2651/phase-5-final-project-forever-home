@@ -5,13 +5,6 @@ import MessageCard from '../components/MessageCard'
 
 function MessageContainer({ user }) {
     const [messages, setMessages] = useState([])
-    const isCustomer = () => {
-        if (user.profile.type === "customer") {
-            return true
-        } else if (user.profile.type === "shelter") {
-            return false
-        }
-    }
 
     useEffect(() => {
         console.log('hello')
@@ -31,15 +24,6 @@ function MessageContainer({ user }) {
             return <h2><em>You currently have no messages</em></h2>
         }
     }
-
-    // const messageCards = () => {
-    //     if (messages.length > 0) {
-    //         const cards = messages.map(message => <MessageCard key={message.id} message={message} user={user}/>)
-    //         return cards
-    //     } else {
-    //         return <h2><em>You currently have no messages</em></h2>
-    //     }
-    // }
 
     return (
         <Container id="messages">
