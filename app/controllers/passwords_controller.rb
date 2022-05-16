@@ -37,3 +37,5 @@ class PasswordsController < ApplicationController
         SecureRandom.urlsafe_base64
     end
 end
+
+# HELLO THERE THIS IS A TEST
