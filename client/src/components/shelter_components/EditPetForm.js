@@ -43,7 +43,7 @@ function EditPetForm({ pet, handleUpdatePet, closeEditForm }) {
         <Form className="edit-pet-form" onSubmit={handleSubmit}>
             <Form.Group className="mb-3" controlId="formBasicInput">
                 <Form.Label><b>Pet's Name:</b></Form.Label>
-                <Form.Control required minlength="2" maxlength="2" type="text" placeholder="Enter Pet's Name" value={name} onChange={e => setName(e.target.value)} />
+                <Form.Control required minlength="2" maxlength="20" type="text" placeholder="Enter Pet's Name" value={name} onChange={e => setName(e.target.value)} />
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="formBasicInput">
