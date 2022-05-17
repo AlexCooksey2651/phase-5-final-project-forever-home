@@ -22,7 +22,7 @@ function Login({ onLogin }) {
                 <Header />
                 {loginPage ? <LoginForm onLogin={onLogin} /> : <SignupForm onLogin={onLogin} />}
                 <Stack gap={2} className="col-md-5 mx-auto">
-                    {loginPage ?
+                    {/* {loginPage ?
                         <>
                             <Button onClick={handleShowModal} variant="outline-dark">
                                 Forgot Password?
@@ -36,7 +36,7 @@ function Login({ onLogin }) {
                                 </Modal.Body>
                             </Modal>
                         </>
-                        : null}
+                        : null} */}
                     <Button variant="outline-dark" onClick={toggleLoginPage}>
                         {loginPage ? "Create Account" : "Return to Login Page"}
                     </Button>

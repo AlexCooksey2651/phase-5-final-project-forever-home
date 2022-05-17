@@ -23,8 +23,6 @@ Rails.application.routes.draw do
   get '/customer-applications', to: 'pet_applications#customer_index'
   patch '/pets/:pet_id/applications/:id', to: 'pet_applications#adopt'
   delete 'bookmarks/:customer_id/:pet_id', to: 'bookmarks#destroy'
-  post '/password/forgot', to: 'passwords#forgot'
-  patch '/password/reset', to: 'passwords#reset'
   # Routing logic: fallback requests for React Router.
   # Leave this here to help deploy your app later!
   get "*path", to: "fallback#index", constraints: ->(req) { !req.xhr? && req.format.html? }

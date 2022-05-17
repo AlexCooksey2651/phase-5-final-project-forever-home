@@ -12,7 +12,6 @@ rescue_from ActiveRecord::RecordInvalid, with: :invalid_record
         session[:user_id] = new_shelter.user.id
         user = User.find_by(id: session[:user_id])
         if user
-            # UserMailer.welcome_email(user).deliver_now
             render json: user, status: :created
         else
             render json: {error: "User not found"}
