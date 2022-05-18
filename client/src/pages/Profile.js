@@ -37,23 +37,23 @@ function Profile({ handleLogout, errors, user }) {
             <h2>ACCOUNT INFORMATION</h2>
             <br />
             {isCustomer(user) ?
-                <Container >
+                <Container className="profile-details">
                     <ListGroup variant="flush">
-                        <ListGroup.Item>Name: {`${userInfo.profile.customer.first_name} ${userInfo.profile.customer.last_name}`}</ListGroup.Item>
-                        <ListGroup.Item>Location: {userInfo.city}, {userInfo.state}</ListGroup.Item>
-                        <ListGroup.Item>Phone: {formatPhoneNum(userInfo.phone_number)}</ListGroup.Item>
-                        <ListGroup.Item>Email: {userInfo.email}</ListGroup.Item>
+                        <ListGroup.Item><b>Name:</b> {`${userInfo.profile.customer.first_name} ${userInfo.profile.customer.last_name}`}</ListGroup.Item>
+                        <ListGroup.Item><b>Location:</b> {userInfo.city}, {userInfo.state}</ListGroup.Item>
+                        <ListGroup.Item><b>Phone:</b> {formatPhoneNum(userInfo.phone_number)}</ListGroup.Item>
+                        <ListGroup.Item><b>Email:</b> {userInfo.email}</ListGroup.Item>
                         {/* <ListGroup.Item type="password">Password: {shelter.user.password}</ListGroup.Item> */}
-                        <ListGroup.Item>Looking For: {userInfo.profile.customer.interested_in.join(', ')}</ListGroup.Item>
+                        <ListGroup.Item><b>Looking For:</b> {userInfo.profile.customer.interested_in.join(', ')}</ListGroup.Item>
                     </ListGroup>
                 </Container> :
-                <Container >
+                <Container className="profile-details">
                     <ListGroup variant="flush">
-                        <ListGroup.Item>Name: {userInfo.profile.shelter.name}</ListGroup.Item>
-                        <ListGroup.Item>Location: {userInfo.city}, {userInfo.state}</ListGroup.Item>
-                        <ListGroup.Item>Phone: {formatPhoneNum(userInfo.phone_number)}</ListGroup.Item>
-                        <ListGroup.Item>Email Address: {userInfo.email}</ListGroup.Item>
-                        <ListGroup.Item>Bio: {userInfo.profile.shelter.bio}</ListGroup.Item>
+                        <ListGroup.Item><b>Name:</b> {userInfo.profile.shelter.name}</ListGroup.Item>
+                        <ListGroup.Item><b>Location:</b> {userInfo.city}, {userInfo.state}</ListGroup.Item>
+                        <ListGroup.Item><b>Phone:</b> {formatPhoneNum(userInfo.phone_number)}</ListGroup.Item>
+                        <ListGroup.Item><b>Email:</b> {userInfo.email}</ListGroup.Item>
+                        <ListGroup.Item><b>Bio:</b> {userInfo.profile.shelter.bio}</ListGroup.Item>
                     </ListGroup>
                 </Container>
             }
@@ -61,7 +61,7 @@ function Profile({ handleLogout, errors, user }) {
             <br />
             <Stack gap={2} className="col-md-5 mx-auto">
                 <Container>
-                    <Button variant="outline-dark" onClick={handleShowEdit}>
+                    <Button className="edit-profile" variant="light" onClick={handleShowEdit}>
                         Edit Profile Information
                     </Button>
 
@@ -75,7 +75,7 @@ function Profile({ handleLogout, errors, user }) {
                     </Modal>
                 </Container>
                 <Container>
-                    <Button variant="outline-dark" onClick={handleShowDelete}>
+                    <Button id="delete-account-btn" variant="light" onClick={handleShowDelete}>
                         Delete Account
                     </Button>
 

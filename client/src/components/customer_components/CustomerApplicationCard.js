@@ -38,16 +38,16 @@ function CustomerApplicationCard({ withdraw, application, user, handleRemoveAppl
                     </div>
                     <div class="col-md-8">
                         <Card.Body>
-                            <Card.Title>{pet.name}</Card.Title>
-                            <Card.Text>Application Date: {cleanupDate(application.created_at)}</Card.Text>
+                            <Card.Title><h2>{pet.name}</h2></Card.Title>
+                            <Card.Text><b>Application Date:</b> {cleanupDate(application.created_at)}</Card.Text>
                             <Card.Text>
-                                Application Status: {application.status}
+                                <b>Application Status:</b> {application.status}
                             </Card.Text>
                             {isApproved() ? <Card.Text>
-                                Adoption Date: {cleanupDate(application.pet.adoption_date)}
+                                <b>Adoption Date:</b> {cleanupDate(application.pet.adoption_date)}
                             </Card.Text> : null}
                             <Card.Text>
-                                <Accordion>
+                                <Accordion className="contact-dropdown">
                                     <Accordion.Item eventKey="0">
                                         <Accordion.Header>Shelter: {shelter.name} </Accordion.Header>
                                         <Accordion.Body>
@@ -58,7 +58,7 @@ function CustomerApplicationCard({ withdraw, application, user, handleRemoveAppl
                                                     <Button variant="outline-dark" onClick={showContactForm}>
                                                         Contact Shelter
                                                     </Button>
-                                                    <Modal show={showContact} onHide={closeContactForm} animation={false}>
+                                                    <Modal  show={showContact} onHide={closeContactForm} animation={false}>
                                                         <Modal.Header closeButton>
                                                             <Modal.Title>Contact Shelter</Modal.Title>
                                                         </Modal.Header>
@@ -72,7 +72,7 @@ function CustomerApplicationCard({ withdraw, application, user, handleRemoveAppl
                                 </Accordion>
                             </Card.Text>
                             <Card.Text>
-                                Application:
+                                <b>Application Message:</b>
                                 <br />
                                 <em>{application.customer_text}</em>
                             </Card.Text>

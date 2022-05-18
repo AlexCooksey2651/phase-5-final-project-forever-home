@@ -52,7 +52,7 @@ function EditPetForm({ pet, handleUpdatePet, closeEditForm }) {
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="formBasicSelect">
-                <Form.Label><b>Select Pet Species:</b></Form.Label>
+                <Form.Label><b>Select Pet Type:</b></Form.Label>
                 <Form.Select required aria-label="Default select example" value={species} onChange={e => setSpecies(e.target.value)}>
                     <option value="" disabled selected>Pet Species</option>
                     <option value="Dog">Dog</option>

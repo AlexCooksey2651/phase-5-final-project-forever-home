@@ -1,14 +1,18 @@
 import React, { useState, useContext, useEffect } from 'react'
 import { UserContext } from '../../context/user'
-import { Container, Modal, Button, Form } from 'react-bootstrap'
+import { Container, Modal, Button, Form, Row, Col, Dropdown } from 'react-bootstrap'
 import NewPetForm from '../../components/shelter_components/NewPetForm'
 import PetCard from '../../components/PetCard'
+import { allPets } from '../../Resources'
 
 function ManagePets({ user }) {
     // const { user } = useContext(UserContext)
     const [showModal, setShowModal] = useState(false)
     const [pets, setPets] = useState([])
     const [searchText, setSearchText] = useState("")
+    const [interestedIn, setInterestedIn] = useState(allPets)
+    const [lowerAge, setLowerAge] = useState(0)
+    const [upperAge, setUpperAge] = useState(99)
 
     const handleShow = () => setShowModal(true)
     const handleClose = () => setShowModal(false)
@@ -21,11 +25,54 @@ function ManagePets({ user }) {
         })
     }, [])
 
-    const searchedPets = () => {
+    // const searchedPets = () => {
+    //     if (pets.length > 0) {
+    //         return pets.filter(pet => (pet.name.toLowerCase().includes(searchText.toLowerCase()) || pet.bio.toLowerCase().includes(searchText.toLowerCase())))
+    //     }
+    //     else {
+    //         return []
+    //     }
+    // }
+
+    function modifyWantedAnimals(animalType) {
+        if (interestedIn.includes(animalType)) {
+            setInterestedIn(interestedIn.filter(animal => animal !== animalType))
+        } else {
+            setInterestedIn([...interestedIn, animalType])
+        }
+    }
+
+    const filteredBySpecies = () => {
         if (pets.length > 0) {
-            return pets.filter(pet => (pet.name.toLowerCase().includes(searchText.toLowerCase()) || pet.bio.toLowerCase().includes(searchText.toLowerCase())))
+            const filtered = pets.filter(pet => interestedIn.includes(pet.species))
+            console.log(filtered)
+            return filtered
+        } else {
+            return []
+        }
+    }
+
+    const ageInYears = (pet) => {
+        if (pet.age_unit === "Weeks" || pet.age_units === "Months") {
+            return 0
+        } else {
+            return pet.age
+        }
+    }
+
+    const searchedPets = () => {
+        if (filteredByAge().length > 0) {
+            return filteredByAge().filter(pet => (pet.name.toLowerCase().includes(searchText.toLowerCase()) || pet.bio.toLowerCase().includes(searchText.toLowerCase()) || pet.species.toLowerCase().includes(searchText.toLowerCase())))
         }
         else {
+            return []
+        }
+    }
+
+    const filteredByAge = () => {
+        if (filteredBySpecies().length > 0) {
+            return filteredBySpecies().filter(pet => (ageInYears(pet) >= lowerAge && ageInYears(pet) <= upperAge))
+        } else {
             return []
         }
     }
@@ -52,12 +99,12 @@ function ManagePets({ user }) {
 
     const petCards = () => {
         if (searchedPets().length > 0) {
-            return searchedPets().map(pet => <PetCard key={pet.id} pet={pet} user={user} handleUpdatePet={handleUpdatePet} handleDeletePet={handleDeletePet}/>)
+            return searchedPets().map(pet => <PetCard className="pet-card" key={pet.id} pet={pet} user={user} handleUpdatePet={handleUpdatePet} handleDeletePet={handleDeletePet} />)
         } else {
             return (
                 <>
-                    <h2><em>Currently, the Shelter has no pets up for adoption.</em></h2>
-                    <p>Use the "Add Pet" form above to add information for new pets at your shelter.</p>
+                    <h2><em>Your shelter has no adoption listings that match this search.</em></h2>
+                    <p>Please revise your search, or use the "Add Pet" form above to add information for new pets at your shelter.</p>
                 </>
             )
         }
@@ -65,12 +112,12 @@ function ManagePets({ user }) {
 
     return (
         <Container id="manage-pets">
-            <br/>
+            <br />
             <h2>Manage Pets</h2>
-            
+
             <br />
             <Container>
-                <Button variant="outline-dark" onClick={handleShow}>
+                <Button id="add-pet-button" variant="light" onClick={handleShow}>
                     Add New Pet
                 </Button>
                 <Modal show={showModal} onHide={handleClose} animation={false}>
@@ -78,19 +125,64 @@ function ManagePets({ user }) {
                         <Modal.Title>Add a New Pet to your Shelter</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <NewPetForm handleAddPet={handleAddPet} handleClose={handleClose}/>
+                        <NewPetForm handleAddPet={handleAddPet} handleClose={handleClose} />
                     </Modal.Body>
                 </Modal>
             </Container>
             <br />
             <div className="pet-search-bar">
                 <Form>
+                    <Row className="align-items-center">
+                        <Col xs={6}>
+                            <Form.Group >
+                                <Form.Control type="text" id="search-bar" placeholder="Search" onChange={(event) => setSearchText(event.target.value)} />
+                            </Form.Group>
+                        </Col>
+                        <Col xs={3}>
+                            <Form.Group id="species-select" >
+                                <Dropdown>
+                                    <Dropdown.Toggle variant="light" id="dropdown-basic-button">
+                                        Type(s) of Pet
+                                    </Dropdown.Toggle>
+                                    <Dropdown.Menu id="species-menu">
+                                        {allPets.map(animal => {
+                                            return <Form.Check className="species-option" defaultChecked={interestedIn.includes(animal)} key={animal} label={animal} value={animal} onChange={(event) => modifyWantedAnimals(event.target.value)} />
+                                        })}
+                                    </Dropdown.Menu>
+                                </Dropdown>
+                            </Form.Group>
+                        </Col>
+                        <Col xs={3}>
+                            <Form.Group id="age-select">
+                                <Dropdown>
+                                    <Dropdown.Toggle variant="light" id="dropdown-basic-button">
+                                        Age Range
+                                    </Dropdown.Toggle>
+                                    <Dropdown.Menu id="age-menu">
+                                        <Row className="align-items-center">
+                                            <Col xs="auto">
+                                                <Form.Control type="number" min="0" max="99" value={lowerAge} onChange={event => setLowerAge(event.target.value)} />
+                                            </Col>
+                                            <Col xs="auto">TO</Col>
+                                            <Col xs="auto">
+                                                <Form.Control type="number" min="1" max="99" maxLength="2" placeholder="99" value={upperAge} onChange={event => setUpperAge(event.target.value)} />
+                                            </Col>
+                                        </Row>
+                                    </Dropdown.Menu>
+                                </Dropdown>
+                            </Form.Group>
+                        </Col>
+                    </Row>
+                </Form>
+            </div>
+            {/* <div className="pet-search-bar">
+                <Form>
                     <Form.Group >
                         <Form.Label for="pet-search">Search for a Pet:</Form.Label>
                         <Form.Control type="text" placeholder="Search" onChange={(event) => setSearchText(event.target.value)} />
                     </Form.Group>
                 </Form>
-            </div>
+            </div> */}
             <br />
             <Container id="shelter-pet-card-container">
                 {petCards()}

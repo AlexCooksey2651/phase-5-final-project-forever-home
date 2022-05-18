@@ -110,15 +110,16 @@ function PetCard({ pet, user, handleUpdatePet, handleDeletePet }) {
                         <div className="col-md-8">
                             <Card.Body>
                                 <Card.Title><h2>{pet.name}</h2></Card.Title>
-                                <Card.Text>Species: {pet.species}</Card.Text>
-                                <Card.Text>Age: {pet.age} {pet.age_unit} old</Card.Text>
+                                <Card.Text><b>Type:</b> {pet.species}</Card.Text>
+                                <Card.Text><b>Age:</b> {pet.age} {pet.age_unit} old</Card.Text>
 
-                                <Card.Text>
+                                <Card.Text className="pet-bio">
                                     <b>Pet Bio:</b>
                                     <br />
                                     {pet.bio}
                                 </Card.Text>
-                                <Card.Text>Adoption Status: {pet.adoption_status}</Card.Text>
+                                <br/>
+                                <Card.Text><b>Adoption Status:</b> {pet.adoption_status}</Card.Text>
                                 <Stack gap={2} className="col-md-5 mx-auto">
                                     <Container>
                                         <Button variant="outline-dark" onClick={showEditForm}>
@@ -168,10 +169,10 @@ function PetCard({ pet, user, handleUpdatePet, handleDeletePet }) {
                         <div className="col-md-8">
                             <Card.Body>
                                 <Card.Title><h2>{pet.name}</h2></Card.Title>
-                                <Card.Text>Species: {pet.species}</Card.Text>
-                                <Card.Text>Age: {pet.age} {pet.age_unit} old</Card.Text>
+                                <Card.Text><b>Type:</b> {pet.species}</Card.Text>
+                                <Card.Text><b>Age:</b> {pet.age} {pet.age_unit} old</Card.Text>
                                 <Card.Text>
-                                    <Accordion>
+                                    <Accordion className="contact-dropdown">
                                         <Accordion.Item eventKey="0">
                                             <Accordion.Header>Shelter: {pet.shelter.name} </Accordion.Header>
                                             <Accordion.Body>
@@ -194,13 +195,13 @@ function PetCard({ pet, user, handleUpdatePet, handleDeletePet }) {
                                         </Accordion.Item>
                                     </Accordion>
                                 </Card.Text>
-                                <Card.Text>
+                                <Card.Text className="pet-bio">
                                     <b>Pet Bio:</b>
                                     <br />
                                     {pet.bio}
                                 </Card.Text>
-
-                                <Card.Text>Adoption Status: {pet.adoption_status}</Card.Text>
+                                <br/>
+                                <Card.Text><b>Adoption Status:</b> {pet.adoption_status}</Card.Text>
                                 <Stack gap={2} className="col-md-5 mx-auto">
                                     <Container>
                                         {bookmarked ? 

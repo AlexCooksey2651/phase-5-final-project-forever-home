@@ -5,9 +5,9 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-image: url("https://cache.desktopnexus.com/thumbseg/1690/1690747-bigthumbnail.jpg");
-  background-repeat: no-repeat;
-  background-size: cover;
+  background-image: url("https://previews.123rf.com/images/dimbar76/dimbar762003/dimbar76200300028/142283341-collage-of-photos-of-pets-and-birds.jpg");
+  background-repeat: repeat;
+  /* background-size: contain; */
 }
 
 code {
@@ -18,7 +18,7 @@ code {
 .app-header {
   /* background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTozoL6cjMD7wH2dwcwu6XSrN5v7v06Tt0qlUId0Y1r8V24I8-QeQjlt1hHnplKIO_f2Ow&usqp=CAU"); */
   height: 250px;
-  background-color: blanchedalmond;
+  background-color: #b1a89a;
   display: flex;
   justify-content: center;;
   width: 100%;
@@ -26,7 +26,8 @@ code {
 }
 
 #header-image {
-  width: 60%;
+  object-fit: contain;
+  width: 100%;
   margin-left: auto;
   margin-right: auto;
   display: block;
@@ -45,15 +46,20 @@ code {
   text-align: center;
 } */
 
-.application-card {
+.application-card, .message-card {
   width: 90%;
-  margin: auto;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
   border: 1px solid black
 }
 
 .pet-card-image, .application-card-image {
+  position: sticky;
   margin-top: 40px;
-  margin-left: 15px;
+  margin-left: 20px;
+  margin-bottom: 10px;
   border: 0.5px solid black;
 }
 
@@ -67,16 +73,24 @@ code {
 }
 
 #customer-applications-container, #profile-container, #bookmarked-pets-container, #pet-search, #manage-pets, #active-applications, #previous-adoptions, #login, #about, #messages {
-  background-color: blanchedalmond;
-  padding: 10px;
+  background-color: #b1a89a;
+  padding: 20px;
   vertical-align: center;
   width: 80%;
   margin: 20px auto;
   border: 1px solid black;
 }
 
+#login {
+  margin-top: 20px;
+}
+
+.profile-details {
+  width: 90%;
+}
+
 .pet-search-bar {
-  width: 50%;
+  width: 70%;
   margin: auto;
 }
 
@@ -89,3 +103,45 @@ code {
 .message-card {
   border: 1px solid black;
 }
+
+#species-select, #age-select {
+  width: 100%;
+}
+
+#species-menu, #age-menu {
+  padding: 10px;
+  width: 250px; 
+}
+
+#add-pet-button, #add-pet-submit, .edit-profile, #delete-account-btn, #login-btn, #create-account-btn, .signup-submit {
+  border: 1px solid black;
+}
+
+#new-pet-form {
+  padding: 10px;
+}
+
+.contact-dropdown {
+  width: 60%;
+  margin: auto;
+}
+
+.pet-bio {
+  width: 90%;
+  margin: auto;
+}
+
+.phone-input {
+ padding: 6px;
+ border-radius: 5%;
+ border: 1px solid lightgrey;
+}
+
+.application-dropdown {
+  width: 90%;
+  margin: auto;
+}
+
+
+
+

@@ -86,7 +86,7 @@ rescue_from ActiveRecord::RecordInvalid, with: :invalid_record
             else
                 pet.update!(adoption_status: "Available")
             end
-            render json: application, status: :ok
+            render json: application, include: ['customer', 'customer.user', 'pet'], status: :ok
         else
             render json: {error: "Application not found"}, status: :not_found
         end

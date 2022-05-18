@@ -21,10 +21,10 @@ function PreviousAdoptionCard({ pet, user }) {
                     </div>
                     <div className="col-md-8">
                         <Card.Body>
-                            <Card.Title>{pet.name}</Card.Title>
-                            <Card.Text>Adoption Date: {cleanupDate(pet.adoption_date)}</Card.Text>
+                            <Card.Title><h2>{pet.name}</h2></Card.Title>
+                            <Card.Text><b>Adoption Date:</b> {cleanupDate(pet.adoption_date)}</Card.Text>
                             <Card.Text>
-                                <Accordion>
+                                <Accordion className="contact-dropdown">
                                     <Accordion.Item eventKey="0">
                                         <Accordion.Header>Customer: {customer.first_name} {customer.last_name} </Accordion.Header>
                                         <Accordion.Body>

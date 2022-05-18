@@ -62,14 +62,25 @@ rescue_from ActiveRecord::RecordInvalid, with: :invalid_record
 
 
     # NOTES: want to filter so that only showing animals whose species is included within the array of species held in user's profile
+    # def customer_index
+    #     user = User.find_by(id: session[:user_id])
+    #     if user
+    #         interested_in = user.profile.interested_in
+    #         pets = Pet.all
+    #         available_pets = pets.where(adoption_status: ["Available", "Application(s) Pending"]).order(:species, :name)
+    #         shown_pets = available_pets.filter { |pet| interested_in.include?(pet[:species]) }
+    #         render json: shown_pets, include: ['shelter', 'shelter.user', 'pet.bookmarks']
+    #     else
+    #         render json: {error: "User not found"}, status: :not_found
+    #     end
+    # end
+
     def customer_index
         user = User.find_by(id: session[:user_id])
         if user
-            interested_in = user.profile.interested_in
             pets = Pet.all
             available_pets = pets.where(adoption_status: ["Available", "Application(s) Pending"]).order(:species, :name)
-            shown_pets = available_pets.filter { |pet| interested_in.include?(pet[:species]) }
-            render json: shown_pets, include: ['shelter', 'shelter.user', 'pet.bookmarks']
+            render json: available_pets, include: ['shelter', 'shelter.user', 'pet.bookmarks']
         else
             render json: {error: "User not found"}, status: :not_found
         end

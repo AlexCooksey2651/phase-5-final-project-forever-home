@@ -57,7 +57,7 @@ function ShelterSignupForm({ onLogin }) {
                 <br/>
                 <Form.Group>
                     <Form.Label><b>Shelter Bio:</b></Form.Label>
-                    <Form.Control as="textarea" rows={4} value={bio} onChange={e => setBio(e.target.value)} />
+                    <Form.Control as="textarea" placeholder="Tell us a bit about your animal shelter" rows={4} value={bio} onChange={e => setBio(e.target.value)} />
                 </Form.Group>
                 <br/>
                 <Form.Group>
@@ -71,7 +71,8 @@ function ShelterSignupForm({ onLogin }) {
                 <br/>
                 <Form.Group>
                     <Form.Label><b>Phone Number:</b></Form.Label>
-                    <PhoneInput required country="US" placeholder="Enter Telephone" value={phoneNumber} onChange={setPhoneNumber}></PhoneInput>
+                    <br/>
+                    <PhoneInput className="phone-input"required country="US" placeholder="Enter Telephone" value={phoneNumber} onChange={setPhoneNumber}></PhoneInput>
                 </Form.Group>
                 <br/>
                 <Form.Group>
@@ -86,7 +87,7 @@ function ShelterSignupForm({ onLogin }) {
                 </Form.Group>
 
                 <Stack gap={2} className="col-md-5 mx-auto" >
-                    <Button variant="outline-dark" type="submit">
+                    <Button className="signup-submit" variant="light" type="submit">
                         Submit
                     </Button>
                 </Stack>

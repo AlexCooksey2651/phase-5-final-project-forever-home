@@ -78,7 +78,8 @@ function EditCustomerProfileForm({ userInfo, setUserInfo, handleCloseEdit }) {
             <br/>
             <Form.Group>
                 <Form.Label><b>Phone Number:</b></Form.Label>
-                <PhoneInput required country="US" placeholder="Phone Number" value={phoneNumber} onChange={setPhoneNumber}></PhoneInput>
+                <br/>
+                <PhoneInput className="phone-input" required country="US" placeholder="Phone Number" value={phoneNumber} onChange={setPhoneNumber}></PhoneInput>
             </Form.Group>
             <br/>
             <Form.Group className="mb-3" controlId="formBasicInput">

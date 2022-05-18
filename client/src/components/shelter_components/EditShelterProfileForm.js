@@ -65,12 +65,13 @@ function EditShelterProfileForm({ userInfo, setUserInfo, handleCloseEdit }) {
                     {stateOptions}
                 </Form.Select>
             </Form.Group>
-
+            <br/>
             <Form.Group>
                 <Form.Label><b>Phone Number:</b></Form.Label>
-                <PhoneInput required minlength="10" country="US" placeholder="Phone Number" value={phoneNumber} onChange={setPhoneNumber}></PhoneInput>
+                <br/>
+                <PhoneInput className="phone-input" required minlength="10" country="US" placeholder="Phone Number" value={phoneNumber} onChange={setPhoneNumber}></PhoneInput>
             </Form.Group>
-
+            <br/>
             <Form.Group className="mb-3" controlId="formBasicInput">
                 <Form.Label><b>Email Address:</b></Form.Label>
                 <Form.Control required type="text" placeholder="Email" value={email} onChange={e => setEmail(e.target.value)} />
@@ -85,7 +86,7 @@ function EditShelterProfileForm({ userInfo, setUserInfo, handleCloseEdit }) {
 
             <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
                 <Form.Label><b>Shelter Bio:</b></Form.Label>
-                <Form.Control required maxlength="200" as="textarea" rows={4} value={bio} onChange={e => setBio(e.target.value)} />
+                <Form.Control required maxLength="200" as="textarea" rows={4} value={bio} onChange={e => setBio(e.target.value)} />
             </Form.Group>
 
 

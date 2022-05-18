@@ -69,7 +69,10 @@ function ContactForm({ sender, recipient, petName, closeContactForm }) {
                 })
                     .then(r => {
                         if (r.ok) {
-                            r.json().then(data => console.log(data))
+                            r.json().then(data => {
+                                console.log(data)
+                                closeContactForm()
+                            })
                         } else {
                             r.json().then(data => setErrors(data.errors));
                         }
@@ -81,12 +84,12 @@ function ContactForm({ sender, recipient, petName, closeContactForm }) {
             <Container>
                 <Form onSubmit={handleSubmit}>
                     <Form.Group className="mb-3" controlId="formBasicInput">
-                        <Form.Label><b>Name:</b></Form.Label>
+                        <Form.Label><b>From:</b></Form.Label>
                         <Form.Control disabled type="text" value={senderName()}></Form.Control>
                     </Form.Group>
 
                     <Form.Group className="mb-3" controlId="formBasicInput">
-                        <Form.Label><b>Recipient:</b></Form.Label>
+                        <Form.Label><b>To:</b></Form.Label>
                         <Form.Control disabled type="email" value={recipientName()}></Form.Control>
                     </Form.Group>
 

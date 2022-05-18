@@ -60,9 +60,9 @@ function NewPetForm({ handleAddPet, handleClose }) {
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="formBasicSelect">
-                <Form.Label><b>Select Pet Species:</b></Form.Label>
+                <Form.Label><b>Select Pet Type:</b></Form.Label>
                 <Form.Select required aria-label="Default select example" value={species} onChange={e => setSpecies(e.target.value)}>
-                    <option value="" disabled selected>Pet Species</option>
+                    <option value="" disabled selected>Select</option>
                     <option value="Dog">Dog</option>
                     <option value="Cat">Cat</option>
                     <option value="Other Mammal">Other Mammal</option>
@@ -89,7 +89,7 @@ function NewPetForm({ handleAddPet, handleClose }) {
             </Form.Group>
 
             <Container>
-                <Button variant="dark" type="submit">
+                <Button id="add-pet-submit" variant="light" type="submit">
                     Submit
                 </Button>
             </Container>

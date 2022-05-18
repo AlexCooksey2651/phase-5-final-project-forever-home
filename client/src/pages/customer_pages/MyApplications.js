@@ -58,20 +58,20 @@ function MyApplications({ user }) {
     return (
         <Container id="customer-applications-container">
             <br/>
-            <Accordion>
-                <Accordion.Item eventKey={0} className="approved-applications">
+            <Accordion className="application-dropdown">
+                <Accordion.Item className="dropdown-section" eventKey={0} id="approved-applications">
                     <Accordion.Header><h2>Approved Applications! Come Meet Your New Best Friend!</h2></Accordion.Header>
                     <Accordion.Body>
                         {approvedApplicationCards()}
                     </Accordion.Body>
                 </Accordion.Item>
                 <br />
-                <Accordion.Item eventKey={1} className="pending-applications">
+                <Accordion.Item className="dropdown-section" eventKey={1} id="pending-applications">
                     <Accordion.Header><h2>Pending Applications</h2></Accordion.Header>
                     <Accordion.Body>{pendingApplicationCards()}</Accordion.Body>
                 </Accordion.Item>
                 <br />
-                <Accordion.Item eventKey={2} className="denied-applications">
+                <Accordion.Item className="dropdown-section" eventKey={2} id="denied-applications">
                     <Accordion.Header><h2>Denied Applications</h2></Accordion.Header>
                     <Accordion.Body>{deniedApplicationCards()}</Accordion.Body>
                 </Accordion.Item>

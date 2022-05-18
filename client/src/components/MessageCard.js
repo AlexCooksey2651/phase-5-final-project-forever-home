@@ -14,7 +14,8 @@ function MessageCard({ message, user }) {
             <h5>From: {isCustomer(user) ? message.shelter.name : `${message.customer.first_name} ${message.customer.last_name}`}</h5>
             <h5>Date: {cleanupDate(message.created_at)}</h5>
             <h5>Regarding: {message.pet_name}</h5>
-            <p><b>Message:</b> <em>{message.message_text}</em></p>
+            <br/>
+            <p><b>Message:</b> <br/><em>{message.message_text}</em></p>
             <Container>
                 <Button variant="outline-dark" onClick={showContactForm}>
                     Reply

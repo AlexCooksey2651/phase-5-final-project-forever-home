@@ -61,13 +61,13 @@ function CustomerSignupForm({ onLogin }) {
             <Form onSubmit={handleSubmit}>
                 <Form.Group className="mb-3" controlId="formBasicInput">
                     <Form.Label><b>Name:</b></Form.Label>
-                    <Form.Control required minlength="2" maxlength="20" type="text" placeholder="First Name" value={firstName} onChange={e => setFirstName(e.target.value)} />
-                    <Form.Control required minlength="2" maxlength="20" type="text" placeholder="Last Name" value={lastName} onChange={e => setLastName(e.target.value)} />
+                    <Form.Control required minLength="2" maxLength="20" type="text" placeholder="First Name" value={firstName} onChange={e => setFirstName(e.target.value)} />
+                    <Form.Control required minLength="2" maxLength="20" type="text" placeholder="Last Name" value={lastName} onChange={e => setLastName(e.target.value)} />
                 </Form.Group>
 
                 <Form.Group>
                     <Form.Label><b>Location:</b></Form.Label>
-                    <Form.Control required minlength="2" maxlength="20" type="text" placeholder="Enter City" value={city} onChange={e => setCity(e.target.value)} />
+                    <Form.Control required minLength="2" maxLength="20" type="text" placeholder="Enter City" value={city} onChange={e => setCity(e.target.value)} />
                     <Form.Select required aria-label="Default select example" value={state} onChange={e => setState(e.target.value)}>
                         <option value="" disabled >State</option>
                         {stateOptions}
@@ -76,7 +76,8 @@ function CustomerSignupForm({ onLogin }) {
                 <br/>
                 <Form.Group>
                     <Form.Label><b>Phone Number:</b></Form.Label>
-                    <PhoneInput required country="US" placeholder="Enter Telephone" value={phoneNumber} onChange={setPhoneNumber}></PhoneInput>
+                    <br/>
+                    <PhoneInput className="phone-input" required country="US" placeholder="Enter Telephone" value={phoneNumber} onChange={setPhoneNumber}></PhoneInput>
                 </Form.Group>
                 <br/>
                 <Form.Group>
@@ -93,12 +94,12 @@ function CustomerSignupForm({ onLogin }) {
                 <br/>
                 <Form.Group className="mb-3" controlId="formBasicPassword">
                     <Form.Label><b>Password:</b></Form.Label>
-                    <Form.Control required minlength="6" maxlength="20" type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)} />
-                    <Form.Control required minlength="6" maxlength="20" type="password" placeholder="Confirm password" value={passwordConfirmation} onChange={e => setPasswordConfirmation(e.target.value)} />
+                    <Form.Control required minLength="6" maxLength="20" type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)} />
+                    <Form.Control required minLength="6" maxLength="20" type="password" placeholder="Confirm password" value={passwordConfirmation} onChange={e => setPasswordConfirmation(e.target.value)} />
                 </Form.Group>
 
                 <Stack gap={2} className="col-md-5 mx-auto" >
-                    <Button variant="outline-dark" type="submit">
+                    <Button className="signup-submit" variant="light" type="submit">
                         Submit
                     </Button>
                 </Stack>

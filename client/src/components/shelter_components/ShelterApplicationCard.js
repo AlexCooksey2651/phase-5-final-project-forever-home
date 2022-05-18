@@ -46,7 +46,10 @@ function ShelterApplicationCard({ application, handleUpdateApplication, user, ac
             })
         }).then((r) => {
             if (r.ok) {
-                r.json().then(application => handleUpdateApplication(application))
+                r.json().then(application => {
+                    console.log(application)
+                    handleUpdateApplication(application)
+                })
             } else {
                 r.json().then(data => setErrors(data.errors))
             }
@@ -69,10 +72,11 @@ function ShelterApplicationCard({ application, handleUpdateApplication, user, ac
                     </div>
                     <div class="col-md-8">
                         <Card.Body>
-                            <Card.Title>{pet.name}</Card.Title>
-                            <Card.Text>Application Date: {cleanupDate(application.created_at)}</Card.Text>
+                            <Card.Title><h2>{pet.name}</h2></Card.Title>
+                            <br/>
+                            <Card.Text><b>Application Date:</b> {cleanupDate(application.created_at)}</Card.Text>
                             <Card.Text>
-                                <Accordion>
+                                <Accordion className="contact-dropdown">
                                     <Accordion.Item eventKey="0">
                                         <Accordion.Header>Customer: {`${customer.first_name} ${customer.last_name}`} </Accordion.Header>
                                         <Accordion.Body>
@@ -96,7 +100,7 @@ function ShelterApplicationCard({ application, handleUpdateApplication, user, ac
                                 </Accordion>
                             </Card.Text>
                             <Card.Text>
-                                Application:
+                                <b>Application Message:</b>
                                 <br />
                                 <em>{application.customer_text}</em>
                             </Card.Text>

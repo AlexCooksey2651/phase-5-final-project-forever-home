@@ -20,6 +20,7 @@ function Login({ onLogin }) {
         <div id="login">
             <Container >
                 <Header />
+                <br/>
                 {loginPage ? <LoginForm onLogin={onLogin} /> : <SignupForm onLogin={onLogin} />}
                 <Stack gap={2} className="col-md-5 mx-auto">
                     {/* {loginPage ?
@@ -37,7 +38,7 @@ function Login({ onLogin }) {
                             </Modal>
                         </>
                         : null} */}
-                    <Button variant="outline-dark" onClick={toggleLoginPage}>
+                    <Button id="create-account-btn" variant="light" onClick={toggleLoginPage}>
                         {loginPage ? "Create Account" : "Return to Login Page"}
                     </Button>
                 </Stack>

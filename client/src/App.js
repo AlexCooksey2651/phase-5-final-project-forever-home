@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext } from "react"
 import { UserContext } from "./context/user";
-import { Routes, Route } from "react-router-dom"
+import { Routes, Route, useNavigate } from "react-router-dom"
 import './App.css';
 import NavBar from './components/NavBar';
 import Header from './components/Header';
@@ -18,6 +18,7 @@ import MessageContainer from './pages/MessageContainer'
 function App() {
   // const { user, setUser } = useContext(UserContext);
   const [user, setUser] = useState(null)
+  const navigate = useNavigate()
 
   useEffect(() => {
     fetch('/me').then((r) => {
@@ -34,6 +35,7 @@ function App() {
       .then(r => {
         if (r.ok) {
           setUser(null)
+          navigate('/login')
         }
       })
   }

@@ -51,7 +51,7 @@ function LoginForm({ onLogin }) {
                     </Form.Group>
 
                     <Stack gap={2} className="col-md-5 mx-auto">
-                        <Button variant="outline-dark" type="submit">
+                        <Button id="login-btn" variant="light" type="submit">
                             Login
                         </Button>
 
