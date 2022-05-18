@@ -104,7 +104,7 @@ function BookmarkCard({ pet, user, bookmark, removeBookmark }) {
                             <Card.Text><b>Adoption Status:</b> {pet.adoption_status}</Card.Text>
                             <Stack gap={2} className="col-md-5 mx-auto">
                                 <Container>
-                                    <Button variant="dark" onClick={deleteBookmark}>
+                                    <Button className="bookmark-btn" variant="dark" onClick={deleteBookmark}>
                                         Bookmarked
                                     </Button>
                                 </Container>

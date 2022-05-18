@@ -205,21 +205,21 @@ function PetCard({ pet, user, handleUpdatePet, handleDeletePet }) {
                                 <Stack gap={2} className="col-md-5 mx-auto">
                                     <Container>
                                         {bookmarked ? 
-                                            <Button variant="dark" onClick={deleteBookmark}>
+                                            <Button className="bookmark-btn" variant="dark" onClick={deleteBookmark}>
                                                 Bookmarked
                                             </Button> : 
-                                            <Button variant="outline-dark" onClick={postBookmark}>
+                                            <Button className="bookmark-btn" variant="outline-dark" onClick={postBookmark}>
                                                 Bookmark
                                             </Button>}
                                     </Container>
                                     
                                     <Container>
                                         {hasApplications() ?
-                                            <Button variant="dark">
+                                            <Button className="apply-btn" variant="dark">
                                                 Already Applied
                                             </Button> :
                                             <>
-                                                <Button variant="outline-dark" onClick={handleShowDelete}>
+                                                <Button className="apply-btn" variant="outline-dark" onClick={handleShowDelete}>
                                                     Apply to Adopt {pet.name}
                                                 </Button>
                                                 <Modal show={showDelete} onHide={handleCloseDelete} animation={false}>

@@ -99,13 +99,13 @@ function PetSearch({ user }) {
                     <Row className="align-items-center">
                         <Col xs={6}>
                             <Form.Group >
-                                <Form.Control type="text" id="search-bar" placeholder="Search" onChange={(event) => setSearchText(event.target.value)} />
+                                <Form.Control className="search-bar-item" type="text" id="search-bar" placeholder="Search" onChange={(event) => setSearchText(event.target.value)} />
                             </Form.Group>
                         </Col>
                         <Col xs={3}>
                             <Form.Group id="species-select" >
                                 <Dropdown>
-                                    <Dropdown.Toggle variant="light" id="dropdown-basic-button">
+                                    <Dropdown.Toggle className="search-bar-item" variant="light" id="dropdown-basic-button">
                                         Type(s) of Pet
                                     </Dropdown.Toggle>
                                     <Dropdown.Menu id="species-menu">
@@ -119,7 +119,7 @@ function PetSearch({ user }) {
                         <Col xs={3}>
                             <Form.Group id="age-select">
                                 <Dropdown>
-                                    <Dropdown.Toggle variant="light" id="dropdown-basic-button">
+                                    <Dropdown.Toggle className="search-bar-item" variant="light" id="dropdown-basic-button">
                                         Age Range
                                     </Dropdown.Toggle>
                                     <Dropdown.Menu id="age-menu">

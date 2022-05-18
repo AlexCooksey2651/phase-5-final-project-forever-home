@@ -51,17 +51,17 @@ function NewPetForm({ handleAddPet, handleClose }) {
         <Form id="new-pet-form" onSubmit={handleSubmit}>
             <Form.Group className="mb-3" controlId="formBasicInput">
                 <Form.Label><b>Pet's Name:</b></Form.Label>
-                <Form.Control required minlength="2" maxlength="20" type="text" placeholder="Enter Pet's Name" value={name} onChange={e => setName(e.target.value)} />
+                <Form.Control type="text" placeholder="Enter Pet's Name" value={name} onChange={e => setName(e.target.value)} />
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="formBasicInput">
                 <Form.Label><b>Pet Image URL:</b></Form.Label>
-                <Form.Control required type="text" placeholder="Enter Pet Image URL" value={image} onChange={e => setImage(e.target.value)} />
+                <Form.Control type="text" placeholder="Enter Pet Image URL" value={image} onChange={e => setImage(e.target.value)} />
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="formBasicSelect">
                 <Form.Label><b>Select Pet Type:</b></Form.Label>
-                <Form.Select required aria-label="Default select example" value={species} onChange={e => setSpecies(e.target.value)}>
+                <Form.Select aria-label="Default select example" value={species} onChange={e => setSpecies(e.target.value)}>
                     <option value="" disabled selected>Select</option>
                     <option value="Dog">Dog</option>
                     <option value="Cat">Cat</option>
@@ -85,7 +85,7 @@ function NewPetForm({ handleAddPet, handleClose }) {
 
             <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
                 <Form.Label><b>Pet Bio:</b></Form.Label>
-                <Form.Control required maxlength="200" as="textarea" rows={4} value={bio} onChange={e => setBio(e.target.value)} />
+                <Form.Control maxlength="200" as="textarea" rows={4} value={bio} onChange={e => setBio(e.target.value)} />
             </Form.Group>
 
             <Container>
@@ -98,7 +98,7 @@ function NewPetForm({ handleAddPet, handleClose }) {
             {errors ? <Form.Group>
                 {errors.map(error => {
                     return (
-                        <Alert key={error}>
+                        <Alert key={error} onClose={() => setErrors([])} dismissible>
                             {error}
                         </Alert>
                     )

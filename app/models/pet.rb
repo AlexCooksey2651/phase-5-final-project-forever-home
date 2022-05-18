@@ -8,7 +8,7 @@ class Pet < ApplicationRecord
     has_many :customers, through: :bookmarks
     belongs_to :shelter
 
-    validates :name, presence: true
+    validates :name, presence: true, length: { in: 2..20 }
     validates :image, presence: true, on: :create
     validates :bio, presence: true, length: { maximum: 200 }
     validates :species, presence: true, inclusion: { in: ANIMALS }

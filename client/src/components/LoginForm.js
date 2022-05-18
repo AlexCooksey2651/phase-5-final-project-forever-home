@@ -60,7 +60,7 @@ function LoginForm({ onLogin }) {
                     {errors ? <Form.Group>
                         {errors.map(error => {
                             return (
-                                <Alert key={error}>
+                                <Alert key={error} onClose={() => setErrors([])} dismissible >
                                     {error}
                                 </Alert>
                             )

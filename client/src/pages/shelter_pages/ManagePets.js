@@ -116,7 +116,7 @@ function ManagePets({ user }) {
             <h2>Manage Pets</h2>
 
             <br />
-            <Container>
+            {/* <Container>
                 <Button id="add-pet-button" variant="light" onClick={handleShow}>
                     Add New Pet
                 </Button>
@@ -129,19 +129,19 @@ function ManagePets({ user }) {
                     </Modal.Body>
                 </Modal>
             </Container>
-            <br />
+            <br /> */}
             <div className="pet-search-bar">
                 <Form>
                     <Row className="align-items-center">
-                        <Col xs={6}>
+                        <Col xs={5}>
                             <Form.Group >
-                                <Form.Control type="text" id="search-bar" placeholder="Search" onChange={(event) => setSearchText(event.target.value)} />
+                                <Form.Control type="text" id="search-bar" className="search-bar-item" placeholder="Search" onChange={(event) => setSearchText(event.target.value)} />
                             </Form.Group>
                         </Col>
-                        <Col xs={3}>
+                        <Col xs="auto">
                             <Form.Group id="species-select" >
                                 <Dropdown>
-                                    <Dropdown.Toggle variant="light" id="dropdown-basic-button">
+                                    <Dropdown.Toggle variant="light" className="search-bar-item" id="dropdown-basic-button">
                                         Type(s) of Pet
                                     </Dropdown.Toggle>
                                     <Dropdown.Menu id="species-menu">
@@ -152,10 +152,10 @@ function ManagePets({ user }) {
                                 </Dropdown>
                             </Form.Group>
                         </Col>
-                        <Col xs={3}>
+                        <Col xs="auto">
                             <Form.Group id="age-select">
                                 <Dropdown>
-                                    <Dropdown.Toggle variant="light" id="dropdown-basic-button">
+                                    <Dropdown.Toggle className="search-bar-item" variant="light" id="dropdown-basic-button">
                                         Age Range
                                     </Dropdown.Toggle>
                                     <Dropdown.Menu id="age-menu">
@@ -171,6 +171,21 @@ function ManagePets({ user }) {
                                     </Dropdown.Menu>
                                 </Dropdown>
                             </Form.Group>
+                        </Col>
+                        <Col xs="auto">
+                            <Container>
+                                <Button id="add-pet-button" variant="light" onClick={handleShow}>
+                                    Add New Pet
+                                </Button>
+                                <Modal show={showModal} onHide={handleClose} animation={false}>
+                                    <Modal.Header closeButton>
+                                        <Modal.Title>Add a New Pet to your Shelter</Modal.Title>
+                                    </Modal.Header>
+                                    <Modal.Body>
+                                        <NewPetForm handleAddPet={handleAddPet} handleClose={handleClose} />
+                                    </Modal.Body>
+                                </Modal>
+                            </Container>
                         </Col>
                     </Row>
                 </Form>

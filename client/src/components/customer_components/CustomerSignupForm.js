@@ -44,7 +44,7 @@ function CustomerSignupForm({ onLogin }) {
                     city,
                     state,
                     phone_number: phoneNumber,
-                } 
+                }
             })
         })
             .then(r => {
@@ -61,41 +61,43 @@ function CustomerSignupForm({ onLogin }) {
             <Form onSubmit={handleSubmit}>
                 <Form.Group className="mb-3" controlId="formBasicInput">
                     <Form.Label><b>Name:</b></Form.Label>
-                    <Form.Control required minLength="2" maxLength="20" type="text" placeholder="First Name" value={firstName} onChange={e => setFirstName(e.target.value)} />
-                    <Form.Control required minLength="2" maxLength="20" type="text" placeholder="Last Name" value={lastName} onChange={e => setLastName(e.target.value)} />
+                    <Form.Control  type="text" placeholder="First Name" value={firstName} onChange={e => setFirstName(e.target.value)} />
+                    <Form.Control  type="text" placeholder="Last Name" value={lastName} onChange={e => setLastName(e.target.value)} />
                 </Form.Group>
 
                 <Form.Group>
                     <Form.Label><b>Location:</b></Form.Label>
-                    <Form.Control required minLength="2" maxLength="20" type="text" placeholder="Enter City" value={city} onChange={e => setCity(e.target.value)} />
-                    <Form.Select required aria-label="Default select example" value={state} onChange={e => setState(e.target.value)}>
+                    <Form.Control type="text" placeholder="Enter City" value={city} onChange={e => setCity(e.target.value)} />
+                    <Form.Select  aria-label="Default select example" value={state} onChange={e => setState(e.target.value)}>
                         <option value="" disabled >State</option>
                         {stateOptions}
                     </Form.Select>
                 </Form.Group>
-                <br/>
+                <br />
                 <Form.Group>
                     <Form.Label><b>Phone Number:</b></Form.Label>
-                    <br/>
-                    <PhoneInput className="phone-input" required country="US" placeholder="Enter Telephone" value={phoneNumber} onChange={setPhoneNumber}></PhoneInput>
+                    <br />
+                    <PhoneInput className="phone-input"  country="US" placeholder="Enter Telephone" value={phoneNumber} onChange={setPhoneNumber}></PhoneInput>
                 </Form.Group>
-                <br/>
+                <br />
                 <Form.Group>
                     <Form.Label><b>What Kind(s) of Pet are you Looking For?</b></Form.Label>
-                    {allPets.map(animal => {
-                        return <Form.Check defaultChecked key={animal} label={animal} value={animal} onChange={(event) => modifyWantedAnimals(event.target.value)} />
-                    })}
+                    <Container id="species-options">
+                        {allPets.map(animal => {
+                            return <Form.Check className="species-option" defaultChecked key={animal} label={animal} value={animal} onChange={(event) => modifyWantedAnimals(event.target.value)} />
+                        })}
+                    </Container>
                 </Form.Group>
-                <br/>
+                <br />
                 <Form.Group>
                     <Form.Label><b>Email Address:</b></Form.Label>
-                    <Form.Control required type="email" placeholder="Enter Email" value={email} onChange={e => setEmail(e.target.value)} />
+                    <Form.Control  type="email" placeholder="Enter Email" value={email} onChange={e => setEmail(e.target.value)} />
                 </Form.Group>
-                <br/>
+                <br />
                 <Form.Group className="mb-3" controlId="formBasicPassword">
                     <Form.Label><b>Password:</b></Form.Label>
-                    <Form.Control required minLength="6" maxLength="20" type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)} />
-                    <Form.Control required minLength="6" maxLength="20" type="password" placeholder="Confirm password" value={passwordConfirmation} onChange={e => setPasswordConfirmation(e.target.value)} />
+                    <Form.Control  type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)} />
+                    <Form.Control  type="password" placeholder="Confirm password" value={passwordConfirmation} onChange={e => setPasswordConfirmation(e.target.value)} />
                 </Form.Group>
 
                 <Stack gap={2} className="col-md-5 mx-auto" >
@@ -108,7 +110,7 @@ function CustomerSignupForm({ onLogin }) {
                 {errors ? <Form.Group>
                     {errors.map(error => {
                         return (
-                            <Alert key={error}>
+                            <Alert key={error} onClose={() => setErrors([])} dismissible>
                                 {error}
                             </Alert>
                         )

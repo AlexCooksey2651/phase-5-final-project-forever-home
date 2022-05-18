@@ -16,7 +16,8 @@ function SignupForm({ onLogin }) {
 
     return (
         <Container id="signup-form">
-            <Form>
+            <p id="profile-select-label"><b>Select Account Type:</b></p>
+            <Form id="profile-select">
                 <Form.Group className="mb-3">
                     <Form.Check
                         type="radio"
@@ -25,7 +26,6 @@ function SignupForm({ onLogin }) {
                         checked={profileType === "customer"}
                         onChange={() => setProfileType("customer")}
                     />
-
                     <Form.Check
                         type="radio"
                         label="Sign Up As Shelter"
@@ -35,6 +35,7 @@ function SignupForm({ onLogin }) {
                     />
                 </Form.Group>
             </Form>
+            <br/>
             {customer() ? <CustomerSignupForm onLogin={onLogin} /> : <ShelterSignupForm onLogin={onLogin}/>}
         </Container>
 

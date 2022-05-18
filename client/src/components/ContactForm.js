@@ -100,7 +100,7 @@ function ContactForm({ sender, recipient, petName, closeContactForm }) {
 
                     <Form.Group className="mb-3" controlId="formBasicInput">
                         <Form.Label><b>Message:</b></Form.Label>
-                        <Form.Control required maxlength="400" as="textarea" rows={4} value={message} onChange={e => setMessage(e.target.value)}></Form.Control>
+                        <Form.Control maxlength="400" as="textarea" rows={4} value={message} onChange={e => setMessage(e.target.value)}></Form.Control>
                     </Form.Group>
 
                     <br />
@@ -108,10 +108,11 @@ function ContactForm({ sender, recipient, petName, closeContactForm }) {
                         Send
                     </Button>
                     <br />
+                    <br/>
                     {errors ? <Form.Group>
                         {errors.map(error => {
                             return (
-                                <Alert key={error}>
+                                <Alert key={error} onClose={() => setErrors([])} dismissible>
                                     {error}
                                 </Alert>
                             )

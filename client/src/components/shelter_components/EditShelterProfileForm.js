@@ -53,14 +53,14 @@ function EditShelterProfileForm({ userInfo, setUserInfo, handleCloseEdit }) {
 
             <Form.Group className="mb-3" controlId="formBasicInput">
                 <Form.Label><b>Shelter Name:</b></Form.Label>
-                <Form.Control required minlength="2" maxlength="40" type="text" placeholder="Shelter Name" value={shelterName} onChange={e => setShelterName(e.target.value)} />
+                <Form.Control type="text" placeholder="Shelter Name" value={shelterName} onChange={e => setShelterName(e.target.value)} />
             </Form.Group>
 
 
             <Form.Group>
                 <Form.Label><b>Shelter Location:</b></Form.Label>
-                <Form.Control required minlength="2" maxlength="20" type="text" placeholder="City" value={city} onChange={e => setCity(e.target.value)} />
-                <Form.Select required aria-label="Default select example" value={state} onChange={e => setState(e.target.value)}>
+                <Form.Control type="text" placeholder="City" value={city} onChange={e => setCity(e.target.value)} />
+                <Form.Select aria-label="Default select example" value={state} onChange={e => setState(e.target.value)}>
                     <option value="" disabled>State</option>
                     {stateOptions}
                 </Form.Select>
@@ -69,12 +69,12 @@ function EditShelterProfileForm({ userInfo, setUserInfo, handleCloseEdit }) {
             <Form.Group>
                 <Form.Label><b>Phone Number:</b></Form.Label>
                 <br/>
-                <PhoneInput className="phone-input" required minlength="10" country="US" placeholder="Phone Number" value={phoneNumber} onChange={setPhoneNumber}></PhoneInput>
+                <PhoneInput className="phone-input" country="US" placeholder="Phone Number" value={phoneNumber} onChange={setPhoneNumber}></PhoneInput>
             </Form.Group>
             <br/>
             <Form.Group className="mb-3" controlId="formBasicInput">
                 <Form.Label><b>Email Address:</b></Form.Label>
-                <Form.Control required type="text" placeholder="Email" value={email} onChange={e => setEmail(e.target.value)} />
+                <Form.Control type="text" placeholder="Email" value={email} onChange={e => setEmail(e.target.value)} />
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="formBasicPassword">
@@ -86,7 +86,7 @@ function EditShelterProfileForm({ userInfo, setUserInfo, handleCloseEdit }) {
 
             <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
                 <Form.Label><b>Shelter Bio:</b></Form.Label>
-                <Form.Control required maxLength="200" as="textarea" rows={4} value={bio} onChange={e => setBio(e.target.value)} />
+                <Form.Control as="textarea" rows={4} value={bio} onChange={e => setBio(e.target.value)} />
             </Form.Group>
 
 
@@ -101,7 +101,7 @@ function EditShelterProfileForm({ userInfo, setUserInfo, handleCloseEdit }) {
             {errors ? <Form.Group>
                 {errors.map(error => {
                     return (
-                        <Alert key={error}>
+                        <Alert key={error} onClose={() => setErrors([])} dismissible>
                             {error}
                         </Alert>
                     )

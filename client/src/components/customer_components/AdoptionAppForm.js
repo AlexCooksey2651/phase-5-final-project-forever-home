@@ -55,17 +55,18 @@ function AdoptionAppForm({ pet, user }) {
 
                 <Form.Group>
                     <Form.Label><b>Tell us why you'd be a great fit for {pet.name}:</b></Form.Label>
-                    <Form.Control required maxlength="200" as="textarea" rows={4} value={applicationText} onChange={e => setApplicationText(e.target.value)} />
+                    <Form.Control maxlength="200" as="textarea" rows={4} value={applicationText} onChange={e => setApplicationText(e.target.value)} />
                 </Form.Group>
                 <br />
                 <Button variant="outline-dark" type="submit">
                     Submit Application
                 </Button>
                 <br />
+                <br/>
                 {errors ? <Form.Group>
                     {errors.map(error => {
                         return (
-                            <Alert key={error}>
+                            <Alert key={error} onClose={() => setErrors([])} dismissible>
                                 {error}
                             </Alert>
                         )

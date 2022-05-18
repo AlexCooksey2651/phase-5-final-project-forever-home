@@ -61,6 +61,8 @@ code {
   margin-left: 20px;
   margin-bottom: 10px;
   border: 0.5px solid black;
+  max-height: 80%;
+  max-width: 80%;
 }
 
 #signup-form {
@@ -84,6 +86,8 @@ code {
 #login {
   margin-top: 20px;
 }
+
+
 
 .profile-details {
   width: 90%;
@@ -113,16 +117,20 @@ code {
   width: 250px; 
 }
 
-#add-pet-button, #add-pet-submit, .edit-profile, #delete-account-btn, #login-btn, #create-account-btn, .signup-submit {
+#add-pet-button, #add-pet-submit, #update-pet-btn, .edit-profile, #delete-account-btn, #login-btn, #create-account-btn, .signup-submit {
   border: 1px solid black;
 }
 
+#create-account-btn {
+  width: 98%;
+  margin: auto;
+}
 #new-pet-form {
   padding: 10px;
 }
 
 .contact-dropdown {
-  width: 60%;
+  width: 50%;
   margin: auto;
 }
 
@@ -142,6 +150,39 @@ code {
   margin: auto;
 }
 
+.search-bar-item {
+  border: 1px solid black;
+}
+
+#species-options  {
+  background-color: rgb(251, 244, 244);
+  border: 1.5px solid lightgray;
+  border-radius: 1%;
+  padding: 3px;
+}
+
+#profile-select {
+  margin-left: 10px;
+  width: 98%;
+  background-color: rgb(251, 244, 244);
+  border: 1.5px solid lightgray;
+  border-radius: 2%;
+  height: 58px;
+  padding-left: 5px;
+}
+
+#profile-select-label {
+  margin-left: 10px;
+  margin-bottom: 8px;
+}
+
+.bookmark-btn {
+  width: 72%;
+}
+
+#delete-account-btn {
+  width: 37.8%;
+}
 
 
 

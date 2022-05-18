@@ -6,7 +6,7 @@ class Shelter < ApplicationRecord
     has_many :customers, through: :messages
 
     validates :name, presence: true, uniqueness: true, length: { in: 2..40 }
-    validates :bio, presence: true, length: { maximum: 200 }
+    validates :bio, presence: true, length: { maximum: 300 }
 
     accepts_nested_attributes_for :user
 end

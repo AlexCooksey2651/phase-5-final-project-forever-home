@@ -112,7 +112,7 @@ function EditCustomerProfileForm({ userInfo, setUserInfo, handleCloseEdit }) {
             {errors ? <Form.Group>
                 {errors.map(error => {
                     return (
-                        <Alert key={error}>
+                        <Alert key={error} onClose={() => setErrors([])} dismissible>
                             {error}
                         </Alert>
                     )

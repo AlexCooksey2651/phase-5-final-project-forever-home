@@ -52,7 +52,7 @@ function ShelterSignupForm({ onLogin }) {
             <Form onSubmit={handleSubmit}>
                 <Form.Group>
                     <Form.Label><b>Shelter Name:</b></Form.Label>
-                    <Form.Control required minLength="2" maxLength="40" type="text" placeholder="Enter Shelter Name" value={shelterName} onChange={e => setShelterName(e.target.value)} />
+                    <Form.Control  type="text" placeholder="Enter Shelter Name" value={shelterName} onChange={e => setShelterName(e.target.value)} />
                 </Form.Group>
                 <br/>
                 <Form.Group>
@@ -62,8 +62,8 @@ function ShelterSignupForm({ onLogin }) {
                 <br/>
                 <Form.Group>
                     <Form.Label><b>Shelter Location:</b></Form.Label>
-                    <Form.Control required minLength="2" maxLength="20" type="text" placeholder="Enter City" value={city} onChange={e => setCity(e.target.value)} />
-                    <Form.Select required aria-label="Default select example" value={state} onChange={e => setState(e.target.value)}>
+                    <Form.Control type="text" placeholder="Enter City" value={city} onChange={e => setCity(e.target.value)} />
+                    <Form.Select  aria-label="Default select example" value={state} onChange={e => setState(e.target.value)}>
                         <option value="" disabled >State</option>
                         {stateOptions}
                     </Form.Select>
@@ -77,13 +77,13 @@ function ShelterSignupForm({ onLogin }) {
                 <br/>
                 <Form.Group>
                     <Form.Label><b>Email Address:</b></Form.Label>
-                    <Form.Control required type="email" placeholder="Enter Shelter Email" value={email} onChange={e => setEmail(e.target.value)} />
+                    <Form.Control type="email" placeholder="Enter Shelter Email" value={email} onChange={e => setEmail(e.target.value)} />
                 </Form.Group>
                 <br/>
                 <Form.Group className="mb-3" controlId="formBasicPassword">
                     <Form.Label><b>Password:</b></Form.Label>
-                    <Form.Control minLength="6" maxLength="20" type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)} />
-                    <Form.Control minLength="6" maxLength="20" type="password" placeholder="Confirm password" value={passwordConfirmation} onChange={e => setPasswordConfirmation(e.target.value)} />
+                    <Form.Control  type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)} />
+                    <Form.Control  type="password" placeholder="Confirm password" value={passwordConfirmation} onChange={e => setPasswordConfirmation(e.target.value)} />
                 </Form.Group>
 
                 <Stack gap={2} className="col-md-5 mx-auto" >
@@ -96,7 +96,7 @@ function ShelterSignupForm({ onLogin }) {
                 {errors ? <Form.Group>
                     {errors.map(error => {
                         return (
-                            <Alert key={error}>
+                            <Alert key={error} onClose={() => setErrors([])} dismissible>
                                 {error}
                             </Alert>
                         )
