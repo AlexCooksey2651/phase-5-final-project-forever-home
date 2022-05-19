@@ -22,7 +22,7 @@ function ShelterApplicationCard({ application, handleUpdateApplication, user, ac
             },
             body: JSON.stringify({
                 ...application,
-                status: "Approved"
+                status: "Approved",
             })
         }).then((r) => {
             if (r.ok) {
@@ -68,7 +68,7 @@ function ShelterApplicationCard({ application, handleUpdateApplication, user, ac
             <Card className="application-card">
                 <div class="row no-gutters">
                     <div class="col-md-4">
-                        <Card.Img className="application-card-image" src={pet.image} alt="pet picture" />
+                        <Card.Img className="application-card-image" src={pet.image_url} alt="pet picture" />
                     </div>
                     <div class="col-md-8">
                         <Card.Body>
@@ -106,8 +106,8 @@ function ShelterApplicationCard({ application, handleUpdateApplication, user, ac
                             </Card.Text>
                             {active ? 
                             <Stack gap={2} className="col-md-5 mx-auto">
-                                <Button variant="outline-dark" onClick={() => adoptPet()}>Approve Application</Button>
-                                <Button variant="outline-dark" onClick={() => denyApplication()}>Deny Application</Button>
+                                <Button  variant="outline-dark" onClick={() => adoptPet()}>Approve Application</Button>
+                                <Button  variant="outline-dark" onClick={() => denyApplication()}>Deny Application</Button>
                             </Stack> : null}
                             <br />
                             {errors ? <Container>

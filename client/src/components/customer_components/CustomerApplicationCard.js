@@ -34,7 +34,7 @@ function CustomerApplicationCard({ withdraw, application, user, handleRemoveAppl
             <Card className="application-card">
                 <div class="row no-gutters">
                     <div class="col-md-4">
-                        <Card.Img className="application-card-image" src={pet.image} alt="pet picture" />
+                        <Card.Img className="application-card-image" src={pet.image_url} alt="pet picture" />
                     </div>
                     <div class="col-md-8">
                         <Card.Body>

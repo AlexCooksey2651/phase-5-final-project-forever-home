@@ -17,7 +17,7 @@ function MessageCard({ message, user }) {
             <br/>
             <p><b>Message:</b> <br/><em>{message.message_text}</em></p>
             <Container>
-                <Button variant="outline-dark" onClick={showContactForm}>
+                <Button className="reply-btn" variant="outline-dark" onClick={showContactForm}>
                     Reply
                 </Button>
                 <Modal show={showContact} onHide={closeContactForm} animation={false}>

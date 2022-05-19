@@ -45,7 +45,6 @@ function ManagePets({ user }) {
     const filteredBySpecies = () => {
         if (pets.length > 0) {
             const filtered = pets.filter(pet => interestedIn.includes(pet.species))
-            console.log(filtered)
             return filtered
         } else {
             return []
@@ -53,7 +52,7 @@ function ManagePets({ user }) {
     }
 
     const ageInYears = (pet) => {
-        if (pet.age_unit === "Weeks" || pet.age_units === "Months") {
+        if (pet.age_unit === "Weeks" || pet.age_unit === "Months") {
             return 0
         } else {
             return pet.age

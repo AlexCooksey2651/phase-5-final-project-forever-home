@@ -3,7 +3,8 @@ import { Form, Container, Button, Alert } from 'react-bootstrap'
 
 function EditPetForm({ pet, handleUpdatePet, closeEditForm }) {
     const [name, setName] = useState(pet.name)
-    const [image, setImage] = useState(pet.image)
+    const [imageFile, setImageFile] = useState()
+    const [imageUrl, setImageUrl] = useState(pet.image_url)
     const [species, setSpecies] = useState(pet.species)
     const [bio, setBio] = useState(pet.bio)
     const [age, setAge] = useState(pet.age)
@@ -13,20 +14,22 @@ function EditPetForm({ pet, handleUpdatePet, closeEditForm }) {
 
     function handleSubmit(e) {
         e.preventDefault()
+        const formData = new FormData();
+        formData.append("name", name)
+        if (imageFile) {
+            formData.append("image_file", imageFile, imageFile.name)
+        }
+        formData.append("bio", bio)
+        formData.append("species", species)
+        formData.append("age", age)
+        formData.append("age_unit", ageUnit)
+        formData.append("adoption_status", "Available")
+        for (const pair of formData.entries()) {
+            console.log(pair[0]+ ', ' + pair[1])
+        }
         fetch(`/pets/${pet.id}`, {
             method: "PATCH",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                name,
-                image,
-                species,
-                bio,
-                age,
-                age_unit: ageUnit,
-                adoption_status: adoptionStatus
-            })
+            body: formData,
         })
             .then(r => {
                 if (r.ok) {
@@ -47,8 +50,8 @@ function EditPetForm({ pet, handleUpdatePet, closeEditForm }) {
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="formBasicInput">
-                <Form.Label><b>Pet Image URL:</b></Form.Label>
-                <Form.Control required type="text" placeholder="Enter Pet Image URL" value={image} onChange={e => setImage(e.target.value)} />
+                <Form.Label><b>Upload Pet Image:</b></Form.Label>
+                <Form.Control type="file" accepts="image/*" multiple={false} placeholder="Upload Pet Image" onChange={e => setImageFile(e.target.files[0])} />
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="formBasicSelect">

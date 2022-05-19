@@ -17,7 +17,7 @@ function PreviousAdoptionCard({ pet, user }) {
             <Card className="application-card">
                 <div className="row no-gutters">
                     <div class="col-md-4">
-                        <Card.Img className="application-card-image" src={pet.image} />
+                        <Card.Img className="application-card-image" src={pet.image_url} alt="pet picture" />
                     </div>
                     <div className="col-md-8">
                         <Card.Body>

@@ -64,7 +64,7 @@ function BookmarkCard({ pet, user, bookmark, removeBookmark }) {
             <Card className="application-card" bg="light">
                 <div className="row no-gutters">
                     <div className="col-md-4">
-                        <Card.Img className="pet-card-image" src={pet.image} />
+                        <Card.Img className="pet-card-image" src={pet.image_url} alt="pet picture" />
                     </div>
                     <div className="col-md-8">
                         <Card.Body>
@@ -111,11 +111,11 @@ function BookmarkCard({ pet, user, bookmark, removeBookmark }) {
 
                                 <Container>
                                     {hasApplications() ?
-                                        <Button variant="dark">
+                                        <Button className="apply-btn" variant="dark">
                                             Already Applied
                                         </Button> :
                                         <>
-                                            <Button variant="outline-dark" onClick={handleShowDelete}>
+                                            <Button className="apply-btn" variant="outline-dark" onClick={handleShowDelete}>
                                                 Apply to Adopt {pet.name}
                                             </Button>
                                             <Modal show={showDelete} onHide={handleCloseDelete} animation={false}>

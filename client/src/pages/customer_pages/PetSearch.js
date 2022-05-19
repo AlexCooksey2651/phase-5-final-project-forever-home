@@ -41,7 +41,7 @@ function PetSearch({ user }) {
     }
 
     const ageInYears = (pet) => {
-        if (pet.age_unit === "Weeks" || pet.age_units === "Months") {
+        if (pet.age_unit === "Weeks" || pet.age_unit === "Months") {
             return 0
         } else {
             return pet.age

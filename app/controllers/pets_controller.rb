@@ -14,7 +14,7 @@ rescue_from ActiveRecord::RecordInvalid, with: :invalid_record
         user = User.find_by(id: session[:user_id])
         if user
             new_pet = user.profile.pets.create!(pet_params)
-            render json: new_pet, status: :created
+            render json: new_pet, methods: :image_url, status: :created
         else
             render json: {error: "User not found"}, status: :not_found
         end
@@ -34,7 +34,7 @@ rescue_from ActiveRecord::RecordInvalid, with: :invalid_record
         pet = Pet.find_by(id: params[:id])
         if pet
             pet.update!(pet_params)
-            render json: pet, status: :ok
+            render json: pet, methods: :image_url, status: :ok
         else
             render json: {error: "Pet not found"}, status: :not_found
         end
@@ -44,7 +44,7 @@ rescue_from ActiveRecord::RecordInvalid, with: :invalid_record
         user = User.find_by(id: session[:user_id])
         if user
             pets = Pet.where(adoption_status: ["Available", "Application(s) Pending"], shelter_id: user.profile.id).order(:species, :name)
-            render json: pets
+            render json: pets, methods: :image_url
         else
             render json: {error: "User not found"}, status: :not_found
         end
@@ -54,7 +54,7 @@ rescue_from ActiveRecord::RecordInvalid, with: :invalid_record
         user = User.find_by(id: session[:user_id])
         if user
             pets = Pet.where("adoption_status = ? AND shelter_id = ?", "Adopted", user.profile.id).order(:species, :name)
-            render json: pets, include: ['pet_applications', 'pet_applications.customer.user']
+            render json: pets, include: ['pet_applications', 'pet_applications.customer.user'], methods: :image_url
         else
             render json: {error: "User not found"}, status: :not_found
         end
@@ -80,7 +80,7 @@ rescue_from ActiveRecord::RecordInvalid, with: :invalid_record
         if user
             pets = Pet.all
             available_pets = pets.where(adoption_status: ["Available", "Application(s) Pending"]).order(:species, :name)
-            render json: available_pets, include: ['shelter', 'shelter.user', 'pet.bookmarks']
+            render json: available_pets, include: ['shelter', 'shelter.user', 'pet.bookmarks'], methods: :image_url
         else
             render json: {error: "User not found"}, status: :not_found
         end
@@ -93,7 +93,7 @@ rescue_from ActiveRecord::RecordInvalid, with: :invalid_record
     end
 
     def pet_params
-        params.permit(:name, :image, :bio, :species, :age, :age_unit, :shelter_id, :adoption_status, :adoption_date)
+        params.permit(:name, :image_file, :bio, :species, :age, :age_unit, :shelter_id, :adoption_status, :adoption_date)
     end
 
 end

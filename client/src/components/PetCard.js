@@ -105,7 +105,7 @@ function PetCard({ pet, user, handleUpdatePet, handleDeletePet }) {
                 <Card className="application-card" bg="light">
                     <div className="row no-gutters">
                         <div className="col-md-4">
-                            <Card.Img className="pet-card-image" src={pet.image} />
+                            <Card.Img className="pet-card-image" src={pet.image_url} alt="pet picture"/>
                         </div>
                         <div className="col-md-8">
                             <Card.Body>
@@ -122,7 +122,7 @@ function PetCard({ pet, user, handleUpdatePet, handleDeletePet }) {
                                 <Card.Text><b>Adoption Status:</b> {pet.adoption_status}</Card.Text>
                                 <Stack gap={2} className="col-md-5 mx-auto">
                                     <Container>
-                                        <Button variant="outline-dark" onClick={showEditForm}>
+                                        <Button className="edit-pet-btn" variant="outline-dark" onClick={showEditForm}>
                                             Edit Pet Information
                                         </Button>
 
@@ -136,7 +136,7 @@ function PetCard({ pet, user, handleUpdatePet, handleDeletePet }) {
                                         </Modal>
                                     </Container>
                                     <Container>
-                                        <Button variant="outline-dark" onClick={handleShowDelete}>
+                                        <Button className="remove-pet-btn" variant="outline-dark" onClick={handleShowDelete}>
                                             Remove Listing
                                         </Button>
                                         <Modal show={showDelete} onHide={handleCloseDelete} animation={false}>
@@ -164,7 +164,7 @@ function PetCard({ pet, user, handleUpdatePet, handleDeletePet }) {
                 <Card className="application-card" bg="light">
                     <div className="row no-gutters">
                         <div className="col-md-4">
-                            <Card.Img className="pet-card-image" src={pet.image} />
+                            <Card.Img className="pet-card-image" src={pet.image_url} alt="pet picture"/>
                         </div>
                         <div className="col-md-8">
                             <Card.Body>
