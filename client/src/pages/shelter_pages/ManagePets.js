@@ -132,7 +132,7 @@ function ManagePets({ user }) {
             <div className="pet-search-bar">
                 <Form>
                     <Row className="align-items-center">
-                        <Col xs={5}>
+                        <Col xs={4}>
                             <Form.Group >
                                 <Form.Control type="text" id="search-bar" className="search-bar-item" placeholder="Search" onChange={(event) => setSearchText(event.target.value)} />
                             </Form.Group>

@@ -110,7 +110,7 @@ code {
 
 #species-select, #age-select {
   width: 100%;
-  padding-left: 15px;
+  padding-left: 10px;
 }
 
 #species-menu, #age-menu {
@@ -178,15 +178,15 @@ code {
 }
 
 .bookmark-btn, .apply-btn, .edit-pet-btn, .remove-pet-btn {
-  width: 78%;
+  width: 90%;
 }
 
 .reply-btn {
   width: 22%
 }
 
-#delete-account-btn {
-  width: 37.8%;
+#delete-account-btn, .edit-profile {
+  width: 45%;
 }
 
 
