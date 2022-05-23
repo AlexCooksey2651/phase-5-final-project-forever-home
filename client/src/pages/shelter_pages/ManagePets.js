@@ -155,7 +155,7 @@ function ManagePets({ user }) {
                             <Form.Group id="age-select">
                                 <Dropdown>
                                     <Dropdown.Toggle className="search-bar-item" variant="light" id="dropdown-basic-button">
-                                        Age Range
+                                        Age Range (Years)
                                     </Dropdown.Toggle>
                                     <Dropdown.Menu id="age-menu">
                                         <Row className="align-items-center">
