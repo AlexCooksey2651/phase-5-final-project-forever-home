@@ -1,5 +1,4 @@
-import React, { useEffect, useState, useContext } from "react"
-import { UserContext } from "./context/user";
+import React, { useEffect, useState } from "react"
 import { Routes, Route, useNavigate } from "react-router-dom"
 import './App.css';
 import NavBar from './components/NavBar';
@@ -16,7 +15,6 @@ import Login from './pages/Login';
 import MessageContainer from './pages/MessageContainer'
 
 function App() {
-  // const { user, setUser } = useContext(UserContext);
   const [user, setUser] = useState(null)
   const navigate = useNavigate()
 

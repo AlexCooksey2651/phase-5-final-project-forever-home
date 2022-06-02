@@ -47,7 +47,6 @@ function ShelterApplicationCard({ application, handleUpdateApplication, user, ac
         }).then((r) => {
             if (r.ok) {
                 r.json().then(application => {
-                    console.log(application)
                     handleUpdateApplication(application)
                 })
             } else {

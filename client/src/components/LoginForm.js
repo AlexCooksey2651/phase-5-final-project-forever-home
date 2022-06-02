@@ -1,6 +1,5 @@
-import React, { useState, useContext } from 'react'
+import React, { useState } from 'react'
 import { useNavigate } from "react-router-dom"
-import { UserContext } from '../context/user'
 import { Form, Container, Button, Stack, Alert } from 'react-bootstrap'
 
 function LoginForm({ onLogin }) {
@@ -8,7 +7,6 @@ function LoginForm({ onLogin }) {
     const [password, setPassword] = useState("")
     const [errors, setErrors] = useState([]);
     const navigate = useNavigate()
-    // const { user, setUser } = useContext(UserContext)
 
     function handleSubmit(e) {
         e.preventDefault()

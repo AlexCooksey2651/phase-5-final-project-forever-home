@@ -3,13 +3,6 @@ import Container from 'react-bootstrap/Container'
 import { isCustomer } from '../Resources'
 
 function Home({ user }) {
-    // const isCustomer = () => {
-    //     if (user.profile.type === "customer") {
-    //         return true
-    //     } else if (user.profile.type === "shelter") {
-    //         return false
-    //     }
-    // }
 
     return (
         <Container id="about">

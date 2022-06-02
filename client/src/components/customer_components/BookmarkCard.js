@@ -1,7 +1,5 @@
 import React, { useState } from 'react'
-import { Container, Card, Button, Stack, Modal, Accordion, Alert, ModalBody } from 'react-bootstrap'
-import { useNavigate } from 'react-router-dom'
-import EditPetForm from '../shelter_components/EditPetForm'
+import { Container, Card, Button, Stack, Modal, Accordion, Alert } from 'react-bootstrap'
 import AdoptionAppForm from './AdoptionAppForm'
 import ContactForm from '../ContactForm'
 
@@ -16,9 +14,7 @@ const formatPhoneNum = (phoneNumber) => {
 
 function BookmarkCard({ pet, user, bookmark, removeBookmark }) {
     const userType = user.profile.type
-    const [bookmarked, setBookmarked] = useState(true)
     const [errors, setErrors] = useState([])
-    const navigate = useNavigate()
 
     const [showDelete, setShowDelete] = useState(false)
     const handleShowDelete = () => setShowDelete(true)
@@ -45,8 +41,6 @@ function BookmarkCard({ pet, user, bookmark, removeBookmark }) {
             } else {
                 return false
             }
-        } else {
-            console.log('hello')
         }
     }
 
@@ -55,9 +49,7 @@ function BookmarkCard({ pet, user, bookmark, removeBookmark }) {
             method: "DELETE",
         })
         removeBookmark(bookmark)
-    }
-
-    
+    } 
 
     return (
         <Container>

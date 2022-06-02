@@ -1,12 +1,10 @@
-import React, { useState, useContext, useEffect } from 'react'
-import { UserContext } from '../../context/user'
+import React, { useState, useEffect } from 'react'
 import { Container, Modal, Button, Form, Row, Col, Dropdown } from 'react-bootstrap'
 import NewPetForm from '../../components/shelter_components/NewPetForm'
 import PetCard from '../../components/PetCard'
 import { allPets } from '../../Resources'
 
 function ManagePets({ user }) {
-    // const { user } = useContext(UserContext)
     const [showModal, setShowModal] = useState(false)
     const [pets, setPets] = useState([])
     const [searchText, setSearchText] = useState("")
@@ -24,15 +22,6 @@ function ManagePets({ user }) {
             }
         })
     }, [])
-
-    // const searchedPets = () => {
-    //     if (pets.length > 0) {
-    //         return pets.filter(pet => (pet.name.toLowerCase().includes(searchText.toLowerCase()) || pet.bio.toLowerCase().includes(searchText.toLowerCase())))
-    //     }
-    //     else {
-    //         return []
-    //     }
-    // }
 
     function modifyWantedAnimals(animalType) {
         if (interestedIn.includes(animalType)) {
@@ -115,20 +104,6 @@ function ManagePets({ user }) {
             <h2>Manage Pets</h2>
 
             <br />
-            {/* <Container>
-                <Button id="add-pet-button" variant="light" onClick={handleShow}>
-                    Add New Pet
-                </Button>
-                <Modal show={showModal} onHide={handleClose} animation={false}>
-                    <Modal.Header closeButton>
-                        <Modal.Title>Add a New Pet to your Shelter</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
-                        <NewPetForm handleAddPet={handleAddPet} handleClose={handleClose} />
-                    </Modal.Body>
-                </Modal>
-            </Container>
-            <br /> */}
             <div className="pet-search-bar">
                 <Form>
                     <Row className="align-items-center">
@@ -189,14 +164,6 @@ function ManagePets({ user }) {
                     </Row>
                 </Form>
             </div>
-            {/* <div className="pet-search-bar">
-                <Form>
-                    <Form.Group >
-                        <Form.Label for="pet-search">Search for a Pet:</Form.Label>
-                        <Form.Control type="text" placeholder="Search" onChange={(event) => setSearchText(event.target.value)} />
-                    </Form.Group>
-                </Form>
-            </div> */}
             <br />
             <Container id="shelter-pet-card-container">
                 {petCards()}

@@ -1,10 +1,9 @@
-import React, { useState, useContext } from 'react'
+import React, { useState } from 'react'
 import PhoneInput from 'react-phone-number-input/input'
 import { Form, Container, Button, Alert } from 'react-bootstrap'
 import { stateOptions } from '../../Resources'
 
 function EditShelterProfileForm({ userInfo, setUserInfo, handleCloseEdit }) {
-    // const [userInfo, setUserInfo] = useState(user)
     const [errors, setErrors] = useState([])
     const [shelterName, setShelterName] = useState(userInfo.profile.shelter.name)
     const [city, setCity] = useState(userInfo.city)

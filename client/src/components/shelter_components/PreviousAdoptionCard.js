@@ -5,7 +5,6 @@ import { formatPhoneNum, cleanupDate } from '../../Resources'
 
 function PreviousAdoptionCard({ pet, user }) {
     const [showContact, setShowContact] = useState(false)
-    const [errors, setErrors] = useState([])
     const matchingApplication = pet.pet_applications.find(application => application.status === "Approved")
     const customer = matchingApplication.customer
 

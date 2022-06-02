@@ -4,7 +4,6 @@ import { Form, Container, Button, Alert } from 'react-bootstrap'
 function EditPetForm({ pet, handleUpdatePet, closeEditForm }) {
     const [name, setName] = useState(pet.name)
     const [imageFile, setImageFile] = useState()
-    const [imageUrl, setImageUrl] = useState(pet.image_url)
     const [species, setSpecies] = useState(pet.species)
     const [bio, setBio] = useState(pet.bio)
     const [age, setAge] = useState(pet.age)

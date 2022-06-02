@@ -1,17 +1,14 @@
-import React, { useContext, useEffect, useState } from 'react'
-import { UserContext } from '../../context/user'
-import { Container, Form, DropdownButton, Dropdown, Row, Col } from 'react-bootstrap'
+import React, { useEffect, useState } from 'react'
+import { Container, Form, Dropdown, Row, Col } from 'react-bootstrap'
 import PetCard from '../../components/PetCard'
 import { allPets } from '../../Resources'
 
 function PetSearch({ user }) {
-    // const { user } = useContext(UserContext)
     const [pets, setPets] = useState([])
     const [searchText, setSearchText] = useState("")
     const [interestedIn, setInterestedIn] = useState(user.profile.customer.interested_in)
     const [lowerAge, setLowerAge] = useState(0)
     const [upperAge, setUpperAge] = useState(99)
-    // const [selectAll, setSelectAll] = useState(false)
     console.log(interestedIn)
 
     useEffect(() => {
@@ -65,15 +62,6 @@ function PetSearch({ user }) {
         }
     }
 
-    // function toggleSelectAll() {
-    //     if (selectAll === true) {
-    //         setInterestedIn([])
-    //         setSelectAll(false)
-    //     } else if (selectAll === false) {
-    //         setInterestedIn(allPets)
-    //         setSelectAll(true)
-    //     }
-    // }
 
     const petCards = () => {
         if (searchedPets().length > 0) {
@@ -146,5 +134,3 @@ function PetSearch({ user }) {
 }
 
 export default PetSearch
-
-// type="checkbox" defaultChecked={selectAll} label={allPets} value={allPets} onChange={() => toggleSelectAll()}>{selectAll ? "Unselect All": "Select All"}

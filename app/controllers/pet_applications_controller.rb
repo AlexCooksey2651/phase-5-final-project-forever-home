@@ -34,13 +34,7 @@ rescue_from ActiveRecord::RecordInvalid, with: :invalid_record
         user = User.find_by(id: session[:user_id])
         if user
             new_application = user.profile.pet_applications.create!(application_params)
-            # NOTE: if pet.adoption_status isn't "application(s) pending", should update to pending
-            # pet = Pet.find_by(id: new_application.pet.id)
-            # if pet.status == "Available"
-            #     pet.update!(adoption_status: "Application(s) pending")
-            # end
             pet = Pet.find_by(id: params[:pet_id])
-            # pet.set_adoption_status
             if pet.adoption_status == "Available"
                 pet.update!(adoption_status: "Application(s) Pending")
             end
@@ -53,8 +47,6 @@ rescue_from ActiveRecord::RecordInvalid, with: :invalid_record
     def destroy
         application = PetApplication.find_by(id: params[:id])
         if application
-            # NOTE: if pet.applications.length now = 0, adoption_status should update to "Available"
-            # pet = Pet.find_by(id: application.pet.id)
             application.destroy
             pet = Pet.find_by(id: application.pet.id)
             petApps = pet.pet_applications
@@ -64,9 +56,6 @@ rescue_from ActiveRecord::RecordInvalid, with: :invalid_record
             else
                 pet.update!(adoption_status: "Available")
             end
-            # if pet.applications.length = 0
-            #     pet.update!(adoption_status: "Available")
-            # end
             head :no_content
         else
             render json: {error: "Application not found"}, status: :not_found
@@ -75,8 +64,7 @@ rescue_from ActiveRecord::RecordInvalid, with: :invalid_record
 
     def update 
         application = PetApplication.find_by(id: params[:id])
-        if application
-            # NOTE: if pet.applications doesn't have any that aren't 
+        if application 
             application.update!(application_params)
             pet = Pet.find_by(id: application.pet.id)
             petApps = pet.pet_applications
@@ -126,5 +114,3 @@ rescue_from ActiveRecord::RecordInvalid, with: :invalid_record
         params.permit(:adoption_status, :adoption_date)
     end
 end
-
-# include: ['customer', 'customer.user']

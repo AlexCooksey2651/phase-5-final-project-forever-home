@@ -1,10 +1,9 @@
-import React, { useState, useContext } from 'react'
+import React, { useState } from 'react'
 import PhoneInput from 'react-phone-number-input/input'
 import { Form, Container, Button, Alert } from 'react-bootstrap'
 import { allPets, stateOptions } from '../../Resources'
 
 function EditCustomerProfileForm({ userInfo, setUserInfo, handleCloseEdit }) {
-    // const [userInfo, setUserInfo] = useState(user)
     const [errors, setErrors] = useState([])
 
     const [firstName, setFirstName] = useState(userInfo.profile.customer.first_name)

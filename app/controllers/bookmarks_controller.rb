@@ -11,11 +11,6 @@ rescue_from ActiveRecord::RecordInvalid, with: :invalid_record
         end
     end
 
-    # def create 
-    #     bookmark = Bookmark.create!(pet_id: params[:pet_id], customer_id: params[:customer_id])
-    #     render json: bookmark, status: :created
-    # end
-
     def destroy
         bookmark = Bookmark.where("pet_id = ? AND customer_id = ?", params[:pet_id], params[:customer_id]).first
         if bookmark

@@ -5,9 +5,7 @@ rescue_from ActiveRecord::RecordInvalid, with: :invalid_record
         user = User.find_by(id: session[:user_id])
         if user
             messages = user.profile.messages.order("created_at DESC")
-            # received = messages.filter { |message| message.sender != user.profile_type }
             render json: messages, status: :ok
-            # render json: messages
         else
             render json: {error: "User not found"}, status: :not_found
         end
@@ -21,12 +19,6 @@ rescue_from ActiveRecord::RecordInvalid, with: :invalid_record
         else
             render json: {error: "User not found"}, status: :not_found
         end
-    end
-
-    def destroy
-        message = Message.find_by(id: params[:id])
-        message.destroy
-        head :no_content
     end
 
     private 

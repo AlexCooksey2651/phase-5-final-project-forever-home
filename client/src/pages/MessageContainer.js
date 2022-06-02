@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Container, Accordion } from 'react-bootstrap'
+import { Container } from 'react-bootstrap'
 import MessageCard from '../components/MessageCard'
 
 

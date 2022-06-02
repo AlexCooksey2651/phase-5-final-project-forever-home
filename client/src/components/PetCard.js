@@ -1,15 +1,13 @@
 import React, { useState, useEffect } from 'react'
-import { Container, Card, Button, Stack, Modal, Accordion, Alert, ModalBody } from 'react-bootstrap'
-import { useNavigate } from 'react-router-dom'
+import { Container, Card, Button, Stack, Modal, Accordion, Alert } from 'react-bootstrap'
 import EditPetForm from './shelter_components/EditPetForm'
 import AdoptionAppForm from './customer_components/AdoptionAppForm'
 import ContactForm from './ContactForm'
-import { formatPhoneNum, isCustomer } from '../Resources'
+import { formatPhoneNum } from '../Resources'
 
 function PetCard({ pet, user, handleUpdatePet, handleDeletePet }) {
     const userType = user.profile.type
     const [errors, setErrors] = useState([])
-    const navigate = useNavigate()
 
     const [showEdit, setShowEdit] = useState(false)
     const showEditForm = () => setShowEdit(true)

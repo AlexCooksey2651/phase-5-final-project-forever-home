@@ -51,8 +51,4 @@ rescue_from ActiveRecord::RecordInvalid, with: :invalid_record
     def shelter_params
         params.permit(:name, :bio, user_attributes: [:id, :email, :password, :password_confirmation, :phone_number, :city, :state])
     end
-
-    # def user_params
-    #     (:email, :password, :password_confirmation, :phone_number, :city, :state)
-    # end
 end

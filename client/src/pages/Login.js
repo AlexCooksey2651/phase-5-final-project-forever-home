@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
-import { Button, Container, Stack, Modal } from 'react-bootstrap'
+import { Button, Container, Stack } from 'react-bootstrap'
 import LoginForm from "../components/LoginForm"
 import SignupForm from "../components/SignupForm"
 import Header from '../components/Header'
-import ForgotPasswordForm from '../components/ForgotPasswordForm'
+// import ForgotPasswordForm from '../components/ForgotPasswordForm'
 
 function Login({ onLogin }) {
     const [loginPage, setLoginPage] = useState(true)
@@ -12,9 +12,9 @@ function Login({ onLogin }) {
         setLoginPage(!loginPage)
     }
 
-    const [showModal, setShowModal] = useState(false)
-    const handleShowModal = () => setShowModal(true)
-    const handleCloseModal = () => setShowModal(false)
+    // const [showModal, setShowModal] = useState(false)
+    // const handleShowModal = () => setShowModal(true)
+    // const handleCloseModal = () => setShowModal(false)
 
     return (
         <div id="login">

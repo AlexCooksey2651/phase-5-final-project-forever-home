@@ -26,16 +26,6 @@ class Pet < ApplicationRecord
             url_for(image_file)
         end
     end
-    
-    # def set_adoption_status
-    #     if self.pet_applications.any? { |app| app.status == "Approved" }
-    #         self.adoption_status = "Adopted"
-    #     elsif self.pet_applications.any? { |app| app.status == "Pending" }
-    #         self.adoption_status = "Application(s) Pending"
-    #     else
-    #         self.adoption_status = "Available"
-    #     end
-    # end
 end
 
 

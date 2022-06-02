@@ -1,10 +1,8 @@
-import React, { useState, useContext } from 'react'
+import React, { useState } from 'react'
 import { Container, Form, Button, Alert } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
-import { UserContext } from '../../context/user'
 
 function AdoptionAppForm({ pet, user }) {
-    // const { user } = useContext(UserContext)
     const [applicationText, setApplicationText] = useState("")
     const fullName = `${user.profile.customer.first_name} ${user.profile.customer.last_name}`
     const [date, setDate] = useState(new Date().toLocaleDateString())

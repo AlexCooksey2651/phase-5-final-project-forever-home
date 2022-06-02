@@ -1,10 +1,8 @@
-import React, { useContext, useState, useEffect } from 'react'
-import { UserContext } from '../../context/user'
+import React, { useState, useEffect } from 'react'
 import CustomerApplicationCard from '../../components/customer_components/CustomerApplicationCard'
 import { Container, Accordion } from 'react-bootstrap'
 
 function MyApplications({ user }) {
-    // const { user } = useContext(UserContext)
     const [customerApplications, setCustomerApplications] = useState([])
 
     useEffect(() => {

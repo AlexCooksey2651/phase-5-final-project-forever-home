@@ -1,10 +1,8 @@
-import React, { useContext, useState, useEffect } from 'react'
-import { UserContext } from '../../context/user'
+import React, { useState, useEffect } from 'react'
 import BookmarkCard from '../../components/customer_components/BookmarkCard'
 import Container from 'react-bootstrap/Container'
 
 function BookmarkedPets({ user }) {
-    // const { user } = useContext(UserContext)
     const [bookmarks, setBookmarks] = useState([])
 
     useEffect(() => {

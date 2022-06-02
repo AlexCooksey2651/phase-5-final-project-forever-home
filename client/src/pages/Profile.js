@@ -1,13 +1,11 @@
-import React, { useState, useContext } from 'react'
+import React, { useState } from 'react'
 import { Container, Modal, Button, Stack } from 'react-bootstrap'
 import EditCustomerProfileForm from "../components/customer_components/EditCustomerProfileForm"
 import ListGroup from "react-bootstrap/ListGroup"
-import { UserContext } from '../context/user'
 import EditShelterProfileForm from '../components/shelter_components/EditShelterProfileForm'
 import { isCustomer, formatPhoneNum } from '../Resources'
 
-function Profile({ handleLogout, errors, user }) {
-    // const { user } = useContext(UserContext)
+function Profile({ handleLogout, user }) {
     const [userInfo, setUserInfo] = useState(user)
 
     const [showModal, setShowModal] = useState(false)
@@ -43,7 +41,6 @@ function Profile({ handleLogout, errors, user }) {
                         <ListGroup.Item><b>Location:</b> {userInfo.city}, {userInfo.state}</ListGroup.Item>
                         <ListGroup.Item><b>Phone:</b> {formatPhoneNum(userInfo.phone_number)}</ListGroup.Item>
                         <ListGroup.Item><b>Email:</b> {userInfo.email}</ListGroup.Item>
-                        {/* <ListGroup.Item type="password">Password: {shelter.user.password}</ListGroup.Item> */}
                         <ListGroup.Item><b>Looking For:</b> {userInfo.profile.customer.interested_in.join(', ')}</ListGroup.Item>
                     </ListGroup>
                 </Container> :
