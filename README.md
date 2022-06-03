@@ -39,7 +39,7 @@ Forever Home was built with a React frontend and a Ruby-on-Rails backend, and wi
 
 Seed data created with the assistance of the Faker gem. To learn more about Faker, please visit this [link](https://github.com/faker-ruby/faker).
 
-Check out a brief video walkthrough of the app [here](https://youtu.be/p14MoKJbuk0). 
+Check out a brief video walkthrough of the app [here](https://youtu.be/_RoC-rcVuC4). 
 
 Please check out these blog posts on Medium to learn more about a couple of the challenges I encountered and learned from over the course of building Forever Home:
 
